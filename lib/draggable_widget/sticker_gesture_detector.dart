@@ -1,18 +1,17 @@
 import 'dart:math';
-
 import 'package:flutter/widgets.dart';
 
-/// Define a callback type for LindiGestureDetector updates.
+/// Define a callback type for StickerGestureDetector updates.
 ///
-typedef LindiGestureDetectorCallback = void Function(
+typedef StickerGestureDetectorCallback = void Function(
     double scale, Matrix4 matrix);
 
-/// LindiGestureDetector for handling scaling, rotating, and translating the widget.
+/// StickerGestureDetector for handling scaling, rotating, and translating the widget.
 ///
-class LindiGestureDetector extends StatefulWidget {
+class StickerGestureDetector extends StatefulWidget {
   /// Callback function for when updates occur.
   ///
-  final LindiGestureDetectorCallback onUpdate;
+  final StickerGestureDetectorCallback onUpdate;
 
   /// [child] widget wrapped by the gesture detector.
   ///
@@ -52,8 +51,8 @@ class LindiGestureDetector extends StatefulWidget {
   final double minScale;
   final double maxScale;
 
-  const LindiGestureDetector(
-      {Key? key,
+  const StickerGestureDetector(
+      {super.key,
       required this.onUpdate,
       required this.child,
       this.shouldTranslate = true,
@@ -65,14 +64,13 @@ class LindiGestureDetector extends StatefulWidget {
       required this.onScaleStart,
       required this.onScaleEnd,
       required this.minScale,
-      required this.maxScale})
-      : super(key: key);
+      required this.maxScale});
 
   @override
-  State<LindiGestureDetector> createState() => LindiGestureDetectorState();
+  State<StickerGestureDetector> createState() => StickerGestureDetectorState();
 }
 
-class LindiGestureDetectorState extends State<LindiGestureDetector> {
+class StickerGestureDetectorState extends State<StickerGestureDetector> {
   // Matrices for handling translation, scaling, and rotation.
   Matrix4 translationDeltaMatrix = Matrix4.identity();
   Matrix4 scaleDeltaMatrix = Matrix4.identity();

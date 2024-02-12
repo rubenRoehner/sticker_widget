@@ -1,39 +1,40 @@
-library lindi_sticker_widget;
+library sticker_widget;
 
 import 'package:flutter/material.dart';
-import 'package:lindi_sticker_widget/lindi_controller.dart';
+import 'package:sticker_widget/sticker_widget_controller.dart';
 
-/// A Flutter widget class LindiStickerWidget, which is used to display draggable stickers.
+/// A Flutter widget class StickerWidget, which is used to display draggable stickers.
 ///
-//ignore: must_be_immutable
-class LindiStickerWidget extends StatefulWidget {
+class StickerWidget extends StatefulWidget {
   /// A global key used to access this widget's state from outside.
   ///
   static GlobalKey globalKey = GlobalKey();
 
   /// The controller responsible for managing stickers and their behavior.
   ///
-  LindiController controller;
+  final StickerWidgetController controller;
 
   /// The [child] widget (the main content) to be displayed on the sticker.
   ///
-  Widget child;
+  final Widget child;
 
   /// Constructor to initialize the widget with a controller and a child widget.
   ///
-  LindiStickerWidget({Key? key, required this.controller, required this.child})
-      : super(key: key);
+  const StickerWidget(
+      {super.key, required this.controller, required this.child});
 
   @override
-  State<StatefulWidget> createState() => _LindiStickerWidgetState();
+  State<StatefulWidget> createState() => _StickerWidgetState();
 }
 
-class _LindiStickerWidgetState extends State<LindiStickerWidget> {
+class _StickerWidgetState extends State<StickerWidget> {
   @override
   void initState() {
     // Add a listener to the controller to update the widget when the controller changes.
     widget.controller.addListener(() {
-      setState(() {});
+      if (mounted) {
+        setState(() {});
+      }
     });
     super.initState();
   }
@@ -42,20 +43,19 @@ class _LindiStickerWidgetState extends State<LindiStickerWidget> {
   Widget build(BuildContext context) {
     // A RepaintBoundary widget used to isolate and capture the sticker and its contents as an image.
     return RepaintBoundary(
-      key: LindiStickerWidget.globalKey,
+      key: StickerWidget.globalKey,
       child: Stack(
         alignment: Alignment.center,
         children: [
           // The main child widget (content) displayed on the sticker.
-          widget.child,
+          GestureDetector(
+            onTap: () => widget.controller.clearAllBorders(),
+            child: widget.child,
+          ),
           // A positioned.fill Stack to overlay draggable widgets on top of the main content.
           Positioned.fill(
             child: Stack(
-              children: [
-                // Create draggable widgets from the controller's list and add them to the stack.
-                for (int i = 0; i < widget.controller.widgets.length; i++)
-                  widget.controller.widgets[i]
-              ],
+              children: widget.controller.widgets,
             ),
           )
         ],
