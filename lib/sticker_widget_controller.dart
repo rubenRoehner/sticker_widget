@@ -2,8 +2,10 @@ import 'dart:async';
 import 'dart:math';
 import 'dart:typed_data';
 import 'dart:ui' as ui;
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:rxdart/rxdart.dart';
 import 'package:sticker_widget/data/draggable_widget_config.dart';
 import 'package:sticker_widget/data/draggable_widget_data.dart';
 import 'package:sticker_widget/draggable_widget.dart';
@@ -12,7 +14,7 @@ import 'package:sticker_widget/sticker_widget.dart';
 /// A Dart class StickerWidgetController extending ChangeNotifier,
 /// used for managing a list of draggable widgets and their properties.
 ///
-class StickerWidgetController extends ChangeNotifier {
+class StickerWidgetController {
   /// StickerWidget's configuration
   StickerWidgetConfig config;
 
@@ -21,7 +23,21 @@ class StickerWidgetController extends ChangeNotifier {
   /// List to store draggable widgets.
   final List<DraggableWidget> _widgets = List.empty(growable: true);
 
-  List<DraggableWidget> get widgets => _widgets;
+  final StreamController<List<DraggableWidget>> _widgetsStreamController =
+      StreamController.broadcast();
+
+  final StreamController<Key?> _selectedWidgetStreamController =
+      StreamController.broadcast();
+
+  Stream<List<DraggableWidget>> get widgets => _widgetsStreamController.stream;
+
+  List<DraggableWidget> get getCurrentWidgets => _widgets;
+
+  Stream<DraggableWidget?> get selectedWidget => Rx.combineLatest2(
+        _widgetsStreamController.stream,
+        _selectedWidgetStreamController.stream,
+        (list, key) => list.firstWhereOrNull((element) => element.key == key),
+      );
 
   // Method to add a widget to the list of draggable widgets.
   void addWidget(Widget widget) {
@@ -54,7 +70,7 @@ class StickerWidgetController extends ChangeNotifier {
 
   /// Method to clear the selected widget.
   void clearAllBorders() {
-    _selectWidget(const Key('-1'));
+    _selectWidget(null);
   }
 
   /// Method to highlight the border of a specific widget.
@@ -76,7 +92,8 @@ class StickerWidgetController extends ChangeNotifier {
         );
       }
     }
-    notifyListeners();
+    _widgetsStreamController.add(_widgets);
+    _selectedWidgetStreamController.add(key);
   }
 
   /// Method to toggle the lock of a widget.
@@ -91,7 +108,7 @@ class StickerWidgetController extends ChangeNotifier {
         );
       }
     }
-    notifyListeners();
+    _widgetsStreamController.add(_widgets);
   }
 
   /// Method to flip a widget.
@@ -107,7 +124,7 @@ class StickerWidgetController extends ChangeNotifier {
         );
       }
     }
-    notifyListeners();
+    _widgetsStreamController.add(_widgets);
   }
 
   /// Method to update the scale of a widget.
@@ -122,7 +139,7 @@ class StickerWidgetController extends ChangeNotifier {
         );
       }
     }
-    notifyListeners();
+    _widgetsStreamController.add(_widgets);
   }
 
   /// Method to update the transform matrix of a widget.
@@ -137,7 +154,7 @@ class StickerWidgetController extends ChangeNotifier {
         );
       }
     }
-    notifyListeners();
+    _widgetsStreamController.add(_widgets);
   }
 
   /// Method to delete a widget from the list.
@@ -145,7 +162,7 @@ class StickerWidgetController extends ChangeNotifier {
     _widgets.removeWhere((element) {
       return element.key! == key;
     });
-    notifyListeners();
+    _widgetsStreamController.add(_widgets);
   }
 
   /// Method to change the layering of a widget.
@@ -156,7 +173,7 @@ class StickerWidgetController extends ChangeNotifier {
     if (index != 0) {
       _widgets.remove(widget);
       _widgets.insert(index - 1, widget);
-      notifyListeners();
+      _widgetsStreamController.add(_widgets);
     }
   }
 

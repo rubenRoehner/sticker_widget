@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:sticker_widget/sticker_widget.dart';
 import 'package:sticker_widget/sticker_widget_controller.dart';
 
@@ -11,13 +11,10 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const CupertinoApp(
       title: 'Sticker Widget',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
-      home: const MyHomePage(),
+      theme: CupertinoThemeData(),
+      home: MyHomePage(),
     );
   }
 }
@@ -30,58 +27,62 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  late StickerWidgetController controller;
-
-  List<Widget> widgets = [
-    SizedBox(
-        height: 100,
-        width: 100,
-        child: Image.network('https://picsum.photos/200/200')),
-    const Icon(Icons.favorite, color: Colors.red, size: 50)
-  ];
+  final StickerWidgetController controller = StickerWidgetController();
 
   @override
   void initState() {
-    controller = StickerWidgetController();
-    for (var element in widgets) {
-      controller.addWidget(element);
-    }
+    controller.addWidget(
+      Image.network(
+        'https://picsum.photos/200',
+        width: 200,
+        height: 200,
+      ),
+    );
+
+    controller.addWidget(
+      const Icon(
+        CupertinoIcons.smiley_fill,
+        color: CupertinoColors.black,
+        size: 48,
+      ),
+    );
+
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: const Text('Sticker Widget'),
+    return CupertinoPageScaffold(
+      navigationBar: CupertinoNavigationBar(
+        backgroundColor: CupertinoTheme.of(context).barBackgroundColor,
+        middle: const Text('Sticker Widget'),
+        trailing: GestureDetector(
+          onTap: () {
+            controller.addWidget(
+              Container(
+                padding: const EdgeInsets.all(5),
+                decoration: const BoxDecoration(
+                  color: CupertinoColors.activeBlue,
+                  borderRadius: BorderRadius.all(Radius.circular(20)),
+                ),
+                child: const Text(
+                  'This is a Text',
+                  style: TextStyle(color: CupertinoColors.white),
+                ),
+              ),
+            );
+          },
+          child: const Icon(CupertinoIcons.add),
+        ),
       ),
-      body: StickerWidget(
+      child: StickerWidget(
         controller: controller,
         child: SizedBox(
           width: double.infinity,
           height: double.infinity,
-          child:
-              Image.network('https://picsum.photos/200/300', fit: BoxFit.cover),
+          child: Image.network('https://picsum.photos/400/800?blur',
+              fit: BoxFit.cover),
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () async {
-          controller.addWidget(
-            Container(
-              padding: const EdgeInsets.all(5),
-              decoration: const BoxDecoration(
-                  color: Colors.blue,
-                  borderRadius: BorderRadius.all(Radius.circular(20))),
-              child: const Text(
-                'This is a Text',
-                style: TextStyle(color: Colors.white),
-              ),
-            ),
-          );
-        },
-        tooltip: 'Add',
-        child: const Icon(Icons.add),
       ),
     );
   }

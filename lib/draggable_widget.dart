@@ -100,7 +100,7 @@ class DraggableWidget extends StatelessWidget {
           iconColor: config.iconColor,
           scale: data.scale,
           left: 0,
-          onTap: () => data.onDeleteButtonPressed,
+          onTap: data.onDeleteButtonPressed,
         ),
       if (config.showFlip)
         DraggableWidgetAction(
@@ -118,7 +118,7 @@ class DraggableWidget extends StatelessWidget {
           borderColor: config.borderColor,
           iconColor: config.iconColor,
           scale: data.scale,
-          onTap: () => data.onLayerButtonPressed(),
+          onTap: data.onLayerButtonPressed,
           bottom: 0,
           right: 0,
         ),
