@@ -45,6 +45,7 @@ class StickerGestureDetector extends StatefulWidget {
   ///
   final VoidCallback onScaleStart;
   final VoidCallback onScaleEnd;
+  final VoidCallback onTap;
 
   /// Minimum and maximum scale values.
   ///
@@ -63,6 +64,7 @@ class StickerGestureDetector extends StatefulWidget {
       this.behavior = HitTestBehavior.deferToChild,
       required this.onScaleStart,
       required this.onScaleEnd,
+      required this.onTap,
       required this.minScale,
       required this.maxScale});
 
@@ -93,6 +95,7 @@ class StickerGestureDetectorState extends State<StickerGestureDetector> {
       onScaleStart: onScaleStart,
       onScaleUpdate: onScaleUpdate,
       onScaleEnd: onScaleEnd,
+      onTap: widget.onTap,
       child: child,
     );
   }

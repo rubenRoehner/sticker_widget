@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:sticker_widget/sticker_widget.dart';
 import 'package:sticker_widget/sticker_widget_controller.dart';
 
@@ -15,6 +16,8 @@ class MyApp extends StatelessWidget {
       title: 'Sticker Widget',
       theme: CupertinoThemeData(),
       home: MyHomePage(),
+      debugShowCheckedModeBanner: false,
+      localizationsDelegates: [DefaultMaterialLocalizations.delegate],
     );
   }
 }
@@ -39,12 +42,9 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
     );
 
-    controller.addWidget(
-      const Icon(
-        CupertinoIcons.smiley_fill,
-        color: CupertinoColors.black,
-        size: 48,
-      ),
+    controller.addIconWidget(
+      CupertinoIcons.square_fill,
+      CupertinoColors.black,
     );
 
     super.initState();
@@ -53,35 +53,42 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(
+      backgroundColor: CupertinoColors.white,
       navigationBar: CupertinoNavigationBar(
         backgroundColor: CupertinoTheme.of(context).barBackgroundColor,
         middle: const Text('Sticker Widget'),
         trailing: GestureDetector(
           onTap: () {
-            controller.addWidget(
-              Container(
-                padding: const EdgeInsets.all(5),
-                decoration: const BoxDecoration(
-                  color: CupertinoColors.activeBlue,
-                  borderRadius: BorderRadius.all(Radius.circular(20)),
-                ),
-                child: const Text(
-                  'This is a Text',
-                  style: TextStyle(color: CupertinoColors.white),
-                ),
-              ),
-            );
+            controller.addTextWidget();
           },
           child: const Icon(CupertinoIcons.add),
         ),
       ),
-      child: StickerWidget(
-        controller: controller,
-        child: SizedBox(
-          width: double.infinity,
-          height: double.infinity,
-          child: Image.network('https://picsum.photos/400/800?blur',
-              fit: BoxFit.cover),
+      child: SafeArea(
+        child: Column(
+          children: [
+            StreamBuilder(
+              stream: controller.selectedWidget,
+              builder: (context, snapshot) {
+                return Text(
+                  "SelectedWidget: ${snapshot.data?.type}",
+                  style: const TextStyle(color: CupertinoColors.activeBlue),
+                );
+              },
+            ),
+            Expanded(
+              child: StickerWidget(
+                controller: controller,
+                child: SizedBox(
+                  width: double.infinity,
+                  height: double.infinity,
+                  child: Image.network('https://picsum.photos/400/800?blur',
+                      fit: BoxFit.cover),
+                ),
+              ),
+            ),
+            CupertinoButton.filled(onPressed: () {}, child: const Text("Test"))
+          ],
         ),
       ),
     );

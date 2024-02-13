@@ -28,6 +28,7 @@ mixin _$DraggableWidgetData {
   void Function(Matrix4) get updateTransform =>
       throw _privateConstructorUsedError;
   Matrix4 get transform => throw _privateConstructorUsedError;
+  int get layerIndex => throw _privateConstructorUsedError;
   double get scale => throw _privateConstructorUsedError;
   bool get isSelected => throw _privateConstructorUsedError;
   bool get isFlipped => throw _privateConstructorUsedError;
@@ -54,6 +55,7 @@ abstract class $DraggableWidgetDataCopyWith<$Res> {
       void Function(double) updateScale,
       void Function(Matrix4) updateTransform,
       Matrix4 transform,
+      int layerIndex,
       double scale,
       bool isSelected,
       bool isFlipped,
@@ -82,6 +84,7 @@ class _$DraggableWidgetDataCopyWithImpl<$Res, $Val extends DraggableWidgetData>
     Object? updateScale = null,
     Object? updateTransform = null,
     Object? transform = null,
+    Object? layerIndex = null,
     Object? scale = null,
     Object? isSelected = null,
     Object? isFlipped = null,
@@ -124,6 +127,10 @@ class _$DraggableWidgetDataCopyWithImpl<$Res, $Val extends DraggableWidgetData>
           ? _value.transform
           : transform // ignore: cast_nullable_to_non_nullable
               as Matrix4,
+      layerIndex: null == layerIndex
+          ? _value.layerIndex
+          : layerIndex // ignore: cast_nullable_to_non_nullable
+              as int,
       scale: null == scale
           ? _value.scale
           : scale // ignore: cast_nullable_to_non_nullable
@@ -162,6 +169,7 @@ abstract class _$$DraggableWidgetDataImplCopyWith<$Res>
       void Function(double) updateScale,
       void Function(Matrix4) updateTransform,
       Matrix4 transform,
+      int layerIndex,
       double scale,
       bool isSelected,
       bool isFlipped,
@@ -188,6 +196,7 @@ class __$$DraggableWidgetDataImplCopyWithImpl<$Res>
     Object? updateScale = null,
     Object? updateTransform = null,
     Object? transform = null,
+    Object? layerIndex = null,
     Object? scale = null,
     Object? isSelected = null,
     Object? isFlipped = null,
@@ -230,6 +239,10 @@ class __$$DraggableWidgetDataImplCopyWithImpl<$Res>
           ? _value.transform
           : transform // ignore: cast_nullable_to_non_nullable
               as Matrix4,
+      layerIndex: null == layerIndex
+          ? _value.layerIndex
+          : layerIndex // ignore: cast_nullable_to_non_nullable
+              as int,
       scale: null == scale
           ? _value.scale
           : scale // ignore: cast_nullable_to_non_nullable
@@ -263,6 +276,7 @@ class _$DraggableWidgetDataImpl implements _DraggableWidgetData {
       required this.updateScale,
       required this.updateTransform,
       required this.transform,
+      required this.layerIndex,
       this.scale = 1.0,
       this.isSelected = false,
       this.isFlipped = false,
@@ -287,6 +301,8 @@ class _$DraggableWidgetDataImpl implements _DraggableWidgetData {
   @override
   final Matrix4 transform;
   @override
+  final int layerIndex;
+  @override
   @JsonKey()
   final double scale;
   @override
@@ -301,7 +317,7 @@ class _$DraggableWidgetDataImpl implements _DraggableWidgetData {
 
   @override
   String toString() {
-    return 'DraggableWidgetData(onSelect: $onSelect, onFlipButtonPressed: $onFlipButtonPressed, onDoneButtonPressed: $onDoneButtonPressed, onLockPressed: $onLockPressed, onDeleteButtonPressed: $onDeleteButtonPressed, onLayerButtonPressed: $onLayerButtonPressed, updateScale: $updateScale, updateTransform: $updateTransform, transform: $transform, scale: $scale, isSelected: $isSelected, isFlipped: $isFlipped, isLocked: $isLocked)';
+    return 'DraggableWidgetData(onSelect: $onSelect, onFlipButtonPressed: $onFlipButtonPressed, onDoneButtonPressed: $onDoneButtonPressed, onLockPressed: $onLockPressed, onDeleteButtonPressed: $onDeleteButtonPressed, onLayerButtonPressed: $onLayerButtonPressed, updateScale: $updateScale, updateTransform: $updateTransform, transform: $transform, layerIndex: $layerIndex, scale: $scale, isSelected: $isSelected, isFlipped: $isFlipped, isLocked: $isLocked)';
   }
 
   @override
@@ -327,6 +343,8 @@ class _$DraggableWidgetDataImpl implements _DraggableWidgetData {
                 other.updateTransform == updateTransform) &&
             (identical(other.transform, transform) ||
                 other.transform == transform) &&
+            (identical(other.layerIndex, layerIndex) ||
+                other.layerIndex == layerIndex) &&
             (identical(other.scale, scale) || other.scale == scale) &&
             (identical(other.isSelected, isSelected) ||
                 other.isSelected == isSelected) &&
@@ -348,6 +366,7 @@ class _$DraggableWidgetDataImpl implements _DraggableWidgetData {
       updateScale,
       updateTransform,
       transform,
+      layerIndex,
       scale,
       isSelected,
       isFlipped,
@@ -372,6 +391,7 @@ abstract class _DraggableWidgetData implements DraggableWidgetData {
       required final void Function(double) updateScale,
       required final void Function(Matrix4) updateTransform,
       required final Matrix4 transform,
+      required final int layerIndex,
       final double scale,
       final bool isSelected,
       final bool isFlipped,
@@ -395,6 +415,8 @@ abstract class _DraggableWidgetData implements DraggableWidgetData {
   void Function(Matrix4) get updateTransform;
   @override
   Matrix4 get transform;
+  @override
+  int get layerIndex;
   @override
   double get scale;
   @override

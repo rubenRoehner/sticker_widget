@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:sticker_widget/data/draggable_widget_config.dart';
+import 'package:sticker_widget/data/sticker_widget_config.dart';
 import 'package:sticker_widget/data/draggable_widget_data.dart';
 import 'draggable_widget/draggable_widget_action.dart';
 import 'draggable_widget/sticker_gesture_detector.dart';
@@ -8,11 +8,14 @@ class DraggableWidget extends StatelessWidget {
   final Widget child;
   final StickerWidgetConfig config;
   final DraggableWidgetData data;
+  final DraggableWidgetType type;
+
   const DraggableWidget({
-    super.key,
+    required super.key,
     required this.child,
     required this.data,
     required this.config,
+    required this.type,
   });
 
   @override
@@ -23,6 +26,9 @@ class DraggableWidget extends StatelessWidget {
       shouldScale: config.shouldScale,
       minScale: config.minScale,
       maxScale: config.maxScale,
+      onTap: () {
+        data.onSelect();
+      },
       onScaleStart: () {
         data.onSelect();
       },
@@ -135,3 +141,5 @@ class DraggableWidget extends StatelessWidget {
     ];
   }
 }
+
+enum DraggableWidgetType { text, image, icon, custom }

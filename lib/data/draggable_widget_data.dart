@@ -14,6 +14,7 @@ class DraggableWidgetData with _$DraggableWidgetData {
     required final void Function(double newScale) updateScale,
     required final void Function(Matrix4 newTransform) updateTransform,
     required final Matrix4 transform,
+    required final int layerIndex,
     @Default(1.0) final double scale,
     @Default(false) final bool isSelected,
     @Default(false) final bool isFlipped,

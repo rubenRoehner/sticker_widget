@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'draggable_widget_config.dart';
+part of 'sticker_widget_config.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -15,7 +15,7 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
-mixin _$DraggableWidgetConfig {
+mixin _$StickerWidgetConfig {
   Color get borderColor => throw _privateConstructorUsedError;
   Color get iconColor => throw _privateConstructorUsedError;
   bool get showDone => throw _privateConstructorUsedError;
@@ -31,15 +31,15 @@ mixin _$DraggableWidgetConfig {
   double get maxScale => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $DraggableWidgetConfigCopyWith<StickerWidgetConfig> get copyWith =>
+  $StickerWidgetConfigCopyWith<StickerWidgetConfig> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $DraggableWidgetConfigCopyWith<$Res> {
-  factory $DraggableWidgetConfigCopyWith(
+abstract class $StickerWidgetConfigCopyWith<$Res> {
+  factory $StickerWidgetConfigCopyWith(
           StickerWidgetConfig value, $Res Function(StickerWidgetConfig) then) =
-      _$DraggableWidgetConfigCopyWithImpl<$Res, StickerWidgetConfig>;
+      _$StickerWidgetConfigCopyWithImpl<$Res, StickerWidgetConfig>;
   @useResult
   $Res call(
       {Color borderColor,
@@ -58,10 +58,9 @@ abstract class $DraggableWidgetConfigCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$DraggableWidgetConfigCopyWithImpl<$Res,
-        $Val extends StickerWidgetConfig>
-    implements $DraggableWidgetConfigCopyWith<$Res> {
-  _$DraggableWidgetConfigCopyWithImpl(this._value, this._then);
+class _$StickerWidgetConfigCopyWithImpl<$Res, $Val extends StickerWidgetConfig>
+    implements $StickerWidgetConfigCopyWith<$Res> {
+  _$StickerWidgetConfigCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -143,12 +142,11 @@ class _$DraggableWidgetConfigCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$DraggableWidgetConfigImplCopyWith<$Res>
-    implements $DraggableWidgetConfigCopyWith<$Res> {
-  factory _$$DraggableWidgetConfigImplCopyWith(
-          _$DraggableWidgetConfigImpl value,
-          $Res Function(_$DraggableWidgetConfigImpl) then) =
-      __$$DraggableWidgetConfigImplCopyWithImpl<$Res>;
+abstract class _$$StickerWidgetConfigImplCopyWith<$Res>
+    implements $StickerWidgetConfigCopyWith<$Res> {
+  factory _$$StickerWidgetConfigImplCopyWith(_$StickerWidgetConfigImpl value,
+          $Res Function(_$StickerWidgetConfigImpl) then) =
+      __$$StickerWidgetConfigImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -168,12 +166,11 @@ abstract class _$$DraggableWidgetConfigImplCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$DraggableWidgetConfigImplCopyWithImpl<$Res>
-    extends _$DraggableWidgetConfigCopyWithImpl<$Res,
-        _$DraggableWidgetConfigImpl>
-    implements _$$DraggableWidgetConfigImplCopyWith<$Res> {
-  __$$DraggableWidgetConfigImplCopyWithImpl(_$DraggableWidgetConfigImpl _value,
-      $Res Function(_$DraggableWidgetConfigImpl) _then)
+class __$$StickerWidgetConfigImplCopyWithImpl<$Res>
+    extends _$StickerWidgetConfigCopyWithImpl<$Res, _$StickerWidgetConfigImpl>
+    implements _$$StickerWidgetConfigImplCopyWith<$Res> {
+  __$$StickerWidgetConfigImplCopyWithImpl(_$StickerWidgetConfigImpl _value,
+      $Res Function(_$StickerWidgetConfigImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -193,7 +190,7 @@ class __$$DraggableWidgetConfigImplCopyWithImpl<$Res>
     Object? minScale = null,
     Object? maxScale = null,
   }) {
-    return _then(_$DraggableWidgetConfigImpl(
+    return _then(_$StickerWidgetConfigImpl(
       borderColor: null == borderColor
           ? _value.borderColor
           : borderColor // ignore: cast_nullable_to_non_nullable
@@ -252,8 +249,8 @@ class __$$DraggableWidgetConfigImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$DraggableWidgetConfigImpl implements _DraggableWidgetConfig {
-  const _$DraggableWidgetConfigImpl(
+class _$StickerWidgetConfigImpl implements _StickerWidgetConfig {
+  const _$StickerWidgetConfigImpl(
       {this.borderColor = const Color(0xFFFFFFFF),
       this.iconColor = const Color(0xFF000000),
       this.showDone = true,
@@ -310,14 +307,14 @@ class _$DraggableWidgetConfigImpl implements _DraggableWidgetConfig {
 
   @override
   String toString() {
-    return 'DraggableWidgetConfig(borderColor: $borderColor, iconColor: $iconColor, showDone: $showDone, showClose: $showClose, showFlip: $showFlip, showStack: $showStack, showLock: $showLock, showAllBorders: $showAllBorders, shouldMove: $shouldMove, shouldRotate: $shouldRotate, shouldScale: $shouldScale, minScale: $minScale, maxScale: $maxScale)';
+    return 'StickerWidgetConfig(borderColor: $borderColor, iconColor: $iconColor, showDone: $showDone, showClose: $showClose, showFlip: $showFlip, showStack: $showStack, showLock: $showLock, showAllBorders: $showAllBorders, shouldMove: $shouldMove, shouldRotate: $shouldRotate, shouldScale: $shouldScale, minScale: $minScale, maxScale: $maxScale)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$DraggableWidgetConfigImpl &&
+            other is _$StickerWidgetConfigImpl &&
             (identical(other.borderColor, borderColor) ||
                 other.borderColor == borderColor) &&
             (identical(other.iconColor, iconColor) ||
@@ -366,13 +363,13 @@ class _$DraggableWidgetConfigImpl implements _DraggableWidgetConfig {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$DraggableWidgetConfigImplCopyWith<_$DraggableWidgetConfigImpl>
-      get copyWith => __$$DraggableWidgetConfigImplCopyWithImpl<
-          _$DraggableWidgetConfigImpl>(this, _$identity);
+  _$$StickerWidgetConfigImplCopyWith<_$StickerWidgetConfigImpl> get copyWith =>
+      __$$StickerWidgetConfigImplCopyWithImpl<_$StickerWidgetConfigImpl>(
+          this, _$identity);
 }
 
-abstract class _DraggableWidgetConfig implements StickerWidgetConfig {
-  const factory _DraggableWidgetConfig(
+abstract class _StickerWidgetConfig implements StickerWidgetConfig {
+  const factory _StickerWidgetConfig(
       {final Color borderColor,
       final Color iconColor,
       final bool showDone,
@@ -385,7 +382,7 @@ abstract class _DraggableWidgetConfig implements StickerWidgetConfig {
       final bool shouldRotate,
       final bool shouldScale,
       final double minScale,
-      final double maxScale}) = _$DraggableWidgetConfigImpl;
+      final double maxScale}) = _$StickerWidgetConfigImpl;
 
   @override
   Color get borderColor;
@@ -415,6 +412,6 @@ abstract class _DraggableWidgetConfig implements StickerWidgetConfig {
   double get maxScale;
   @override
   @JsonKey(ignore: true)
-  _$$DraggableWidgetConfigImplCopyWith<_$DraggableWidgetConfigImpl>
-      get copyWith => throw _privateConstructorUsedError;
+  _$$StickerWidgetConfigImplCopyWith<_$StickerWidgetConfigImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }

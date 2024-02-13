@@ -1,9 +1,9 @@
 import 'dart:ui';
 import 'package:freezed_annotation/freezed_annotation.dart';
-part 'draggable_widget_config.freezed.dart';
+part 'sticker_widget_config.freezed.dart';
 
 @freezed
-class StickerWidgetConfig with _$DraggableWidgetConfig {
+class StickerWidgetConfig with _$StickerWidgetConfig {
   const factory StickerWidgetConfig({
     @Default(Color(0xFFFFFFFF)) final Color borderColor,
     @Default(Color(0xFF000000)) final Color iconColor,
@@ -18,5 +18,5 @@ class StickerWidgetConfig with _$DraggableWidgetConfig {
     @Default(true) final bool shouldScale,
     @Default(0.5) final double minScale,
     @Default(4.0) final double maxScale,
-  }) = _DraggableWidgetConfig;
+  }) = _StickerWidgetConfig;
 }
