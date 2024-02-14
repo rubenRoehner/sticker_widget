@@ -77,19 +77,21 @@ class _MyHomePageState extends State<MyHomePage> {
               },
             ),
             Expanded(
-              child: StickerWidget(
-                controller: controller,
-                width: MediaQuery.of(context).size.width * 3,
-                height: MediaQuery.of(context).size.height,
-                child: SizedBox(
-                  width: double.infinity,
-                  height: double.infinity,
-                  child: Image.network('https://picsum.photos/800/800?blur',
-                      fit: BoxFit.cover),
+              child: Container(
+                color: CupertinoColors.darkBackgroundGray,
+                child: StickerWidget(
+                  controller: controller,
+                  width: MediaQuery.of(context).size.width * 3,
+                  height: MediaQuery.of(context).size.width,
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: CupertinoColors.white,
+                      borderRadius: BorderRadius.circular(16),
+                    ),
+                  ),
                 ),
               ),
             ),
-            CupertinoButton.filled(onPressed: () {}, child: const Text("Test"))
           ],
         ),
       ),

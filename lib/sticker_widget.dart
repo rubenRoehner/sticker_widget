@@ -27,6 +27,11 @@ class StickerWidget extends StatelessWidget {
 
   final EdgeInsets contentPadding;
 
+  final TransformationController? transformationController;
+
+  final double minScale;
+  final double maxScale;
+
   /// Constructor to initialize the widget with a controller and a child widget.
   ///
   const StickerWidget(
@@ -36,6 +41,9 @@ class StickerWidget extends StatelessWidget {
       required this.height,
       this.contentPadding =
           const EdgeInsets.symmetric(horizontal: 48, vertical: 180),
+      this.transformationController,
+      this.minScale = 0.4,
+      this.maxScale = 2.5,
       required this.child});
 
   @override
@@ -43,43 +51,42 @@ class StickerWidget extends StatelessWidget {
     // A RepaintBoundary widget used to isolate and capture the sticker and its contents as an image.
     return InteractiveViewer(
       constrained: false,
-      minScale: 0.5,
-      alignment: Alignment.centerLeft,
-      child: Padding(
-        padding: contentPadding,
-        child: SizedBox(
-          height: height,
-          width: width,
-          child: RepaintBoundary(
-            key: globalKey,
-            child: Stack(
-              alignment: Alignment.center,
-              children: [
-                // The main child widget (content) displayed on the sticker.
-                GestureDetector(
-                  onTap: () {
-                    if (MediaQuery.of(context).viewInsets.bottom != 0) {
-                      SystemChannels.textInput.invokeMethod('TextInput.hide');
-                    } else {
-                      controller.clearAllBorders();
-                    }
-                  },
-                  child: child,
-                ),
-                // A positioned.fill Stack to overlay draggable widgets on top of the main content.
-                StreamBuilder(
-                  stream: controller.widgets,
-                  initialData: controller.getCurrentWidgets,
-                  builder: (context, widgets) {
-                    return Positioned.fill(
-                      child: Stack(
-                        children: widgets.data ?? List.empty(),
-                      ),
-                    );
-                  },
-                ),
-              ],
-            ),
+      boundaryMargin: contentPadding,
+      transformationController: transformationController,
+      minScale: minScale,
+      maxScale: maxScale,
+      child: SizedBox(
+        height: height,
+        width: width,
+        child: RepaintBoundary(
+          key: globalKey,
+          child: Stack(
+            alignment: Alignment.center,
+            children: [
+              // The main child widget (content) displayed on the sticker.
+              GestureDetector(
+                onTap: () {
+                  if (MediaQuery.of(context).viewInsets.bottom != 0) {
+                    SystemChannels.textInput.invokeMethod('TextInput.hide');
+                  } else {
+                    controller.clearAllBorders();
+                  }
+                },
+                child: child,
+              ),
+              // A positioned.fill Stack to overlay draggable widgets on top of the main content.
+              StreamBuilder(
+                stream: controller.widgets,
+                initialData: controller.getCurrentWidgets,
+                builder: (context, widgets) {
+                  return Positioned.fill(
+                    child: Stack(
+                      children: widgets.data ?? List.empty(),
+                    ),
+                  );
+                },
+              ),
+            ],
           ),
         ),
       ),
