@@ -25,6 +25,8 @@ class StickerWidget extends StatelessWidget {
   /// The childs height.
   final double height;
 
+  final EdgeInsets contentPadding;
+
   /// Constructor to initialize the widget with a controller and a child widget.
   ///
   const StickerWidget(
@@ -32,6 +34,8 @@ class StickerWidget extends StatelessWidget {
       required this.controller,
       required this.width,
       required this.height,
+      this.contentPadding =
+          const EdgeInsets.symmetric(horizontal: 48, vertical: 180),
       required this.child});
 
   @override
@@ -41,10 +45,10 @@ class StickerWidget extends StatelessWidget {
       constrained: false,
       minScale: 0.5,
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 48, vertical: 180),
+        padding: contentPadding,
         child: SizedBox(
-          height: MediaQuery.of(context).size.height,
-          width: MediaQuery.of(context).size.width * 3,
+          height: height,
+          width: width,
           child: RepaintBoundary(
             key: globalKey,
             child: Stack(
