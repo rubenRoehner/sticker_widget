@@ -79,10 +79,12 @@ class _MyHomePageState extends State<MyHomePage> {
             Expanded(
               child: StickerWidget(
                 controller: controller,
+                width: MediaQuery.of(context).size.width * 3,
+                height: MediaQuery.of(context).size.height,
                 child: SizedBox(
                   width: double.infinity,
                   height: double.infinity,
-                  child: Image.network('https://picsum.photos/400/800?blur',
+                  child: Image.network('https://picsum.photos/800/800?blur',
                       fit: BoxFit.cover),
                 ),
               ),

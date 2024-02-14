@@ -19,10 +19,20 @@ class StickerWidget extends StatelessWidget {
   ///
   final Widget child;
 
+  /// The childs width.
+  final double width;
+
+  /// The childs height.
+  final double height;
+
   /// Constructor to initialize the widget with a controller and a child widget.
   ///
   const StickerWidget(
-      {super.key, required this.controller, required this.child});
+      {super.key,
+      required this.controller,
+      required this.width,
+      required this.height,
+      required this.child});
 
   @override
   Widget build(BuildContext context) {
