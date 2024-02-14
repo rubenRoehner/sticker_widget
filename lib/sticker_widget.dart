@@ -44,6 +44,7 @@ class StickerWidget extends StatelessWidget {
     return InteractiveViewer(
       constrained: false,
       minScale: 0.5,
+      alignment: Alignment.centerLeft,
       child: Padding(
         padding: contentPadding,
         child: SizedBox(
