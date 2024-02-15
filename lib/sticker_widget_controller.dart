@@ -77,9 +77,12 @@ class StickerWidgetController {
       key: key,
       config: config,
       data: data,
-      textEditingController: TextEditingController(),
+      textEditingController: TextEditingController(text: "Moments"),
       textAlign: TextAlign.center,
       textStyle: const TextStyle(),
+      showTextField: false,
+      setShowTextField: (showTextField) =>
+          _setShowTextField(key, showTextField),
     );
 
     // Highlight the border of the added widget.
@@ -159,6 +162,10 @@ class StickerWidgetController {
           _widgets[key]!,
           _widgets[key]!.data.copyWith(isSelected: false),
         );
+        if (_widgets[key] is DraggableTextFieldWidget &&
+            (_widgets[key] as DraggableTextFieldWidget).showTextField) {
+          _setShowTextField(key, false);
+        }
       }
     });
     _widgetsStreamController.add(getCurrentWidgets);
@@ -223,6 +230,27 @@ class StickerWidgetController {
     _widgetsStreamController.add(getCurrentWidgets);
   }
 
+  /// Method to update the transform matrix of a widget.
+  void _setShowTextField(Key key, bool showTextField) {
+    if (_widgets.containsKey(key) &&
+        _widgets[key] is DraggableTextFieldWidget) {
+      DraggableTextFieldWidget textFieldWidget =
+          _widgets[key] as DraggableTextFieldWidget;
+
+      _widgets[key] = DraggableTextFieldWidget(
+        key: key,
+        data: textFieldWidget.data,
+        config: config,
+        textEditingController: textFieldWidget.textEditingController,
+        textStyle: textFieldWidget.textStyle,
+        textAlign: textFieldWidget.textAlign,
+        showTextField: showTextField,
+        setShowTextField: textFieldWidget.setShowTextField,
+      );
+    }
+    _widgetsStreamController.add(getCurrentWidgets);
+  }
+
   void updateDraggableWidget(DraggableWidget widget, DraggableWidgetData data) {
     switch (widget.type) {
       case DraggableWidgetType.text:
@@ -235,6 +263,8 @@ class StickerWidgetController {
           textEditingController: textFieldWidget.textEditingController,
           textStyle: textFieldWidget.textStyle,
           textAlign: textFieldWidget.textAlign,
+          showTextField: textFieldWidget.showTextField,
+          setShowTextField: textFieldWidget.setShowTextField,
         );
         break;
       case DraggableWidgetType.image:
