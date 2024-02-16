@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:sticker_widget/draggable_widget.dart';
+import 'package:sticker_widget/utils/upper_case_text_formatter.dart';
 
 class DraggableTextFieldWidget extends DraggableWidget {
   final TextEditingController textEditingController;
   final TextStyle textStyle;
   final TextAlign textAlign;
+  final bool upperCase;
   final bool showTextField;
   final void Function(bool showTextField) setShowTextField;
 
@@ -15,6 +17,7 @@ class DraggableTextFieldWidget extends DraggableWidget {
     required this.textEditingController,
     required this.textStyle,
     required this.textAlign,
+    required this.upperCase,
     required this.showTextField,
     required this.setShowTextField,
   }) : super(
@@ -36,6 +39,8 @@ class DraggableTextFieldWidget extends DraggableWidget {
                         style: textStyle,
                         textAlign: textAlign,
                         autofocus: true,
+                        inputFormatters:
+                            upperCase ? [UpperCaseTextFormatter()] : null,
                       ),
                     ),
                   ),
@@ -49,7 +54,9 @@ class DraggableTextFieldWidget extends DraggableWidget {
                   child: ConstrainedBox(
                     constraints: const BoxConstraints(minWidth: 48),
                     child: Text(
-                      textEditingController.text,
+                      upperCase
+                          ? textEditingController.text.toUpperCase()
+                          : textEditingController.text,
                       style: textStyle,
                       textAlign: textAlign,
                     ),

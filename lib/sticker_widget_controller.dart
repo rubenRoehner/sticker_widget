@@ -67,7 +67,10 @@ class StickerWidgetController {
   }
 
   /// Method to add a TextField to the list of draggable widgets.
-  void addTextWidget() {
+  void addTextWidget(
+      {TextStyle textStyle = const TextStyle(),
+      TextAlign textAlign = TextAlign.center,
+      bool upperCase = false}) {
     // Generate a unique key for the widget.
     Key key = _getNewKey();
     DraggableWidgetData data = _getNewDraggableWidgetData(key);
@@ -78,8 +81,9 @@ class StickerWidgetController {
       config: config,
       data: data,
       textEditingController: TextEditingController(text: "Moments"),
-      textAlign: TextAlign.center,
-      textStyle: const TextStyle(),
+      textAlign: textAlign,
+      textStyle: textStyle,
+      upperCase: upperCase,
       showTextField: false,
       setShowTextField: (showTextField) =>
           _setShowTextField(key, showTextField),
@@ -244,6 +248,7 @@ class StickerWidgetController {
         textEditingController: textFieldWidget.textEditingController,
         textStyle: textFieldWidget.textStyle,
         textAlign: textFieldWidget.textAlign,
+        upperCase: textFieldWidget.upperCase,
         showTextField: showTextField,
         setShowTextField: textFieldWidget.setShowTextField,
       );
@@ -263,6 +268,7 @@ class StickerWidgetController {
           textEditingController: textFieldWidget.textEditingController,
           textStyle: textFieldWidget.textStyle,
           textAlign: textFieldWidget.textAlign,
+          upperCase: textFieldWidget.upperCase,
           showTextField: textFieldWidget.showTextField,
           setShowTextField: textFieldWidget.setShowTextField,
         );
