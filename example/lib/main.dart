@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:sticker_widget/data/sticker_widget_config.dart';
 import 'package:sticker_widget/sticker_widget.dart';
 import 'package:sticker_widget/sticker_widget_controller.dart';
 
@@ -30,7 +31,9 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  final StickerWidgetController controller = StickerWidgetController();
+  final StickerWidgetController controller = StickerWidgetController(
+      config: const StickerWidgetConfig(
+          borderColor: CupertinoColors.systemBlue, shouldRotate: false));
 
   @override
   void initState() {
@@ -78,15 +81,14 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             Expanded(
               child: Container(
-                color: CupertinoColors.darkBackgroundGray,
+                color: CupertinoColors.systemBackground,
                 child: StickerWidget(
                   controller: controller,
-                  width: MediaQuery.of(context).size.width * 3,
-                  height: MediaQuery.of(context).size.width,
+                  width: 200,
+                  height: 200,
                   child: Container(
-                    decoration: BoxDecoration(
-                      color: CupertinoColors.white,
-                      borderRadius: BorderRadius.circular(16),
+                    decoration: const BoxDecoration(
+                      color: CupertinoColors.darkBackgroundGray,
                     ),
                   ),
                 ),

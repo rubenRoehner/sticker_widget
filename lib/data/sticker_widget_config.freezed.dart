@@ -29,6 +29,9 @@ mixin _$StickerWidgetConfig {
   bool get shouldScale => throw _privateConstructorUsedError;
   double get minScale => throw _privateConstructorUsedError;
   double get maxScale => throw _privateConstructorUsedError;
+  List<double> get rotationSnapValues => throw _privateConstructorUsedError;
+  List<double> get translationXSnapValues => throw _privateConstructorUsedError;
+  List<double> get translationYSnapValues => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $StickerWidgetConfigCopyWith<StickerWidgetConfig> get copyWith =>
@@ -54,7 +57,10 @@ abstract class $StickerWidgetConfigCopyWith<$Res> {
       bool shouldRotate,
       bool shouldScale,
       double minScale,
-      double maxScale});
+      double maxScale,
+      List<double> rotationSnapValues,
+      List<double> translationXSnapValues,
+      List<double> translationYSnapValues});
 }
 
 /// @nodoc
@@ -83,6 +89,9 @@ class _$StickerWidgetConfigCopyWithImpl<$Res, $Val extends StickerWidgetConfig>
     Object? shouldScale = null,
     Object? minScale = null,
     Object? maxScale = null,
+    Object? rotationSnapValues = null,
+    Object? translationXSnapValues = null,
+    Object? translationYSnapValues = null,
   }) {
     return _then(_value.copyWith(
       borderColor: null == borderColor
@@ -137,6 +146,18 @@ class _$StickerWidgetConfigCopyWithImpl<$Res, $Val extends StickerWidgetConfig>
           ? _value.maxScale
           : maxScale // ignore: cast_nullable_to_non_nullable
               as double,
+      rotationSnapValues: null == rotationSnapValues
+          ? _value.rotationSnapValues
+          : rotationSnapValues // ignore: cast_nullable_to_non_nullable
+              as List<double>,
+      translationXSnapValues: null == translationXSnapValues
+          ? _value.translationXSnapValues
+          : translationXSnapValues // ignore: cast_nullable_to_non_nullable
+              as List<double>,
+      translationYSnapValues: null == translationYSnapValues
+          ? _value.translationYSnapValues
+          : translationYSnapValues // ignore: cast_nullable_to_non_nullable
+              as List<double>,
     ) as $Val);
   }
 }
@@ -162,7 +183,10 @@ abstract class _$$StickerWidgetConfigImplCopyWith<$Res>
       bool shouldRotate,
       bool shouldScale,
       double minScale,
-      double maxScale});
+      double maxScale,
+      List<double> rotationSnapValues,
+      List<double> translationXSnapValues,
+      List<double> translationYSnapValues});
 }
 
 /// @nodoc
@@ -189,6 +213,9 @@ class __$$StickerWidgetConfigImplCopyWithImpl<$Res>
     Object? shouldScale = null,
     Object? minScale = null,
     Object? maxScale = null,
+    Object? rotationSnapValues = null,
+    Object? translationXSnapValues = null,
+    Object? translationYSnapValues = null,
   }) {
     return _then(_$StickerWidgetConfigImpl(
       borderColor: null == borderColor
@@ -243,6 +270,18 @@ class __$$StickerWidgetConfigImplCopyWithImpl<$Res>
           ? _value.maxScale
           : maxScale // ignore: cast_nullable_to_non_nullable
               as double,
+      rotationSnapValues: null == rotationSnapValues
+          ? _value._rotationSnapValues
+          : rotationSnapValues // ignore: cast_nullable_to_non_nullable
+              as List<double>,
+      translationXSnapValues: null == translationXSnapValues
+          ? _value._translationXSnapValues
+          : translationXSnapValues // ignore: cast_nullable_to_non_nullable
+              as List<double>,
+      translationYSnapValues: null == translationYSnapValues
+          ? _value._translationYSnapValues
+          : translationYSnapValues // ignore: cast_nullable_to_non_nullable
+              as List<double>,
     ));
   }
 }
@@ -263,7 +302,13 @@ class _$StickerWidgetConfigImpl implements _StickerWidgetConfig {
       this.shouldRotate = true,
       this.shouldScale = true,
       this.minScale = 0.5,
-      this.maxScale = 4.0});
+      this.maxScale = 4.0,
+      final List<double> rotationSnapValues = const [0, 90, 180, 270],
+      final List<double> translationXSnapValues = const [0],
+      final List<double> translationYSnapValues = const [0]})
+      : _rotationSnapValues = rotationSnapValues,
+        _translationXSnapValues = translationXSnapValues,
+        _translationYSnapValues = translationYSnapValues;
 
   @override
   @JsonKey()
@@ -304,10 +349,39 @@ class _$StickerWidgetConfigImpl implements _StickerWidgetConfig {
   @override
   @JsonKey()
   final double maxScale;
+  final List<double> _rotationSnapValues;
+  @override
+  @JsonKey()
+  List<double> get rotationSnapValues {
+    if (_rotationSnapValues is EqualUnmodifiableListView)
+      return _rotationSnapValues;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_rotationSnapValues);
+  }
+
+  final List<double> _translationXSnapValues;
+  @override
+  @JsonKey()
+  List<double> get translationXSnapValues {
+    if (_translationXSnapValues is EqualUnmodifiableListView)
+      return _translationXSnapValues;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_translationXSnapValues);
+  }
+
+  final List<double> _translationYSnapValues;
+  @override
+  @JsonKey()
+  List<double> get translationYSnapValues {
+    if (_translationYSnapValues is EqualUnmodifiableListView)
+      return _translationYSnapValues;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_translationYSnapValues);
+  }
 
   @override
   String toString() {
-    return 'StickerWidgetConfig(borderColor: $borderColor, iconColor: $iconColor, showDone: $showDone, showClose: $showClose, showFlip: $showFlip, showStack: $showStack, showLock: $showLock, showAllBorders: $showAllBorders, shouldMove: $shouldMove, shouldRotate: $shouldRotate, shouldScale: $shouldScale, minScale: $minScale, maxScale: $maxScale)';
+    return 'StickerWidgetConfig(borderColor: $borderColor, iconColor: $iconColor, showDone: $showDone, showClose: $showClose, showFlip: $showFlip, showStack: $showStack, showLock: $showLock, showAllBorders: $showAllBorders, shouldMove: $shouldMove, shouldRotate: $shouldRotate, shouldScale: $shouldScale, minScale: $minScale, maxScale: $maxScale, rotationSnapValues: $rotationSnapValues, translationXSnapValues: $translationXSnapValues, translationYSnapValues: $translationYSnapValues)';
   }
 
   @override
@@ -340,7 +414,13 @@ class _$StickerWidgetConfigImpl implements _StickerWidgetConfig {
             (identical(other.minScale, minScale) ||
                 other.minScale == minScale) &&
             (identical(other.maxScale, maxScale) ||
-                other.maxScale == maxScale));
+                other.maxScale == maxScale) &&
+            const DeepCollectionEquality()
+                .equals(other._rotationSnapValues, _rotationSnapValues) &&
+            const DeepCollectionEquality().equals(
+                other._translationXSnapValues, _translationXSnapValues) &&
+            const DeepCollectionEquality().equals(
+                other._translationYSnapValues, _translationYSnapValues));
   }
 
   @override
@@ -358,7 +438,10 @@ class _$StickerWidgetConfigImpl implements _StickerWidgetConfig {
       shouldRotate,
       shouldScale,
       minScale,
-      maxScale);
+      maxScale,
+      const DeepCollectionEquality().hash(_rotationSnapValues),
+      const DeepCollectionEquality().hash(_translationXSnapValues),
+      const DeepCollectionEquality().hash(_translationYSnapValues));
 
   @JsonKey(ignore: true)
   @override
@@ -382,7 +465,10 @@ abstract class _StickerWidgetConfig implements StickerWidgetConfig {
       final bool shouldRotate,
       final bool shouldScale,
       final double minScale,
-      final double maxScale}) = _$StickerWidgetConfigImpl;
+      final double maxScale,
+      final List<double> rotationSnapValues,
+      final List<double> translationXSnapValues,
+      final List<double> translationYSnapValues}) = _$StickerWidgetConfigImpl;
 
   @override
   Color get borderColor;
@@ -410,6 +496,12 @@ abstract class _StickerWidgetConfig implements StickerWidgetConfig {
   double get minScale;
   @override
   double get maxScale;
+  @override
+  List<double> get rotationSnapValues;
+  @override
+  List<double> get translationXSnapValues;
+  @override
+  List<double> get translationYSnapValues;
   @override
   @JsonKey(ignore: true)
   _$$StickerWidgetConfigImplCopyWith<_$StickerWidgetConfigImpl> get copyWith =>

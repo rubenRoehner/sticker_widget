@@ -1,5 +1,7 @@
 import 'dart:math';
 import 'package:flutter/widgets.dart';
+import 'package:sticker_widget/data/sticker_widget_config.dart';
+import 'package:vector_math/vector_math_64.dart';
 
 /// Define a callback type for StickerGestureDetector updates.
 ///
@@ -52,10 +54,15 @@ class StickerGestureDetector extends StatefulWidget {
   final double minScale;
   final double maxScale;
 
+  /// StickerWidgetConfig.
+  ///
+  final StickerWidgetConfig stickerWidgetConfig;
+
   const StickerGestureDetector(
       {super.key,
       required this.onUpdate,
       required this.child,
+      required this.stickerWidgetConfig,
       this.shouldTranslate = true,
       this.shouldScale = true,
       this.shouldRotate = true,
@@ -82,6 +89,8 @@ class StickerGestureDetectorState extends State<StickerGestureDetector> {
   // Current and previous scale values.
   double recordScale = 1;
   double recordOldScale = 0;
+
+  final double rotationThreshold = 0.015;
 
   @override
   Widget build(BuildContext context) {
@@ -162,8 +171,8 @@ class StickerGestureDetectorState extends State<StickerGestureDetector> {
 
     // Handle rotation.
     if (widget.shouldRotate && details.rotation != 0.0) {
-      double rotationDelta = rotationUpdater.update(details.rotation);
-      rotationDeltaMatrix = _rotate(rotationDelta, focalPoint);
+      //double rotationDelta = rotationUpdater.update(details.rotation);
+      rotationDeltaMatrix = _rotate(details.rotation, focalPoint);
       matrix = rotationDeltaMatrix * matrix;
     }
 
@@ -187,12 +196,37 @@ class StickerGestureDetectorState extends State<StickerGestureDetector> {
     return Matrix4(scale, 0, 0, 0, 0, scale, 0, 0, 0, 0, 1, 0, dx, dy, 0, 1);
   }
 
-  // Helper function for rotation matrix.
   Matrix4 _rotate(double angle, Offset focalPoint) {
-    var c = cos(angle);
-    var s = sin(angle);
-    var dx = (1 - c) * focalPoint.dx + s * focalPoint.dy;
-    var dy = (1 - c) * focalPoint.dy - s * focalPoint.dx;
+    double toBeRotated = 0;
+    var array = matrix.applyToVector3Array([0, 0, 0, 1, 0, 0]);
+    Offset delta = Offset(array[3] - array[0], array[4] - array[1]);
+    double rotation = delta.direction;
+    double deltaAngle = rotationUpdater.update(angle);
+
+    for (var snapPosition in widget.stickerWidgetConfig.rotationSnapValues) {
+      if (snapPosition > 180) {
+        snapPosition = 180 - snapPosition;
+      }
+      snapPosition = radians(snapPosition);
+      if (absoluteError((rotation + deltaAngle), snapPosition) >
+          rotationThreshold) {
+        toBeRotated = deltaAngle;
+      } else if (rotation != snapPosition &&
+          absoluteError((rotation + deltaAngle), snapPosition) <=
+              rotationThreshold) {
+        toBeRotated = snapPosition - rotation;
+        break;
+      } else {
+        toBeRotated = 0;
+        break;
+      }
+    }
+
+    double c = cos(toBeRotated);
+    double s = sin(toBeRotated);
+
+    double dx = (1 - c) * focalPoint.dx + s * focalPoint.dy;
+    double dy = (1 - c) * focalPoint.dy - s * focalPoint.dx;
 
     return Matrix4(c, s, 0, 0, -s, c, 0, 0, 0, 0, 1, 0, dx, dy, 0, 1);
   }

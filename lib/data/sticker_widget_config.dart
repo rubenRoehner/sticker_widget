@@ -18,5 +18,8 @@ class StickerWidgetConfig with _$StickerWidgetConfig {
     @Default(true) final bool shouldScale,
     @Default(0.5) final double minScale,
     @Default(4.0) final double maxScale,
+    @Default([0, 90, 180, 270]) final List<double> rotationSnapValues,
+    @Default([0]) final List<double> translationXSnapValues,
+    @Default([0]) final List<double> translationYSnapValues,
   }) = _StickerWidgetConfig;
 }

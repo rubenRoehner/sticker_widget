@@ -21,6 +21,7 @@ class DraggableWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return StickerGestureDetector(
+      stickerWidgetConfig: config,
       shouldTranslate: config.shouldMove,
       shouldRotate: config.shouldRotate,
       shouldScale: config.shouldScale,
