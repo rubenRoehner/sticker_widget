@@ -188,8 +188,7 @@ class StickerGestureDetectorState extends State<StickerGestureDetector> {
     for (var snapPosition
         in widget.stickerWidgetConfig.translationXSnapValues) {
       if (absoluteError(centerX + dy, snapPosition) <=
-          widget.stickerWidgetConfig.translationSnapThreshold *
-              recordOldScale) {
+          widget.stickerWidgetConfig.translationSnapThreshold) {
         dx = snapPosition - centerX;
       }
     }
@@ -197,8 +196,7 @@ class StickerGestureDetectorState extends State<StickerGestureDetector> {
     for (var snapPosition
         in widget.stickerWidgetConfig.translationYSnapValues) {
       if (absoluteError(centerY + dy, snapPosition) <=
-          widget.stickerWidgetConfig.translationSnapThreshold *
-              recordOldScale) {
+          widget.stickerWidgetConfig.translationSnapThreshold) {
         dy = snapPosition - centerY;
       }
     }
