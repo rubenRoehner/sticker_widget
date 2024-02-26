@@ -32,6 +32,8 @@ mixin _$StickerWidgetConfig {
   List<double> get rotationSnapValues => throw _privateConstructorUsedError;
   List<double> get translationXSnapValues => throw _privateConstructorUsedError;
   List<double> get translationYSnapValues => throw _privateConstructorUsedError;
+  double get rotationSnapThreshold => throw _privateConstructorUsedError;
+  double get translationSnapThreshold => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $StickerWidgetConfigCopyWith<StickerWidgetConfig> get copyWith =>
@@ -60,7 +62,9 @@ abstract class $StickerWidgetConfigCopyWith<$Res> {
       double maxScale,
       List<double> rotationSnapValues,
       List<double> translationXSnapValues,
-      List<double> translationYSnapValues});
+      List<double> translationYSnapValues,
+      double rotationSnapThreshold,
+      double translationSnapThreshold});
 }
 
 /// @nodoc
@@ -92,6 +96,8 @@ class _$StickerWidgetConfigCopyWithImpl<$Res, $Val extends StickerWidgetConfig>
     Object? rotationSnapValues = null,
     Object? translationXSnapValues = null,
     Object? translationYSnapValues = null,
+    Object? rotationSnapThreshold = null,
+    Object? translationSnapThreshold = null,
   }) {
     return _then(_value.copyWith(
       borderColor: null == borderColor
@@ -158,6 +164,14 @@ class _$StickerWidgetConfigCopyWithImpl<$Res, $Val extends StickerWidgetConfig>
           ? _value.translationYSnapValues
           : translationYSnapValues // ignore: cast_nullable_to_non_nullable
               as List<double>,
+      rotationSnapThreshold: null == rotationSnapThreshold
+          ? _value.rotationSnapThreshold
+          : rotationSnapThreshold // ignore: cast_nullable_to_non_nullable
+              as double,
+      translationSnapThreshold: null == translationSnapThreshold
+          ? _value.translationSnapThreshold
+          : translationSnapThreshold // ignore: cast_nullable_to_non_nullable
+              as double,
     ) as $Val);
   }
 }
@@ -186,7 +200,9 @@ abstract class _$$StickerWidgetConfigImplCopyWith<$Res>
       double maxScale,
       List<double> rotationSnapValues,
       List<double> translationXSnapValues,
-      List<double> translationYSnapValues});
+      List<double> translationYSnapValues,
+      double rotationSnapThreshold,
+      double translationSnapThreshold});
 }
 
 /// @nodoc
@@ -216,6 +232,8 @@ class __$$StickerWidgetConfigImplCopyWithImpl<$Res>
     Object? rotationSnapValues = null,
     Object? translationXSnapValues = null,
     Object? translationYSnapValues = null,
+    Object? rotationSnapThreshold = null,
+    Object? translationSnapThreshold = null,
   }) {
     return _then(_$StickerWidgetConfigImpl(
       borderColor: null == borderColor
@@ -282,6 +300,14 @@ class __$$StickerWidgetConfigImplCopyWithImpl<$Res>
           ? _value._translationYSnapValues
           : translationYSnapValues // ignore: cast_nullable_to_non_nullable
               as List<double>,
+      rotationSnapThreshold: null == rotationSnapThreshold
+          ? _value.rotationSnapThreshold
+          : rotationSnapThreshold // ignore: cast_nullable_to_non_nullable
+              as double,
+      translationSnapThreshold: null == translationSnapThreshold
+          ? _value.translationSnapThreshold
+          : translationSnapThreshold // ignore: cast_nullable_to_non_nullable
+              as double,
     ));
   }
 }
@@ -305,7 +331,9 @@ class _$StickerWidgetConfigImpl implements _StickerWidgetConfig {
       this.maxScale = 4.0,
       final List<double> rotationSnapValues = const [0, 90, 180, 270],
       final List<double> translationXSnapValues = const [0],
-      final List<double> translationYSnapValues = const [0]})
+      final List<double> translationYSnapValues = const [0],
+      this.rotationSnapThreshold = 0.015,
+      this.translationSnapThreshold = 0.8})
       : _rotationSnapValues = rotationSnapValues,
         _translationXSnapValues = translationXSnapValues,
         _translationYSnapValues = translationYSnapValues;
@@ -380,8 +408,15 @@ class _$StickerWidgetConfigImpl implements _StickerWidgetConfig {
   }
 
   @override
+  @JsonKey()
+  final double rotationSnapThreshold;
+  @override
+  @JsonKey()
+  final double translationSnapThreshold;
+
+  @override
   String toString() {
-    return 'StickerWidgetConfig(borderColor: $borderColor, iconColor: $iconColor, showDone: $showDone, showClose: $showClose, showFlip: $showFlip, showStack: $showStack, showLock: $showLock, showAllBorders: $showAllBorders, shouldMove: $shouldMove, shouldRotate: $shouldRotate, shouldScale: $shouldScale, minScale: $minScale, maxScale: $maxScale, rotationSnapValues: $rotationSnapValues, translationXSnapValues: $translationXSnapValues, translationYSnapValues: $translationYSnapValues)';
+    return 'StickerWidgetConfig(borderColor: $borderColor, iconColor: $iconColor, showDone: $showDone, showClose: $showClose, showFlip: $showFlip, showStack: $showStack, showLock: $showLock, showAllBorders: $showAllBorders, shouldMove: $shouldMove, shouldRotate: $shouldRotate, shouldScale: $shouldScale, minScale: $minScale, maxScale: $maxScale, rotationSnapValues: $rotationSnapValues, translationXSnapValues: $translationXSnapValues, translationYSnapValues: $translationYSnapValues, rotationSnapThreshold: $rotationSnapThreshold, translationSnapThreshold: $translationSnapThreshold)';
   }
 
   @override
@@ -420,7 +455,12 @@ class _$StickerWidgetConfigImpl implements _StickerWidgetConfig {
             const DeepCollectionEquality().equals(
                 other._translationXSnapValues, _translationXSnapValues) &&
             const DeepCollectionEquality().equals(
-                other._translationYSnapValues, _translationYSnapValues));
+                other._translationYSnapValues, _translationYSnapValues) &&
+            (identical(other.rotationSnapThreshold, rotationSnapThreshold) ||
+                other.rotationSnapThreshold == rotationSnapThreshold) &&
+            (identical(
+                    other.translationSnapThreshold, translationSnapThreshold) ||
+                other.translationSnapThreshold == translationSnapThreshold));
   }
 
   @override
@@ -441,7 +481,9 @@ class _$StickerWidgetConfigImpl implements _StickerWidgetConfig {
       maxScale,
       const DeepCollectionEquality().hash(_rotationSnapValues),
       const DeepCollectionEquality().hash(_translationXSnapValues),
-      const DeepCollectionEquality().hash(_translationYSnapValues));
+      const DeepCollectionEquality().hash(_translationYSnapValues),
+      rotationSnapThreshold,
+      translationSnapThreshold);
 
   @JsonKey(ignore: true)
   @override
@@ -468,7 +510,9 @@ abstract class _StickerWidgetConfig implements StickerWidgetConfig {
       final double maxScale,
       final List<double> rotationSnapValues,
       final List<double> translationXSnapValues,
-      final List<double> translationYSnapValues}) = _$StickerWidgetConfigImpl;
+      final List<double> translationYSnapValues,
+      final double rotationSnapThreshold,
+      final double translationSnapThreshold}) = _$StickerWidgetConfigImpl;
 
   @override
   Color get borderColor;
@@ -502,6 +546,10 @@ abstract class _StickerWidgetConfig implements StickerWidgetConfig {
   List<double> get translationXSnapValues;
   @override
   List<double> get translationYSnapValues;
+  @override
+  double get rotationSnapThreshold;
+  @override
+  double get translationSnapThreshold;
   @override
   @JsonKey(ignore: true)
   _$$StickerWidgetConfigImplCopyWith<_$StickerWidgetConfigImpl> get copyWith =>

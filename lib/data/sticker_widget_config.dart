@@ -21,5 +21,7 @@ class StickerWidgetConfig with _$StickerWidgetConfig {
     @Default([0, 90, 180, 270]) final List<double> rotationSnapValues,
     @Default([0]) final List<double> translationXSnapValues,
     @Default([0]) final List<double> translationYSnapValues,
+    @Default(0.015) final double rotationSnapThreshold,
+    @Default(0.8) final double translationSnapThreshold,
   }) = _StickerWidgetConfig;
 }

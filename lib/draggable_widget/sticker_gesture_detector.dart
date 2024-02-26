@@ -3,17 +3,12 @@ import 'package:flutter/widgets.dart';
 import 'package:sticker_widget/data/sticker_widget_config.dart';
 import 'package:vector_math/vector_math_64.dart';
 
-/// Define a callback type for StickerGestureDetector updates.
-///
-typedef StickerGestureDetectorCallback = void Function(
-    double scale, Matrix4 matrix);
-
 /// StickerGestureDetector for handling scaling, rotating, and translating the widget.
 ///
 class StickerGestureDetector extends StatefulWidget {
   /// Callback function for when updates occur.
   ///
-  final StickerGestureDetectorCallback onUpdate;
+  final void Function(double scale, Matrix4 matrix) onUpdate;
 
   /// [child] widget wrapped by the gesture detector.
   ///
@@ -80,17 +75,12 @@ class StickerGestureDetector extends StatefulWidget {
 }
 
 class StickerGestureDetectorState extends State<StickerGestureDetector> {
-  // Matrices for handling translation, scaling, and rotation.
-  Matrix4 translationDeltaMatrix = Matrix4.identity();
-  Matrix4 scaleDeltaMatrix = Matrix4.identity();
-  Matrix4 rotationDeltaMatrix = Matrix4.identity();
+  // Matrix for handling translation, scaling, and rotation.
   Matrix4 matrix = Matrix4.identity();
 
   // Current and previous scale values.
   double recordScale = 1;
   double recordOldScale = 0;
-
-  final double rotationThreshold = 0.015;
 
   @override
   Widget build(BuildContext context) {
@@ -141,16 +131,10 @@ class StickerGestureDetectorState extends State<StickerGestureDetector> {
   void onScaleUpdate(ScaleUpdateDetails details) {
     widget.onScaleStart();
 
-    // Reset transformation matrices.
-    translationDeltaMatrix = Matrix4.identity();
-    scaleDeltaMatrix = Matrix4.identity();
-    rotationDeltaMatrix = Matrix4.identity();
-
     // Handle translation.
     if (widget.shouldTranslate) {
       Offset translationDelta = translationUpdater.update(details.focalPoint);
-      translationDeltaMatrix = _translate(translationDelta);
-      matrix = translationDeltaMatrix * matrix;
+      matrix = _translate(translationDelta) * matrix;
     }
 
     final focalPointAlignment = widget.focalPointAlignment;
@@ -164,16 +148,13 @@ class StickerGestureDetectorState extends State<StickerGestureDetector> {
       if (sc > widget.minScale && sc < widget.maxScale) {
         recordScale = sc;
         double scaleDelta = scaleUpdater.update(details.scale);
-        scaleDeltaMatrix = _scale(scaleDelta, focalPoint);
-        matrix = scaleDeltaMatrix * matrix;
+        matrix = _scale(scaleDelta, focalPoint) * matrix;
       }
     }
 
     // Handle rotation.
     if (widget.shouldRotate && details.rotation != 0.0) {
-      //double rotationDelta = rotationUpdater.update(details.rotation);
-      rotationDeltaMatrix = _rotate(details.rotation, focalPoint);
-      matrix = rotationDeltaMatrix * matrix;
+      matrix = _rotate(details.rotation, focalPoint) * matrix;
     }
 
     // Notify the callback with the updated scale and matrix.
@@ -185,7 +166,47 @@ class StickerGestureDetectorState extends State<StickerGestureDetector> {
     var dx = translation.dx;
     var dy = translation.dy;
 
-    return Matrix4(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, dx, dy, 0, 1);
+    double tx = matrix[12];
+    double ty = matrix[13];
+
+    Size size = context.size!;
+    double rotation = atan2(matrix[1], matrix[0]);
+
+    double preRotationCenterX = (tx - size.width / 2) / recordOldScale;
+    double preRotationCenterY = (ty - size.height / 2) / recordOldScale;
+
+    double centerX = cos(-rotation) * preRotationCenterX -
+        sin(-rotation) * preRotationCenterY +
+        (size.width / 2);
+
+    double centerY = sin(-rotation) * preRotationCenterX +
+        cos(-rotation) * preRotationCenterY +
+        (size.height / 2);
+
+    // TODO: Fix translation snapping when the object is rotated.
+
+    for (var snapPosition
+        in widget.stickerWidgetConfig.translationXSnapValues) {
+      if (absoluteError(centerX + dy, snapPosition) <=
+          widget.stickerWidgetConfig.translationSnapThreshold *
+              recordOldScale) {
+        dx = snapPosition - centerX;
+      }
+    }
+
+    for (var snapPosition
+        in widget.stickerWidgetConfig.translationYSnapValues) {
+      if (absoluteError(centerY + dy, snapPosition) <=
+          widget.stickerWidgetConfig.translationSnapThreshold *
+              recordOldScale) {
+        dy = snapPosition - centerY;
+      }
+    }
+
+    Matrix4 translationMatrix =
+        Matrix4(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, dx, dy, 0, 1);
+
+    return translationMatrix;
   }
 
   // Helper function for scaling matrix.
@@ -208,12 +229,13 @@ class StickerGestureDetectorState extends State<StickerGestureDetector> {
         snapPosition = 180 - snapPosition;
       }
       snapPosition = radians(snapPosition);
+
       if (absoluteError((rotation + deltaAngle), snapPosition) >
-          rotationThreshold) {
+          widget.stickerWidgetConfig.rotationSnapThreshold) {
         toBeRotated = deltaAngle;
       } else if (rotation != snapPosition &&
           absoluteError((rotation + deltaAngle), snapPosition) <=
-              rotationThreshold) {
+              widget.stickerWidgetConfig.rotationSnapThreshold) {
         toBeRotated = snapPosition - rotation;
         break;
       } else {

@@ -27,6 +27,8 @@ mixin _$DraggableWidgetData {
   void Function(double) get updateScale => throw _privateConstructorUsedError;
   void Function(Matrix4) get updateTransform =>
       throw _privateConstructorUsedError;
+  void Function() get startTransform => throw _privateConstructorUsedError;
+  void Function() get endTransform => throw _privateConstructorUsedError;
   Matrix4 get transform => throw _privateConstructorUsedError;
   int get layerIndex => throw _privateConstructorUsedError;
   double get scale => throw _privateConstructorUsedError;
@@ -54,6 +56,8 @@ abstract class $DraggableWidgetDataCopyWith<$Res> {
       void Function() onLayerButtonPressed,
       void Function(double) updateScale,
       void Function(Matrix4) updateTransform,
+      void Function() startTransform,
+      void Function() endTransform,
       Matrix4 transform,
       int layerIndex,
       double scale,
@@ -83,6 +87,8 @@ class _$DraggableWidgetDataCopyWithImpl<$Res, $Val extends DraggableWidgetData>
     Object? onLayerButtonPressed = null,
     Object? updateScale = null,
     Object? updateTransform = null,
+    Object? startTransform = null,
+    Object? endTransform = null,
     Object? transform = null,
     Object? layerIndex = null,
     Object? scale = null,
@@ -123,6 +129,14 @@ class _$DraggableWidgetDataCopyWithImpl<$Res, $Val extends DraggableWidgetData>
           ? _value.updateTransform
           : updateTransform // ignore: cast_nullable_to_non_nullable
               as void Function(Matrix4),
+      startTransform: null == startTransform
+          ? _value.startTransform
+          : startTransform // ignore: cast_nullable_to_non_nullable
+              as void Function(),
+      endTransform: null == endTransform
+          ? _value.endTransform
+          : endTransform // ignore: cast_nullable_to_non_nullable
+              as void Function(),
       transform: null == transform
           ? _value.transform
           : transform // ignore: cast_nullable_to_non_nullable
@@ -168,6 +182,8 @@ abstract class _$$DraggableWidgetDataImplCopyWith<$Res>
       void Function() onLayerButtonPressed,
       void Function(double) updateScale,
       void Function(Matrix4) updateTransform,
+      void Function() startTransform,
+      void Function() endTransform,
       Matrix4 transform,
       int layerIndex,
       double scale,
@@ -195,6 +211,8 @@ class __$$DraggableWidgetDataImplCopyWithImpl<$Res>
     Object? onLayerButtonPressed = null,
     Object? updateScale = null,
     Object? updateTransform = null,
+    Object? startTransform = null,
+    Object? endTransform = null,
     Object? transform = null,
     Object? layerIndex = null,
     Object? scale = null,
@@ -235,6 +253,14 @@ class __$$DraggableWidgetDataImplCopyWithImpl<$Res>
           ? _value.updateTransform
           : updateTransform // ignore: cast_nullable_to_non_nullable
               as void Function(Matrix4),
+      startTransform: null == startTransform
+          ? _value.startTransform
+          : startTransform // ignore: cast_nullable_to_non_nullable
+              as void Function(),
+      endTransform: null == endTransform
+          ? _value.endTransform
+          : endTransform // ignore: cast_nullable_to_non_nullable
+              as void Function(),
       transform: null == transform
           ? _value.transform
           : transform // ignore: cast_nullable_to_non_nullable
@@ -275,6 +301,8 @@ class _$DraggableWidgetDataImpl implements _DraggableWidgetData {
       required this.onLayerButtonPressed,
       required this.updateScale,
       required this.updateTransform,
+      required this.startTransform,
+      required this.endTransform,
       required this.transform,
       required this.layerIndex,
       this.scale = 1.0,
@@ -299,6 +327,10 @@ class _$DraggableWidgetDataImpl implements _DraggableWidgetData {
   @override
   final void Function(Matrix4) updateTransform;
   @override
+  final void Function() startTransform;
+  @override
+  final void Function() endTransform;
+  @override
   final Matrix4 transform;
   @override
   final int layerIndex;
@@ -317,7 +349,7 @@ class _$DraggableWidgetDataImpl implements _DraggableWidgetData {
 
   @override
   String toString() {
-    return 'DraggableWidgetData(onSelect: $onSelect, onFlipButtonPressed: $onFlipButtonPressed, onDoneButtonPressed: $onDoneButtonPressed, onLockPressed: $onLockPressed, onDeleteButtonPressed: $onDeleteButtonPressed, onLayerButtonPressed: $onLayerButtonPressed, updateScale: $updateScale, updateTransform: $updateTransform, transform: $transform, layerIndex: $layerIndex, scale: $scale, isSelected: $isSelected, isFlipped: $isFlipped, isLocked: $isLocked)';
+    return 'DraggableWidgetData(onSelect: $onSelect, onFlipButtonPressed: $onFlipButtonPressed, onDoneButtonPressed: $onDoneButtonPressed, onLockPressed: $onLockPressed, onDeleteButtonPressed: $onDeleteButtonPressed, onLayerButtonPressed: $onLayerButtonPressed, updateScale: $updateScale, updateTransform: $updateTransform, startTransform: $startTransform, endTransform: $endTransform, transform: $transform, layerIndex: $layerIndex, scale: $scale, isSelected: $isSelected, isFlipped: $isFlipped, isLocked: $isLocked)';
   }
 
   @override
@@ -341,6 +373,10 @@ class _$DraggableWidgetDataImpl implements _DraggableWidgetData {
                 other.updateScale == updateScale) &&
             (identical(other.updateTransform, updateTransform) ||
                 other.updateTransform == updateTransform) &&
+            (identical(other.startTransform, startTransform) ||
+                other.startTransform == startTransform) &&
+            (identical(other.endTransform, endTransform) ||
+                other.endTransform == endTransform) &&
             (identical(other.transform, transform) ||
                 other.transform == transform) &&
             (identical(other.layerIndex, layerIndex) ||
@@ -365,6 +401,8 @@ class _$DraggableWidgetDataImpl implements _DraggableWidgetData {
       onLayerButtonPressed,
       updateScale,
       updateTransform,
+      startTransform,
+      endTransform,
       transform,
       layerIndex,
       scale,
@@ -390,6 +428,8 @@ abstract class _DraggableWidgetData implements DraggableWidgetData {
       required final void Function() onLayerButtonPressed,
       required final void Function(double) updateScale,
       required final void Function(Matrix4) updateTransform,
+      required final void Function() startTransform,
+      required final void Function() endTransform,
       required final Matrix4 transform,
       required final int layerIndex,
       final double scale,
@@ -413,6 +453,10 @@ abstract class _DraggableWidgetData implements DraggableWidgetData {
   void Function(double) get updateScale;
   @override
   void Function(Matrix4) get updateTransform;
+  @override
+  void Function() get startTransform;
+  @override
+  void Function() get endTransform;
   @override
   Matrix4 get transform;
   @override

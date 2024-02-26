@@ -32,6 +32,13 @@ class StickerWidgetController {
   final StreamController<Key?> _selectedWidgetStreamController =
       StreamController.broadcast();
 
+  /// StreamController to keep track of selected DraggableWidget.
+  final StreamController<bool> _isTransformingStreamController =
+      StreamController.broadcast();
+
+  /// Returns stream of DraggableWidget's.
+  Stream<bool> get isTransforming => _isTransformingStreamController.stream;
+
   /// Returns stream of DraggableWidget's.
   Stream<List<DraggableWidget>> get widgets => _widgetsStreamController.stream;
 
@@ -349,6 +356,8 @@ class StickerWidgetController {
       updateScale: (scale) => _updateScale(key, scale),
       updateTransform: (transform) => _updateTransform(key, transform),
       layerIndex: _widgets.length,
+      startTransform: () => _isTransformingStreamController.add(true),
+      endTransform: () => _isTransformingStreamController.add(false),
     );
   }
 

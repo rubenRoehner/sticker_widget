@@ -32,8 +32,8 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   final StickerWidgetController controller = StickerWidgetController(
-      config: const StickerWidgetConfig(
-          borderColor: CupertinoColors.systemBlue, shouldRotate: false));
+      config:
+          const StickerWidgetConfig(borderColor: CupertinoColors.systemBlue));
 
   @override
   void initState() {
@@ -79,13 +79,23 @@ class _MyHomePageState extends State<MyHomePage> {
                 );
               },
             ),
+            StreamBuilder(
+              stream: controller.isTransforming,
+              initialData: false,
+              builder: (context, snapshot) {
+                return Text(
+                  "IsTransforming: ${snapshot.data}",
+                  style: const TextStyle(color: CupertinoColors.activeBlue),
+                );
+              },
+            ),
             Expanded(
               child: Container(
                 color: CupertinoColors.systemBackground,
                 child: StickerWidget(
                   controller: controller,
-                  width: 200,
-                  height: 200,
+                  width: 500,
+                  height: 500,
                   child: Container(
                     decoration: const BoxDecoration(
                       color: CupertinoColors.darkBackgroundGray,

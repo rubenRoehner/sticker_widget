@@ -32,8 +32,11 @@ class DraggableWidget extends StatelessWidget {
       },
       onScaleStart: () {
         data.onSelect();
+        data.startTransform();
       },
-      onScaleEnd: () {},
+      onScaleEnd: () {
+        data.endTransform();
+      },
       onUpdate: (s, m) {
         data.updateScale(s);
         data.updateTransform(m);
