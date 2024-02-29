@@ -22,13 +22,13 @@ class DraggableWidgetAction extends StatelessWidget {
   final double? bottom;
   final double? top;
 
-  static const double _defaultCircleSize = 24;
-  static const double _defaultIconSize = 12;
+  static const double defaultCircleRadius = 12;
+  static const double defaultIconSize = 12;
 
   @override
   Widget build(BuildContext context) {
-    double circleSize = _defaultCircleSize / scale;
-    double iconSize = _defaultIconSize / scale;
+    double circleSize = defaultCircleRadius / scale;
+    double iconSize = defaultIconSize / scale;
     return Positioned(
       left: left,
       right: right,
@@ -36,16 +36,13 @@ class DraggableWidgetAction extends StatelessWidget {
       top: top,
       child: GestureDetector(
         onTap: onTap,
-        child: SizedBox(
-          width: circleSize,
-          height: circleSize,
-          child: CircleAvatar(
-            backgroundColor: borderColor,
-            child: Icon(
-              icon,
-              size: iconSize,
-              color: iconColor,
-            ),
+        child: CircleAvatar(
+          radius: circleSize,
+          backgroundColor: borderColor,
+          child: Icon(
+            icon,
+            size: iconSize,
+            color: iconColor,
           ),
         ),
       ),

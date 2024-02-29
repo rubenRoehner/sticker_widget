@@ -14,6 +14,8 @@ class StickerGestureDetector extends StatefulWidget {
   ///
   final Widget child;
 
+  final bool isSelected;
+
   /// Control flags for various gesture types (translate, scale, rotate).
   ///
   /// Defaults to true
@@ -49,6 +51,8 @@ class StickerGestureDetector extends StatefulWidget {
   final double minScale;
   final double maxScale;
 
+  final GlobalKey childrenKey;
+
   /// StickerWidgetConfig.
   ///
   final StickerWidgetConfig stickerWidgetConfig;
@@ -68,7 +72,9 @@ class StickerGestureDetector extends StatefulWidget {
       required this.onScaleEnd,
       required this.onTap,
       required this.minScale,
-      required this.maxScale});
+      required this.maxScale,
+      required this.isSelected,
+      required this.childrenKey});
 
   @override
   State<StickerGestureDetector> createState() => StickerGestureDetectorState();
@@ -115,6 +121,9 @@ class StickerGestureDetectorState extends State<StickerGestureDetector> {
 
   // Callback when a scale gesture starts.
   void onScaleStart(ScaleStartDetails details) {
+    if (!widget.isSelected) {
+      return;
+    }
     widget.onScaleStart();
     translationUpdater.value = details.focalPoint;
     recordOldScale = recordScale;
@@ -129,12 +138,17 @@ class StickerGestureDetectorState extends State<StickerGestureDetector> {
 
   // Callback for handling scale updates.
   void onScaleUpdate(ScaleUpdateDetails details) {
+    if (!widget.isSelected) {
+      return;
+    }
+
     widget.onScaleStart();
 
     // Handle translation.
     if (widget.shouldTranslate) {
       Offset translationDelta = translationUpdater.update(details.focalPoint);
       matrix = _translate(translationDelta) * matrix;
+      matrix = _translationSnap() * matrix;
     }
 
     final focalPointAlignment = widget.focalPointAlignment;
@@ -166,38 +180,35 @@ class StickerGestureDetectorState extends State<StickerGestureDetector> {
     var dx = translation.dx;
     var dy = translation.dy;
 
-    double tx = matrix[12];
-    double ty = matrix[13];
+    Matrix4 translationMatrix =
+        Matrix4(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, dx, dy, 0, 1);
 
-    Size size = context.size!;
-    double rotation = atan2(matrix[1], matrix[0]);
+    return translationMatrix;
+  }
 
-    double preRotationCenterX = (tx - size.width / 2) / recordOldScale;
-    double preRotationCenterY = (ty - size.height / 2) / recordOldScale;
+  // Helper function for translation matrix.
+  Matrix4 _translationSnap() {
+    var dx = 0.0;
+    var dy = 0.0;
 
-    double centerX = cos(-rotation) * preRotationCenterX -
-        sin(-rotation) * preRotationCenterY +
-        (size.width / 2);
-
-    double centerY = sin(-rotation) * preRotationCenterX +
-        cos(-rotation) * preRotationCenterY +
-        (size.height / 2);
-
-    // TODO: Fix translation snapping when the object is rotated.
+    Offset center = _findTransformedRectangleCenter(
+        matrix,
+        widget.childrenKey.currentContext!.size!,
+        widget.stickerWidgetConfig.canvasSize);
 
     for (var snapPosition
         in widget.stickerWidgetConfig.translationXSnapValues) {
-      if (absoluteError(centerX + dy, snapPosition) <=
+      if (absoluteError(center.dx, snapPosition) <=
           widget.stickerWidgetConfig.translationSnapThreshold) {
-        dx = snapPosition - centerX;
+        dx = center.dx - snapPosition;
       }
     }
 
     for (var snapPosition
         in widget.stickerWidgetConfig.translationYSnapValues) {
-      if (absoluteError(centerY + dy, snapPosition) <=
+      if (absoluteError(center.dy, snapPosition) <=
           widget.stickerWidgetConfig.translationSnapThreshold) {
-        dy = snapPosition - centerY;
+        dy = center.dy - snapPosition;
       }
     }
 
@@ -205,6 +216,25 @@ class StickerGestureDetectorState extends State<StickerGestureDetector> {
         Matrix4(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, dx, dy, 0, 1);
 
     return translationMatrix;
+  }
+
+  Offset _findTransformedRectangleCenter(
+      Matrix4 transformationMatrix, Size rectangleSize, Size canvasSize) {
+    // Calculate the center point of the rectangle in its own coordinate system
+    Vector3 rectangleCenter =
+        Vector3(rectangleSize.width / 2, rectangleSize.height / 2, 0);
+
+    // Apply the transformation matrix to the rectangle center
+    Vector3 transformedCenter =
+        transformationMatrix.transform3(rectangleCenter);
+
+    // Calculate the center point of the transformed rectangle in the canvas coordinate system
+    Offset canvasCenter = Offset(canvasSize.width / 2, canvasSize.height / 2);
+    Offset transformedCanvasCenter = Offset(
+        canvasCenter.dx - transformedCenter.x,
+        canvasCenter.dy - transformedCenter.y);
+
+    return transformedCanvasCenter;
   }
 
   // Helper function for scaling matrix.
@@ -217,9 +247,7 @@ class StickerGestureDetectorState extends State<StickerGestureDetector> {
 
   Matrix4 _rotate(double angle, Offset focalPoint) {
     double toBeRotated = 0;
-    var array = matrix.applyToVector3Array([0, 0, 0, 1, 0, 0]);
-    Offset delta = Offset(array[3] - array[0], array[4] - array[1]);
-    double rotation = delta.direction;
+    double rotation = atan2(matrix[1], matrix[0]);
     double deltaAngle = rotationUpdater.update(angle);
 
     for (var snapPosition in widget.stickerWidgetConfig.rotationSnapValues) {

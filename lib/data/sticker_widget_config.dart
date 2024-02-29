@@ -5,6 +5,7 @@ part 'sticker_widget_config.freezed.dart';
 @freezed
 class StickerWidgetConfig with _$StickerWidgetConfig {
   const factory StickerWidgetConfig({
+    @Default(Size(500, 500)) final Size canvasSize,
     @Default(Color(0xFFFFFFFF)) final Color borderColor,
     @Default(Color(0xFF000000)) final Color iconColor,
     @Default(true) final bool showDone,

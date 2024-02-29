@@ -19,12 +19,6 @@ class StickerWidget extends StatelessWidget {
   ///
   final Widget child;
 
-  /// The childs width.
-  final double width;
-
-  /// The childs height.
-  final double height;
-
   final EdgeInsets contentPadding;
 
   final TransformationController? transformationController;
@@ -37,8 +31,6 @@ class StickerWidget extends StatelessWidget {
   const StickerWidget(
       {super.key,
       required this.controller,
-      required this.width,
-      required this.height,
       this.contentPadding =
           const EdgeInsets.symmetric(horizontal: 48, vertical: 180),
       this.transformationController,
@@ -56,8 +48,8 @@ class StickerWidget extends StatelessWidget {
       minScale: minScale,
       maxScale: maxScale,
       child: SizedBox(
-        height: height,
-        width: width,
+        height: controller.config.canvasSize.height,
+        width: controller.config.canvasSize.width,
         child: RepaintBoundary(
           key: globalKey,
           child: Stack(

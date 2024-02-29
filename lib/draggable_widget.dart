@@ -10,7 +10,7 @@ class DraggableWidget extends StatelessWidget {
   final DraggableWidgetData data;
   final DraggableWidgetType type;
 
-  const DraggableWidget({
+  DraggableWidget({
     required super.key,
     required this.child,
     required this.data,
@@ -18,10 +18,13 @@ class DraggableWidget extends StatelessWidget {
     required this.type,
   });
 
+  final GlobalKey childrenKey = GlobalKey();
+
   @override
   Widget build(BuildContext context) {
     return StickerGestureDetector(
       stickerWidgetConfig: config,
+      isSelected: data.isSelected,
       shouldTranslate: config.shouldMove,
       shouldRotate: config.shouldRotate,
       shouldScale: config.shouldScale,
@@ -31,7 +34,6 @@ class DraggableWidget extends StatelessWidget {
         data.onSelect();
       },
       onScaleStart: () {
-        data.onSelect();
         data.startTransform();
       },
       onScaleEnd: () {
@@ -41,15 +43,22 @@ class DraggableWidget extends StatelessWidget {
         data.updateScale(s);
         data.updateTransform(m);
       },
-      child: Center(
+      childrenKey: childrenKey,
+      child: SizedBox(
+        width: config.canvasSize.width,
+        height: config.canvasSize.height,
         child: Transform(
           transform: data.transform,
-          child: Center(
+          child: FittedBox(
+            key: childrenKey,
+            fit: BoxFit.scaleDown,
             child: Stack(
               children: [
                 Container(
-                  margin: EdgeInsets.all(11 / data.scale),
-                  padding: EdgeInsets.all(13 / data.scale),
+                  margin: EdgeInsets.all(
+                      DraggableWidgetAction.defaultCircleRadius / data.scale),
+                  padding: EdgeInsets.all(
+                      DraggableWidgetAction.defaultCircleRadius / data.scale),
                   decoration: (config.showAllBorders && data.isSelected)
                       ? BoxDecoration(
                           border: Border.all(
@@ -58,12 +67,9 @@ class DraggableWidget extends StatelessWidget {
                           ),
                         )
                       : null,
-                  child: FittedBox(
-                    fit: BoxFit.contain,
-                    child: Transform.flip(
-                      flipX: data.isFlipped,
-                      child: child,
-                    ),
+                  child: Transform.flip(
+                    flipX: data.isFlipped,
+                    child: child,
                   ),
                 ),
                 ...actionWidgets(),

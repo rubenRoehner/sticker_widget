@@ -32,23 +32,39 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   final StickerWidgetController controller = StickerWidgetController(
-      config:
-          const StickerWidgetConfig(borderColor: CupertinoColors.systemBlue));
+      config: const StickerWidgetConfig(
+    canvasSize: Size(500, 300),
+    borderColor: CupertinoColors.systemBlue,
+    translationSnapThreshold: 1.5,
+  ));
 
   @override
   void initState() {
-    controller.addWidget(
-      Image.network(
-        'https://picsum.photos/200',
-        width: 200,
-        height: 200,
-      ),
-    );
-
     controller.addIconWidget(
       CupertinoIcons.square_fill,
-      CupertinoColors.black,
+      CupertinoColors.white,
     );
+    controller.addWidget(Container(
+      width: 200,
+      height: 200,
+      decoration: BoxDecoration(
+        border: Border.all(
+          color: CupertinoColors.activeGreen,
+          width: 3,
+        ),
+        color: Colors.transparent,
+      ),
+      child: Center(
+        child: Container(
+          width: 5,
+          height: 5,
+          decoration: const BoxDecoration(
+            color: CupertinoColors.systemRed,
+            borderRadius: BorderRadius.all(Radius.circular(5)),
+          ),
+        ),
+      ),
+    ));
 
     super.initState();
   }
@@ -94,8 +110,6 @@ class _MyHomePageState extends State<MyHomePage> {
                 color: CupertinoColors.systemBackground,
                 child: StickerWidget(
                   controller: controller,
-                  width: 500,
-                  height: 500,
                   child: Container(
                     decoration: const BoxDecoration(
                       color: CupertinoColors.darkBackgroundGray,

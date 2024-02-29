@@ -16,6 +16,7 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$StickerWidgetConfig {
+  Size get canvasSize => throw _privateConstructorUsedError;
   Color get borderColor => throw _privateConstructorUsedError;
   Color get iconColor => throw _privateConstructorUsedError;
   bool get showDone => throw _privateConstructorUsedError;
@@ -47,7 +48,8 @@ abstract class $StickerWidgetConfigCopyWith<$Res> {
       _$StickerWidgetConfigCopyWithImpl<$Res, StickerWidgetConfig>;
   @useResult
   $Res call(
-      {Color borderColor,
+      {Size canvasSize,
+      Color borderColor,
       Color iconColor,
       bool showDone,
       bool showClose,
@@ -80,6 +82,7 @@ class _$StickerWidgetConfigCopyWithImpl<$Res, $Val extends StickerWidgetConfig>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? canvasSize = null,
     Object? borderColor = null,
     Object? iconColor = null,
     Object? showDone = null,
@@ -100,6 +103,10 @@ class _$StickerWidgetConfigCopyWithImpl<$Res, $Val extends StickerWidgetConfig>
     Object? translationSnapThreshold = null,
   }) {
     return _then(_value.copyWith(
+      canvasSize: null == canvasSize
+          ? _value.canvasSize
+          : canvasSize // ignore: cast_nullable_to_non_nullable
+              as Size,
       borderColor: null == borderColor
           ? _value.borderColor
           : borderColor // ignore: cast_nullable_to_non_nullable
@@ -185,7 +192,8 @@ abstract class _$$StickerWidgetConfigImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {Color borderColor,
+      {Size canvasSize,
+      Color borderColor,
       Color iconColor,
       bool showDone,
       bool showClose,
@@ -216,6 +224,7 @@ class __$$StickerWidgetConfigImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? canvasSize = null,
     Object? borderColor = null,
     Object? iconColor = null,
     Object? showDone = null,
@@ -236,6 +245,10 @@ class __$$StickerWidgetConfigImplCopyWithImpl<$Res>
     Object? translationSnapThreshold = null,
   }) {
     return _then(_$StickerWidgetConfigImpl(
+      canvasSize: null == canvasSize
+          ? _value.canvasSize
+          : canvasSize // ignore: cast_nullable_to_non_nullable
+              as Size,
       borderColor: null == borderColor
           ? _value.borderColor
           : borderColor // ignore: cast_nullable_to_non_nullable
@@ -316,7 +329,8 @@ class __$$StickerWidgetConfigImplCopyWithImpl<$Res>
 
 class _$StickerWidgetConfigImpl implements _StickerWidgetConfig {
   const _$StickerWidgetConfigImpl(
-      {this.borderColor = const Color(0xFFFFFFFF),
+      {this.canvasSize = const Size(500, 500),
+      this.borderColor = const Color(0xFFFFFFFF),
       this.iconColor = const Color(0xFF000000),
       this.showDone = true,
       this.showClose = true,
@@ -338,6 +352,9 @@ class _$StickerWidgetConfigImpl implements _StickerWidgetConfig {
         _translationXSnapValues = translationXSnapValues,
         _translationYSnapValues = translationYSnapValues;
 
+  @override
+  @JsonKey()
+  final Size canvasSize;
   @override
   @JsonKey()
   final Color borderColor;
@@ -416,7 +433,7 @@ class _$StickerWidgetConfigImpl implements _StickerWidgetConfig {
 
   @override
   String toString() {
-    return 'StickerWidgetConfig(borderColor: $borderColor, iconColor: $iconColor, showDone: $showDone, showClose: $showClose, showFlip: $showFlip, showStack: $showStack, showLock: $showLock, showAllBorders: $showAllBorders, shouldMove: $shouldMove, shouldRotate: $shouldRotate, shouldScale: $shouldScale, minScale: $minScale, maxScale: $maxScale, rotationSnapValues: $rotationSnapValues, translationXSnapValues: $translationXSnapValues, translationYSnapValues: $translationYSnapValues, rotationSnapThreshold: $rotationSnapThreshold, translationSnapThreshold: $translationSnapThreshold)';
+    return 'StickerWidgetConfig(canvasSize: $canvasSize, borderColor: $borderColor, iconColor: $iconColor, showDone: $showDone, showClose: $showClose, showFlip: $showFlip, showStack: $showStack, showLock: $showLock, showAllBorders: $showAllBorders, shouldMove: $shouldMove, shouldRotate: $shouldRotate, shouldScale: $shouldScale, minScale: $minScale, maxScale: $maxScale, rotationSnapValues: $rotationSnapValues, translationXSnapValues: $translationXSnapValues, translationYSnapValues: $translationYSnapValues, rotationSnapThreshold: $rotationSnapThreshold, translationSnapThreshold: $translationSnapThreshold)';
   }
 
   @override
@@ -424,6 +441,8 @@ class _$StickerWidgetConfigImpl implements _StickerWidgetConfig {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$StickerWidgetConfigImpl &&
+            (identical(other.canvasSize, canvasSize) ||
+                other.canvasSize == canvasSize) &&
             (identical(other.borderColor, borderColor) ||
                 other.borderColor == borderColor) &&
             (identical(other.iconColor, iconColor) ||
@@ -464,26 +483,28 @@ class _$StickerWidgetConfigImpl implements _StickerWidgetConfig {
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      borderColor,
-      iconColor,
-      showDone,
-      showClose,
-      showFlip,
-      showStack,
-      showLock,
-      showAllBorders,
-      shouldMove,
-      shouldRotate,
-      shouldScale,
-      minScale,
-      maxScale,
-      const DeepCollectionEquality().hash(_rotationSnapValues),
-      const DeepCollectionEquality().hash(_translationXSnapValues),
-      const DeepCollectionEquality().hash(_translationYSnapValues),
-      rotationSnapThreshold,
-      translationSnapThreshold);
+  int get hashCode => Object.hashAll([
+        runtimeType,
+        canvasSize,
+        borderColor,
+        iconColor,
+        showDone,
+        showClose,
+        showFlip,
+        showStack,
+        showLock,
+        showAllBorders,
+        shouldMove,
+        shouldRotate,
+        shouldScale,
+        minScale,
+        maxScale,
+        const DeepCollectionEquality().hash(_rotationSnapValues),
+        const DeepCollectionEquality().hash(_translationXSnapValues),
+        const DeepCollectionEquality().hash(_translationYSnapValues),
+        rotationSnapThreshold,
+        translationSnapThreshold
+      ]);
 
   @JsonKey(ignore: true)
   @override
@@ -495,7 +516,8 @@ class _$StickerWidgetConfigImpl implements _StickerWidgetConfig {
 
 abstract class _StickerWidgetConfig implements StickerWidgetConfig {
   const factory _StickerWidgetConfig(
-      {final Color borderColor,
+      {final Size canvasSize,
+      final Color borderColor,
       final Color iconColor,
       final bool showDone,
       final bool showClose,
@@ -514,6 +536,8 @@ abstract class _StickerWidgetConfig implements StickerWidgetConfig {
       final double rotationSnapThreshold,
       final double translationSnapThreshold}) = _$StickerWidgetConfigImpl;
 
+  @override
+  Size get canvasSize;
   @override
   Color get borderColor;
   @override
