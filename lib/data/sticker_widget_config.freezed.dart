@@ -16,24 +16,99 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$StickerWidgetConfig {
+  /// The size of the underlying canvas.
+  ///
+  /// The [canvasSize] property represents the size of the underlying canvas.
   Size get canvasSize => throw _privateConstructorUsedError;
+
+  /// The color of the border.
+  ///
+  /// The [borderColor] property represents the color of the border.
   Color get borderColor => throw _privateConstructorUsedError;
+
+  /// The color of the icon.
+  ///
+  /// The [iconColor] property represents the color of the icon.
   Color get iconColor => throw _privateConstructorUsedError;
+
+  /// Whether to show the "Done" button.
+  ///
+  /// The [showDone] property determines whether to show the "Done" button.
   bool get showDone => throw _privateConstructorUsedError;
+
+  /// Whether to show the "Close" button.
+  ///
+  /// The [showClose] property determines whether to show the "Close" button.
   bool get showClose => throw _privateConstructorUsedError;
+
+  /// Whether to show the "Flip" button.
+  ///
+  /// The [showFlip] property determines whether to show the "Flip" button.
   bool get showFlip => throw _privateConstructorUsedError;
+
+  /// Whether to show the "Stack" button.
+  ///
+  /// The [showStack] property determines whether to show the "Stack" button.
   bool get showStack => throw _privateConstructorUsedError;
+
+  /// Whether to show the "Lock" button.
+  ///
+  /// The [showLock] property determines whether to show the "Lock" button.
   bool get showLock => throw _privateConstructorUsedError;
+
+  /// Whether to show all borders.
+  ///
+  /// The [showAllBorders] property determines whether to show all borders.
   bool get showAllBorders => throw _privateConstructorUsedError;
+
+  /// Whether the widget should be movable.
+  ///
+  /// The [shouldMove] property determines whether the widget should be movable.
   bool get shouldMove => throw _privateConstructorUsedError;
+
+  /// Whether the widget should be rotatable.
+  ///
+  /// The [shouldRotate] property determines whether the widget should be rotatable.
   bool get shouldRotate => throw _privateConstructorUsedError;
+
+  /// Whether the widget should be scalable.
+  ///
+  /// The [shouldScale] property determines whether the widget should be scalable.
   bool get shouldScale => throw _privateConstructorUsedError;
+
+  /// The minimum scale value.
+  ///
+  /// The [minScale] property represents the minimum scale value.
   double get minScale => throw _privateConstructorUsedError;
+
+  /// The maximum scale value.
+  ///
+  /// The [maxScale] property represents the maximum scale value.
   double get maxScale => throw _privateConstructorUsedError;
+
+  /// The snap values for rotation.
+  ///
+  /// The [rotationSnapValues] property represents the snap values for rotation.
   List<double> get rotationSnapValues => throw _privateConstructorUsedError;
+
+  /// The snap values for translation on the x-axis.
+  ///
+  /// The [translationXSnapValues] property represents the snap values for translation on the x-axis.
   List<double> get translationXSnapValues => throw _privateConstructorUsedError;
+
+  /// The snap values for translation on the y-axis.
+  ///
+  /// The [translationYSnapValues] property represents the snap values for translation on the y-axis.
   List<double> get translationYSnapValues => throw _privateConstructorUsedError;
+
+  /// The rotation snap threshold.
+  ///
+  /// The [rotationSnapThreshold] property represents the rotation snap threshold.
   double get rotationSnapThreshold => throw _privateConstructorUsedError;
+
+  /// The translation snap threshold.
+  ///
+  /// The [translationSnapThreshold] property represents the translation snap threshold.
   double get translationSnapThreshold => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -352,49 +427,112 @@ class _$StickerWidgetConfigImpl implements _StickerWidgetConfig {
         _translationXSnapValues = translationXSnapValues,
         _translationYSnapValues = translationYSnapValues;
 
+  /// The size of the underlying canvas.
+  ///
+  /// The [canvasSize] property represents the size of the underlying canvas.
   @override
   @JsonKey()
   final Size canvasSize;
+
+  /// The color of the border.
+  ///
+  /// The [borderColor] property represents the color of the border.
   @override
   @JsonKey()
   final Color borderColor;
+
+  /// The color of the icon.
+  ///
+  /// The [iconColor] property represents the color of the icon.
   @override
   @JsonKey()
   final Color iconColor;
+
+  /// Whether to show the "Done" button.
+  ///
+  /// The [showDone] property determines whether to show the "Done" button.
   @override
   @JsonKey()
   final bool showDone;
+
+  /// Whether to show the "Close" button.
+  ///
+  /// The [showClose] property determines whether to show the "Close" button.
   @override
   @JsonKey()
   final bool showClose;
+
+  /// Whether to show the "Flip" button.
+  ///
+  /// The [showFlip] property determines whether to show the "Flip" button.
   @override
   @JsonKey()
   final bool showFlip;
+
+  /// Whether to show the "Stack" button.
+  ///
+  /// The [showStack] property determines whether to show the "Stack" button.
   @override
   @JsonKey()
   final bool showStack;
+
+  /// Whether to show the "Lock" button.
+  ///
+  /// The [showLock] property determines whether to show the "Lock" button.
   @override
   @JsonKey()
   final bool showLock;
+
+  /// Whether to show all borders.
+  ///
+  /// The [showAllBorders] property determines whether to show all borders.
   @override
   @JsonKey()
   final bool showAllBorders;
+
+  /// Whether the widget should be movable.
+  ///
+  /// The [shouldMove] property determines whether the widget should be movable.
   @override
   @JsonKey()
   final bool shouldMove;
+
+  /// Whether the widget should be rotatable.
+  ///
+  /// The [shouldRotate] property determines whether the widget should be rotatable.
   @override
   @JsonKey()
   final bool shouldRotate;
+
+  /// Whether the widget should be scalable.
+  ///
+  /// The [shouldScale] property determines whether the widget should be scalable.
   @override
   @JsonKey()
   final bool shouldScale;
+
+  /// The minimum scale value.
+  ///
+  /// The [minScale] property represents the minimum scale value.
   @override
   @JsonKey()
   final double minScale;
+
+  /// The maximum scale value.
+  ///
+  /// The [maxScale] property represents the maximum scale value.
   @override
   @JsonKey()
   final double maxScale;
+
+  /// The snap values for rotation.
+  ///
+  /// The [rotationSnapValues] property represents the snap values for rotation.
   final List<double> _rotationSnapValues;
+
+  /// The snap values for rotation.
+  ///
+  /// The [rotationSnapValues] property represents the snap values for rotation.
   @override
   @JsonKey()
   List<double> get rotationSnapValues {
@@ -404,7 +542,14 @@ class _$StickerWidgetConfigImpl implements _StickerWidgetConfig {
     return EqualUnmodifiableListView(_rotationSnapValues);
   }
 
+  /// The snap values for translation on the x-axis.
+  ///
+  /// The [translationXSnapValues] property represents the snap values for translation on the x-axis.
   final List<double> _translationXSnapValues;
+
+  /// The snap values for translation on the x-axis.
+  ///
+  /// The [translationXSnapValues] property represents the snap values for translation on the x-axis.
   @override
   @JsonKey()
   List<double> get translationXSnapValues {
@@ -414,7 +559,14 @@ class _$StickerWidgetConfigImpl implements _StickerWidgetConfig {
     return EqualUnmodifiableListView(_translationXSnapValues);
   }
 
+  /// The snap values for translation on the y-axis.
+  ///
+  /// The [translationYSnapValues] property represents the snap values for translation on the y-axis.
   final List<double> _translationYSnapValues;
+
+  /// The snap values for translation on the y-axis.
+  ///
+  /// The [translationYSnapValues] property represents the snap values for translation on the y-axis.
   @override
   @JsonKey()
   List<double> get translationYSnapValues {
@@ -424,9 +576,16 @@ class _$StickerWidgetConfigImpl implements _StickerWidgetConfig {
     return EqualUnmodifiableListView(_translationYSnapValues);
   }
 
+  /// The rotation snap threshold.
+  ///
+  /// The [rotationSnapThreshold] property represents the rotation snap threshold.
   @override
   @JsonKey()
   final double rotationSnapThreshold;
+
+  /// The translation snap threshold.
+  ///
+  /// The [translationSnapThreshold] property represents the translation snap threshold.
   @override
   @JsonKey()
   final double translationSnapThreshold;
@@ -537,42 +696,118 @@ abstract class _StickerWidgetConfig implements StickerWidgetConfig {
       final double translationSnapThreshold}) = _$StickerWidgetConfigImpl;
 
   @override
+
+  /// The size of the underlying canvas.
+  ///
+  /// The [canvasSize] property represents the size of the underlying canvas.
   Size get canvasSize;
   @override
+
+  /// The color of the border.
+  ///
+  /// The [borderColor] property represents the color of the border.
   Color get borderColor;
   @override
+
+  /// The color of the icon.
+  ///
+  /// The [iconColor] property represents the color of the icon.
   Color get iconColor;
   @override
+
+  /// Whether to show the "Done" button.
+  ///
+  /// The [showDone] property determines whether to show the "Done" button.
   bool get showDone;
   @override
+
+  /// Whether to show the "Close" button.
+  ///
+  /// The [showClose] property determines whether to show the "Close" button.
   bool get showClose;
   @override
+
+  /// Whether to show the "Flip" button.
+  ///
+  /// The [showFlip] property determines whether to show the "Flip" button.
   bool get showFlip;
   @override
+
+  /// Whether to show the "Stack" button.
+  ///
+  /// The [showStack] property determines whether to show the "Stack" button.
   bool get showStack;
   @override
+
+  /// Whether to show the "Lock" button.
+  ///
+  /// The [showLock] property determines whether to show the "Lock" button.
   bool get showLock;
   @override
+
+  /// Whether to show all borders.
+  ///
+  /// The [showAllBorders] property determines whether to show all borders.
   bool get showAllBorders;
   @override
+
+  /// Whether the widget should be movable.
+  ///
+  /// The [shouldMove] property determines whether the widget should be movable.
   bool get shouldMove;
   @override
+
+  /// Whether the widget should be rotatable.
+  ///
+  /// The [shouldRotate] property determines whether the widget should be rotatable.
   bool get shouldRotate;
   @override
+
+  /// Whether the widget should be scalable.
+  ///
+  /// The [shouldScale] property determines whether the widget should be scalable.
   bool get shouldScale;
   @override
+
+  /// The minimum scale value.
+  ///
+  /// The [minScale] property represents the minimum scale value.
   double get minScale;
   @override
+
+  /// The maximum scale value.
+  ///
+  /// The [maxScale] property represents the maximum scale value.
   double get maxScale;
   @override
+
+  /// The snap values for rotation.
+  ///
+  /// The [rotationSnapValues] property represents the snap values for rotation.
   List<double> get rotationSnapValues;
   @override
+
+  /// The snap values for translation on the x-axis.
+  ///
+  /// The [translationXSnapValues] property represents the snap values for translation on the x-axis.
   List<double> get translationXSnapValues;
   @override
+
+  /// The snap values for translation on the y-axis.
+  ///
+  /// The [translationYSnapValues] property represents the snap values for translation on the y-axis.
   List<double> get translationYSnapValues;
   @override
+
+  /// The rotation snap threshold.
+  ///
+  /// The [rotationSnapThreshold] property represents the rotation snap threshold.
   double get rotationSnapThreshold;
   @override
+
+  /// The translation snap threshold.
+  ///
+  /// The [translationSnapThreshold] property represents the translation snap threshold.
   double get translationSnapThreshold;
   @override
   @JsonKey(ignore: true)

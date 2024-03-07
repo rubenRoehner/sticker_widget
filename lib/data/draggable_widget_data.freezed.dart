@@ -16,8 +16,17 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$DraggableWidgetData {
+  /// A callback function that is called when the widget is selected.
+  ///
+  /// The [onSelect] function is required and should be provided by the parent widget.
+  /// It will be called when the user selects the draggable widget.
+  /// This can be used to perform any necessary actions or updates in the parent widget.
   void Function() get onSelect => throw _privateConstructorUsedError;
+
+  /// Callback function that is called when the flip button is pressed.
   void Function() get onFlipButtonPressed => throw _privateConstructorUsedError;
+
+  /// A required callback function `onDoneButtonPressed` that will be called when the done button is pressed.
   void Function() get onDoneButtonPressed => throw _privateConstructorUsedError;
   void Function() get onLockPressed => throw _privateConstructorUsedError;
   void Function() get onDeleteButtonPressed =>
@@ -310,10 +319,19 @@ class _$DraggableWidgetDataImpl implements _DraggableWidgetData {
       this.isFlipped = false,
       this.isLocked = false});
 
+  /// A callback function that is called when the widget is selected.
+  ///
+  /// The [onSelect] function is required and should be provided by the parent widget.
+  /// It will be called when the user selects the draggable widget.
+  /// This can be used to perform any necessary actions or updates in the parent widget.
   @override
   final void Function() onSelect;
+
+  /// Callback function that is called when the flip button is pressed.
   @override
   final void Function() onFlipButtonPressed;
+
+  /// A required callback function `onDoneButtonPressed` that will be called when the done button is pressed.
   @override
   final void Function() onDoneButtonPressed;
   @override
@@ -438,10 +456,20 @@ abstract class _DraggableWidgetData implements DraggableWidgetData {
       final bool isLocked}) = _$DraggableWidgetDataImpl;
 
   @override
+
+  /// A callback function that is called when the widget is selected.
+  ///
+  /// The [onSelect] function is required and should be provided by the parent widget.
+  /// It will be called when the user selects the draggable widget.
+  /// This can be used to perform any necessary actions or updates in the parent widget.
   void Function() get onSelect;
   @override
+
+  /// Callback function that is called when the flip button is pressed.
   void Function() get onFlipButtonPressed;
   @override
+
+  /// A required callback function `onDoneButtonPressed` that will be called when the done button is pressed.
   void Function() get onDoneButtonPressed;
   @override
   void Function() get onLockPressed;

@@ -2,14 +2,31 @@ import 'package:flutter/material.dart';
 import 'package:sticker_widget/draggable_widget.dart';
 import 'package:sticker_widget/utils/upper_case_text_formatter.dart';
 
+/// A draggable text field widget that extends the [DraggableWidget] class.
 class DraggableTextFieldWidget extends DraggableWidget {
+  /// The controller for the text field.
   final TextEditingController textEditingController;
+
+  /// The style of the text.
   final TextStyle textStyle;
+
+  /// The alignment of the text.
   final TextAlign textAlign;
+
+  /// Whether the text should be automatically converted to uppercase.
   final bool upperCase;
+
+  /// Whether to show the text field or a simple text widget.
   final bool showTextField;
+
+  /// Callback function to control whether to show a TextField or a Text widget.
   final void Function(bool showTextField) setShowTextField;
 
+  /// Constructs a [DraggableTextFieldWidget].
+  ///
+  /// The [key], [data], [config], [textEditingController], [textStyle],
+  /// [textAlign], [upperCase], [showTextField], and [setShowTextField]
+  /// parameters are required.
   DraggableTextFieldWidget({
     super.key,
     required super.data,

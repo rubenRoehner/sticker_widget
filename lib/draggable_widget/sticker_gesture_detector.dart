@@ -5,76 +5,93 @@ import 'package:vector_math/vector_math_64.dart';
 
 /// StickerGestureDetector for handling scaling, rotating, and translating the widget.
 ///
+/// This widget wraps another widget and provides gesture detection for scaling, rotating, and translating the child widget.
+/// It allows the user to interact with the child widget by performing pinch-to-zoom, rotate, and drag gestures.
 class StickerGestureDetector extends StatefulWidget {
   /// Callback function for when updates occur.
   ///
+  /// The [onUpdate] function is called whenever there is a change in the scale or matrix of the widget.
+  /// It receives the updated scale and matrix as parameters.
   final void Function(double scale, Matrix4 matrix) onUpdate;
 
-  /// [child] widget wrapped by the gesture detector.
-  ///
+  /// The child widget wrapped by the gesture detector.
   final Widget child;
 
+  /// Flag indicating whether the widget is currently selected.
+  ///
+  /// When [isSelected] is true, the widget will respond to user gestures.
   final bool isSelected;
 
   /// Control flags for various gesture types (translate, scale, rotate).
   ///
-  /// Defaults to true
-  ///
+  /// By default, all gestures are enabled.
   final bool shouldTranslate;
   final bool shouldScale;
   final bool shouldRotate;
 
   /// Flag to clip the child widget.
   ///
-  /// Defaults to true
-  ///
+  /// When [clipChild] is true, the child widget will be clipped to its parent's bounds.
   final bool clipChild;
 
   /// Behavior when handling hit tests.
   ///
-  /// Defaults to HitTestBehavior.deferToChild
-  ///
+  /// By default, the gesture detector defers to the child widget for hit testing.
   final HitTestBehavior behavior;
 
   /// Alignment of the focal point.
   ///
+  /// The [focalPointAlignment] determines the alignment of the focal point used for scaling and rotating the widget.
+  /// If not specified, the focal point will be the local focal point of the gesture.
   final Alignment? focalPointAlignment;
 
   /// Callback functions for scale start and end.
   ///
+  /// The [onScaleStart] function is called when a scale gesture starts.
+  /// The [onScaleEnd] function is called when a scale gesture ends.
   final VoidCallback onScaleStart;
   final VoidCallback onScaleEnd;
+
+  /// Callback function for tap gesture.
+  ///
+  /// The [onTap] function is called when the widget is tapped.
   final VoidCallback onTap;
 
   /// Minimum and maximum scale values.
   ///
+  /// The [minScale] and [maxScale] determine the range of allowed scale values for the widget.
   final double minScale;
   final double maxScale;
 
+  /// GlobalKey for accessing the child widget.
+  ///
+  /// The [childrenKey] is used to access the child widget's context and size.
   final GlobalKey childrenKey;
 
   /// StickerWidgetConfig.
   ///
+  /// The [stickerWidgetConfig] contains configuration options for the sticker widget.
   final StickerWidgetConfig stickerWidgetConfig;
 
-  const StickerGestureDetector(
-      {super.key,
-      required this.onUpdate,
-      required this.child,
-      required this.stickerWidgetConfig,
-      this.shouldTranslate = true,
-      this.shouldScale = true,
-      this.shouldRotate = true,
-      this.clipChild = true,
-      this.focalPointAlignment,
-      this.behavior = HitTestBehavior.deferToChild,
-      required this.onScaleStart,
-      required this.onScaleEnd,
-      required this.onTap,
-      required this.minScale,
-      required this.maxScale,
-      required this.isSelected,
-      required this.childrenKey});
+  const StickerGestureDetector({
+    super.key,
+    required this.onUpdate,
+    required this.child,
+    required this.stickerWidgetConfig,
+    this.shouldTranslate = true,
+    this.shouldScale = true,
+    this.shouldRotate = true,
+    this.clipChild = true,
+    this.focalPointAlignment,
+    this.behavior = HitTestBehavior.deferToChild,
+    required this.onScaleStart,
+    required this.onScaleEnd,
+    required this.onTap,
+    required this.minScale,
+    required this.maxScale,
+    required this.isSelected,
+    required this.childrenKey,
+  });
 
   @override
   State<StickerGestureDetector> createState() => StickerGestureDetectorState();
@@ -119,7 +136,6 @@ class StickerGestureDetectorState extends State<StickerGestureDetector> {
     onUpdate: (oldVal, newVal) => newVal - oldVal,
   );
 
-  // Callback when a scale gesture starts.
   void onScaleStart(ScaleStartDetails details) {
     if (!widget.isSelected) {
       return;
@@ -131,12 +147,10 @@ class StickerGestureDetectorState extends State<StickerGestureDetector> {
     rotationUpdater.value = 0.0;
   }
 
-  // Callback when a scale gesture ends.
   void onScaleEnd(ScaleEndDetails details) {
     widget.onScaleEnd();
   }
 
-  // Callback for handling scale updates.
   void onScaleUpdate(ScaleUpdateDetails details) {
     if (!widget.isSelected) {
       return;
@@ -245,6 +259,7 @@ class StickerGestureDetectorState extends State<StickerGestureDetector> {
     return Matrix4(scale, 0, 0, 0, 0, scale, 0, 0, 0, 0, 1, 0, dx, dy, 0, 1);
   }
 
+  // Helper function for rotating matrix.
   Matrix4 _rotate(double angle, Offset focalPoint) {
     double toBeRotated = 0;
     double rotation = atan2(matrix[1], matrix[0]);

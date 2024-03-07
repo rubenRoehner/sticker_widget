@@ -19,24 +19,34 @@ class StickerWidget extends StatelessWidget {
   ///
   final Widget child;
 
+  /// The padding around the sticker's content.
+  ///
   final EdgeInsets contentPadding;
 
+  /// The transformation controller for controlling the scale and position of the sticker.
+  ///
   final TransformationController? transformationController;
 
+  /// The minimum scale value for the sticker.
+  ///
   final double minScale;
+
+  /// The maximum scale value for the sticker.
+  ///
   final double maxScale;
 
   /// Constructor to initialize the widget with a controller and a child widget.
   ///
-  const StickerWidget(
-      {super.key,
-      required this.controller,
-      this.contentPadding =
-          const EdgeInsets.symmetric(horizontal: 48, vertical: 180),
-      this.transformationController,
-      this.minScale = 0.4,
-      this.maxScale = 2.5,
-      required this.child});
+  const StickerWidget({
+    super.key,
+    required this.controller,
+    this.contentPadding =
+        const EdgeInsets.symmetric(horizontal: 48, vertical: 180),
+    this.transformationController,
+    this.minScale = 0.4,
+    this.maxScale = 2.5,
+    required this.child,
+  });
 
   @override
   Widget build(BuildContext context) {

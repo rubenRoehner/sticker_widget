@@ -5,11 +5,24 @@ import 'draggable_widget/draggable_widget_action.dart';
 import 'draggable_widget/sticker_gesture_detector.dart';
 
 class DraggableWidget extends StatelessWidget {
+  /// The [child] parameter is required and specifies the widget to be displayed.
   final Widget child;
+
+  /// The [config] parameter is the configuration for the sticker widget.
   final StickerWidgetConfig config;
+
+  /// The [data] parameter is the data associated with the draggable widget.
   final DraggableWidgetData data;
+
+  /// The [type] parameter is the type of the draggable widget.
   final DraggableWidgetType type;
 
+  /// Creates a draggable widget.
+  ///
+  /// The [child] parameter is the widget to be displayed.
+  /// The [config] parameter is the configuration for the sticker widget.
+  /// The [data] parameter is the data associated with the draggable widget.
+  /// The [type] parameter is the type of the draggable widget.
   DraggableWidget({
     required super.key,
     required this.child,

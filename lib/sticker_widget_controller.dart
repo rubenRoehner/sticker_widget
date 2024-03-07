@@ -263,6 +263,7 @@ class StickerWidgetController {
     _widgetsStreamController.add(getCurrentWidgets);
   }
 
+  /// Method to update the draggable widget.
   void updateDraggableWidget(DraggableWidget widget, DraggableWidgetData data) {
     switch (widget.type) {
       case DraggableWidgetType.text:
@@ -320,7 +321,7 @@ class StickerWidgetController {
     _widgetsStreamController.add(getCurrentWidgets);
   }
 
-  // Method to save the widget layout as a Uint8List image.
+  /// Method to save the widget layout as a Uint8List image.
   Future<Uint8List?> saveAsUint8List() async {
     // Clear all borders before capturing the image.
     clearAllBorders();
