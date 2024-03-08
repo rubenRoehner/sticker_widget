@@ -8,7 +8,7 @@ import 'package:flutter/rendering.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:sticker_widget/data/sticker_widget_config.dart';
 import 'package:sticker_widget/data/draggable_widget_data.dart';
-import 'package:sticker_widget/draggable_widget.dart';
+import 'package:sticker_widget/draggable_widget/draggable_widget.dart';
 import 'package:sticker_widget/draggable_widget/draggable_icon_widget.dart';
 import 'package:sticker_widget/draggable_widget/draggable_image_widget.dart';
 import 'package:sticker_widget/draggable_widget/draggable_text_field_widget.dart';
@@ -184,7 +184,7 @@ class StickerWidgetController {
   }
 
   /// Method to toggle the lock of a widget.
-  void _toggleLock(Key key) {
+  void toggleLock(Key key) {
     if (_widgets.containsKey(key)) {
       updateDraggableWidget(
         _widgets[key]!,
@@ -197,7 +197,7 @@ class StickerWidgetController {
   }
 
   /// Method to flip a widget.
-  void _toggleFlip(Key key) {
+  void toggleFlip(Key key) {
     if (_widgets.containsKey(key)) {
       updateDraggableWidget(
         _widgets[key]!,
@@ -228,7 +228,7 @@ class StickerWidgetController {
   }
 
   /// Method to change the layering of a widget.
-  void _updateLayer(Key key) {
+  void updateLayer(Key key) {
     DraggableWidget widget = _widgets[key]!;
     int index = widget.data.layerIndex;
     if (index != 0) {
@@ -350,10 +350,10 @@ class StickerWidgetController {
       transform: Matrix4.identity(),
       onSelect: () => _selectWidget(key),
       onDeleteButtonPressed: () => deleteWidget(key),
-      onLayerButtonPressed: () => _updateLayer(key),
+      onLayerButtonPressed: () => updateLayer(key),
       onDoneButtonPressed: () => clearAllBorders(),
-      onFlipButtonPressed: () => _toggleFlip(key),
-      onLockPressed: () => _toggleLock(key),
+      onFlipButtonPressed: () => toggleFlip(key),
+      onLockPressed: () => toggleLock(key),
       updateScale: (scale) => _updateScale(key, scale),
       updateTransform: (transform) => _updateTransform(key, transform),
       layerIndex: _widgets.length,
