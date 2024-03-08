@@ -32,11 +32,12 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   final StickerWidgetController controller = StickerWidgetController(
-      config: const StickerWidgetConfig(
-    canvasSize: Size(500, 300),
-    borderColor: CupertinoColors.systemBlue,
-    translationSnapThreshold: 1.5,
-  ));
+    config: const StickerWidgetConfig(
+      canvasSize: Size(500, 300),
+      translationSnapThreshold: 1.5,
+      selectedOverlayColor: Color.fromARGB(100, 0, 122, 255),
+    ),
+  );
 
   @override
   void initState() {

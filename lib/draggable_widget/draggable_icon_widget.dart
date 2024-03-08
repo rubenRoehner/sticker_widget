@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sticker_widget/draggable_widget.dart';
+import 'package:sticker_widget/draggable_widget/draggable_widget.dart';
 
 /// A widget that represents an icon that can be dragged.
 class DraggableIconWidget extends DraggableWidget {

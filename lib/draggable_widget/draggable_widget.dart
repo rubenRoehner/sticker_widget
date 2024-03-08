@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:sticker_widget/data/sticker_widget_config.dart';
 import 'package:sticker_widget/data/draggable_widget_data.dart';
-import 'draggable_widget/draggable_widget_action.dart';
-import 'draggable_widget/sticker_gesture_detector.dart';
+import 'draggable_widget_action.dart';
+import 'sticker_gesture_detector.dart';
 
 class DraggableWidget extends StatelessWidget {
   /// The [child] parameter is required and specifies the widget to be displayed.
@@ -68,10 +68,16 @@ class DraggableWidget extends StatelessWidget {
             child: Stack(
               children: [
                 Container(
-                  margin: EdgeInsets.all(
-                      DraggableWidgetAction.defaultCircleRadius / data.scale),
-                  padding: EdgeInsets.all(
-                      DraggableWidgetAction.defaultCircleRadius / data.scale),
+                  margin: config.showAllBorders
+                      ? EdgeInsets.all(
+                          DraggableWidgetAction.defaultCircleRadius /
+                              data.scale)
+                      : EdgeInsetsDirectional.zero,
+                  padding: config.showAllBorders
+                      ? EdgeInsets.all(
+                          DraggableWidgetAction.defaultCircleRadius /
+                              data.scale)
+                      : EdgeInsetsDirectional.zero,
                   decoration: (config.showAllBorders && data.isSelected)
                       ? BoxDecoration(
                           border: Border.all(
@@ -80,6 +86,11 @@ class DraggableWidget extends StatelessWidget {
                           ),
                         )
                       : null,
+                  foregroundDecoration: BoxDecoration(
+                    color: data.isSelected
+                        ? config.selectedOverlayColor
+                        : const Color(0x00000000),
+                  ),
                   child: Transform.flip(
                     flipX: data.isFlipped,
                     child: child,

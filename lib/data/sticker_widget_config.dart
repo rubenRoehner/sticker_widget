@@ -102,5 +102,11 @@ class StickerWidgetConfig with _$StickerWidgetConfig {
     ///
     /// The [translationSnapThreshold] property represents the translation snap threshold.
     @Default(0.8) final double translationSnapThreshold,
+
+    /// The color of the Overlay.
+    ///
+    /// The [selectedOverlayColor] property represents the color of the Overlay that is displayed when the Widget is selected.
+    /// It defaults to a transparent color.
+    @Default(Color(0x00000000)) final Color selectedOverlayColor,
   }) = _StickerWidgetConfig;
 }

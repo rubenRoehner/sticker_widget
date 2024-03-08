@@ -23,26 +23,91 @@ mixin _$DraggableWidgetData {
   /// This can be used to perform any necessary actions or updates in the parent widget.
   void Function() get onSelect => throw _privateConstructorUsedError;
 
-  /// Callback function that is called when the flip button is pressed.
+  /// A callback function that is called when the flip button is pressed.
+  ///
+  /// The [onFlipButtonPressed] function is required and should be provided by the parent widget.
+  /// It will be called when the user presses the flip button on the draggable widget.
   void Function() get onFlipButtonPressed => throw _privateConstructorUsedError;
 
-  /// A required callback function `onDoneButtonPressed` that will be called when the done button is pressed.
+  /// A required callback function that is called when the done button is pressed.
+  ///
+  /// The [onDoneButtonPressed] function is required and should be provided by the parent widget.
+  /// It will be called when the user presses the done button on the draggable widget.
   void Function() get onDoneButtonPressed => throw _privateConstructorUsedError;
+
+  /// A callback function that is called when the lock button is pressed.
+  ///
+  /// The [onLockPressed] function is required and should be provided by the parent widget.
+  /// It will be called when the user presses the lock button on the draggable widget.
   void Function() get onLockPressed => throw _privateConstructorUsedError;
+
+  /// A callback function that is called when the delete button is pressed.
+  ///
+  /// The [onDeleteButtonPressed] function is required and should be provided by the parent widget.
+  /// It will be called when the user presses the delete button on the draggable widget.
   void Function() get onDeleteButtonPressed =>
       throw _privateConstructorUsedError;
+
+  /// A callback function that is called when the layer button is pressed.
+  ///
+  /// The [onLayerButtonPressed] function is required and should be provided by the parent widget.
+  /// It will be called when the user presses the layer button on the draggable widget.
   void Function() get onLayerButtonPressed =>
       throw _privateConstructorUsedError;
+
+  /// A callback function that is called when the scale is updated.
+  ///
+  /// The [updateScale] function is required and should be provided by the parent widget.
+  /// It will be called when the user updates the scale of the draggable widget.
   void Function(double) get updateScale => throw _privateConstructorUsedError;
+
+  /// A callback function that is called when the transform is updated.
+  ///
+  /// The [updateTransform] function is required and should be provided by the parent widget.
+  /// It will be called when the user updates the transform of the draggable widget.
   void Function(Matrix4) get updateTransform =>
       throw _privateConstructorUsedError;
+
+  /// A callback function that is called when the transform starts.
+  ///
+  /// The [startTransform] function is required and should be provided by the parent widget.
+  /// It will be called when the user starts transforming the draggable widget.
   void Function() get startTransform => throw _privateConstructorUsedError;
+
+  /// A callback function that is called when the transform ends.
+  ///
+  /// The [endTransform] function is required and should be provided by the parent widget.
+  /// It will be called when the user finishes transforming the draggable widget.
   void Function() get endTransform => throw _privateConstructorUsedError;
+
+  /// The current transform of the widget.
+  ///
+  /// The [transform] property represents the current transformation matrix of the draggable widget.
   Matrix4 get transform => throw _privateConstructorUsedError;
+
+  /// The index of the layer the widget belongs to.
+  ///
+  /// The [layerIndex] property represents the index of the layer to which the draggable widget belongs.
   int get layerIndex => throw _privateConstructorUsedError;
+
+  /// The scale of the widget.
+  ///
+  /// The [scale] property represents the scale factor of the draggable widget.
   double get scale => throw _privateConstructorUsedError;
+
+  /// Whether the widget is currently selected.
+  ///
+  /// The [isSelected] property indicates whether the draggable widget is currently selected or not.
   bool get isSelected => throw _privateConstructorUsedError;
+
+  /// Whether the widget is flipped.
+  ///
+  /// The [isFlipped] property indicates whether the draggable widget is flipped or not.
   bool get isFlipped => throw _privateConstructorUsedError;
+
+  /// Whether the widget is locked.
+  ///
+  /// The [isLocked] property indicates whether the draggable widget is locked or not.
   bool get isLocked => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -327,40 +392,105 @@ class _$DraggableWidgetDataImpl implements _DraggableWidgetData {
   @override
   final void Function() onSelect;
 
-  /// Callback function that is called when the flip button is pressed.
+  /// A callback function that is called when the flip button is pressed.
+  ///
+  /// The [onFlipButtonPressed] function is required and should be provided by the parent widget.
+  /// It will be called when the user presses the flip button on the draggable widget.
   @override
   final void Function() onFlipButtonPressed;
 
-  /// A required callback function `onDoneButtonPressed` that will be called when the done button is pressed.
+  /// A required callback function that is called when the done button is pressed.
+  ///
+  /// The [onDoneButtonPressed] function is required and should be provided by the parent widget.
+  /// It will be called when the user presses the done button on the draggable widget.
   @override
   final void Function() onDoneButtonPressed;
+
+  /// A callback function that is called when the lock button is pressed.
+  ///
+  /// The [onLockPressed] function is required and should be provided by the parent widget.
+  /// It will be called when the user presses the lock button on the draggable widget.
   @override
   final void Function() onLockPressed;
+
+  /// A callback function that is called when the delete button is pressed.
+  ///
+  /// The [onDeleteButtonPressed] function is required and should be provided by the parent widget.
+  /// It will be called when the user presses the delete button on the draggable widget.
   @override
   final void Function() onDeleteButtonPressed;
+
+  /// A callback function that is called when the layer button is pressed.
+  ///
+  /// The [onLayerButtonPressed] function is required and should be provided by the parent widget.
+  /// It will be called when the user presses the layer button on the draggable widget.
   @override
   final void Function() onLayerButtonPressed;
+
+  /// A callback function that is called when the scale is updated.
+  ///
+  /// The [updateScale] function is required and should be provided by the parent widget.
+  /// It will be called when the user updates the scale of the draggable widget.
   @override
   final void Function(double) updateScale;
+
+  /// A callback function that is called when the transform is updated.
+  ///
+  /// The [updateTransform] function is required and should be provided by the parent widget.
+  /// It will be called when the user updates the transform of the draggable widget.
   @override
   final void Function(Matrix4) updateTransform;
+
+  /// A callback function that is called when the transform starts.
+  ///
+  /// The [startTransform] function is required and should be provided by the parent widget.
+  /// It will be called when the user starts transforming the draggable widget.
   @override
   final void Function() startTransform;
+
+  /// A callback function that is called when the transform ends.
+  ///
+  /// The [endTransform] function is required and should be provided by the parent widget.
+  /// It will be called when the user finishes transforming the draggable widget.
   @override
   final void Function() endTransform;
+
+  /// The current transform of the widget.
+  ///
+  /// The [transform] property represents the current transformation matrix of the draggable widget.
   @override
   final Matrix4 transform;
+
+  /// The index of the layer the widget belongs to.
+  ///
+  /// The [layerIndex] property represents the index of the layer to which the draggable widget belongs.
   @override
   final int layerIndex;
+
+  /// The scale of the widget.
+  ///
+  /// The [scale] property represents the scale factor of the draggable widget.
   @override
   @JsonKey()
   final double scale;
+
+  /// Whether the widget is currently selected.
+  ///
+  /// The [isSelected] property indicates whether the draggable widget is currently selected or not.
   @override
   @JsonKey()
   final bool isSelected;
+
+  /// Whether the widget is flipped.
+  ///
+  /// The [isFlipped] property indicates whether the draggable widget is flipped or not.
   @override
   @JsonKey()
   final bool isFlipped;
+
+  /// Whether the widget is locked.
+  ///
+  /// The [isLocked] property indicates whether the draggable widget is locked or not.
   @override
   @JsonKey()
   final bool isLocked;
@@ -465,37 +595,102 @@ abstract class _DraggableWidgetData implements DraggableWidgetData {
   void Function() get onSelect;
   @override
 
-  /// Callback function that is called when the flip button is pressed.
+  /// A callback function that is called when the flip button is pressed.
+  ///
+  /// The [onFlipButtonPressed] function is required and should be provided by the parent widget.
+  /// It will be called when the user presses the flip button on the draggable widget.
   void Function() get onFlipButtonPressed;
   @override
 
-  /// A required callback function `onDoneButtonPressed` that will be called when the done button is pressed.
+  /// A required callback function that is called when the done button is pressed.
+  ///
+  /// The [onDoneButtonPressed] function is required and should be provided by the parent widget.
+  /// It will be called when the user presses the done button on the draggable widget.
   void Function() get onDoneButtonPressed;
   @override
+
+  /// A callback function that is called when the lock button is pressed.
+  ///
+  /// The [onLockPressed] function is required and should be provided by the parent widget.
+  /// It will be called when the user presses the lock button on the draggable widget.
   void Function() get onLockPressed;
   @override
+
+  /// A callback function that is called when the delete button is pressed.
+  ///
+  /// The [onDeleteButtonPressed] function is required and should be provided by the parent widget.
+  /// It will be called when the user presses the delete button on the draggable widget.
   void Function() get onDeleteButtonPressed;
   @override
+
+  /// A callback function that is called when the layer button is pressed.
+  ///
+  /// The [onLayerButtonPressed] function is required and should be provided by the parent widget.
+  /// It will be called when the user presses the layer button on the draggable widget.
   void Function() get onLayerButtonPressed;
   @override
+
+  /// A callback function that is called when the scale is updated.
+  ///
+  /// The [updateScale] function is required and should be provided by the parent widget.
+  /// It will be called when the user updates the scale of the draggable widget.
   void Function(double) get updateScale;
   @override
+
+  /// A callback function that is called when the transform is updated.
+  ///
+  /// The [updateTransform] function is required and should be provided by the parent widget.
+  /// It will be called when the user updates the transform of the draggable widget.
   void Function(Matrix4) get updateTransform;
   @override
+
+  /// A callback function that is called when the transform starts.
+  ///
+  /// The [startTransform] function is required and should be provided by the parent widget.
+  /// It will be called when the user starts transforming the draggable widget.
   void Function() get startTransform;
   @override
+
+  /// A callback function that is called when the transform ends.
+  ///
+  /// The [endTransform] function is required and should be provided by the parent widget.
+  /// It will be called when the user finishes transforming the draggable widget.
   void Function() get endTransform;
   @override
+
+  /// The current transform of the widget.
+  ///
+  /// The [transform] property represents the current transformation matrix of the draggable widget.
   Matrix4 get transform;
   @override
+
+  /// The index of the layer the widget belongs to.
+  ///
+  /// The [layerIndex] property represents the index of the layer to which the draggable widget belongs.
   int get layerIndex;
   @override
+
+  /// The scale of the widget.
+  ///
+  /// The [scale] property represents the scale factor of the draggable widget.
   double get scale;
   @override
+
+  /// Whether the widget is currently selected.
+  ///
+  /// The [isSelected] property indicates whether the draggable widget is currently selected or not.
   bool get isSelected;
   @override
+
+  /// Whether the widget is flipped.
+  ///
+  /// The [isFlipped] property indicates whether the draggable widget is flipped or not.
   bool get isFlipped;
   @override
+
+  /// Whether the widget is locked.
+  ///
+  /// The [isLocked] property indicates whether the draggable widget is locked or not.
   bool get isLocked;
   @override
   @JsonKey(ignore: true)

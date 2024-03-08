@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sticker_widget/draggable_widget.dart';
+import 'package:sticker_widget/draggable_widget/draggable_widget.dart';
 import 'package:sticker_widget/utils/upper_case_text_formatter.dart';
 
 /// A draggable text field widget that extends the [DraggableWidget] class.
