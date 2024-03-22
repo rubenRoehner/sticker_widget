@@ -55,7 +55,7 @@ class StickerWidgetController {
       );
 
   ///  Method to add a custom widget to the list of draggable widgets.
-  void addWidget(Widget widget) {
+  Key addWidget(Widget widget) {
     // Generate a unique key for the widget.
     Key key = _getNewKey();
     DraggableWidgetData data = _getNewDraggableWidgetData(key);
@@ -71,10 +71,11 @@ class StickerWidgetController {
 
     // Highlight the border of the added widget.
     _selectWidget(key);
+    return key;
   }
 
   /// Method to add a TextField to the list of draggable widgets.
-  void addTextWidget(
+  Key addTextWidget(
       {TextStyle textStyle = const TextStyle(),
       TextAlign textAlign = TextAlign.center,
       bool upperCase = false}) {
@@ -98,6 +99,7 @@ class StickerWidgetController {
 
     // Highlight the border of the added widget.
     _selectWidget(key);
+    return key;
   }
 
   /// Method to update an existing TextField.
@@ -107,7 +109,7 @@ class StickerWidgetController {
   }
 
   /// Method to add an Image to the list of draggable widgets.
-  void addImageWidget(String filePath) {
+  Key addImageWidget(String filePath) {
     // Generate a unique key for the widget.
     Key key = _getNewKey();
     DraggableWidgetData data = _getNewDraggableWidgetData(key);
@@ -122,6 +124,7 @@ class StickerWidgetController {
 
     // Highlight the border of the added widget.
     _selectWidget(key);
+    return key;
   }
 
   /// Method to update an existing DraggableImage.
@@ -131,7 +134,7 @@ class StickerWidgetController {
   }
 
   /// Method to add an Icon to the list of draggable widgets.
-  void addIconWidget(IconData icon, Color color) {
+  Key addIconWidget(IconData icon, Color color) {
     // Generate a unique key for the widget.
     Key key = _getNewKey();
     DraggableWidgetData data = _getNewDraggableWidgetData(key);
@@ -147,6 +150,7 @@ class StickerWidgetController {
 
     // Highlight the border of the added widget.
     _selectWidget(key);
+    return key;
   }
 
   /// Method to update an existing Image.
