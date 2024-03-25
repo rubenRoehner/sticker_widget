@@ -73,6 +73,8 @@ class StickerGestureDetector extends StatefulWidget {
   /// The [stickerWidgetConfig] contains configuration options for the sticker widget.
   final StickerWidgetConfig stickerWidgetConfig;
 
+  final Matrix4 initialMatrix;
+
   const StickerGestureDetector({
     super.key,
     required this.onUpdate,
@@ -91,6 +93,7 @@ class StickerGestureDetector extends StatefulWidget {
     required this.maxScale,
     required this.isSelected,
     required this.childrenKey,
+    required this.initialMatrix,
   });
 
   @override
@@ -135,6 +138,17 @@ class StickerGestureDetectorState extends State<StickerGestureDetector> {
     value: 0.0,
     onUpdate: (oldVal, newVal) => newVal - oldVal,
   );
+
+  @override
+  void initState() {
+    translationUpdater.value = Offset(widget.initialMatrix.getTranslation().x,
+        widget.initialMatrix.getTranslation().y);
+    scaleUpdater.value = widget.initialMatrix.getMaxScaleOnAxis();
+    recordOldScale = scaleUpdater.value;
+    rotationUpdater.value =
+        atan2(widget.initialMatrix[1], widget.initialMatrix[0]);
+    super.initState();
+  }
 
   void onScaleStart(ScaleStartDetails details) {
     if (!widget.isSelected) {
