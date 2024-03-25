@@ -141,6 +141,7 @@ class StickerGestureDetectorState extends State<StickerGestureDetector> {
 
   @override
   void initState() {
+    matrix = widget.initialMatrix;
     translationUpdater.value = Offset(widget.initialMatrix.getTranslation().x,
         widget.initialMatrix.getTranslation().y);
     scaleUpdater.value = widget.initialMatrix.getMaxScaleOnAxis();
