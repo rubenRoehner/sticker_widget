@@ -108,5 +108,11 @@ class StickerWidgetConfig with _$StickerWidgetConfig {
     /// The [selectedOverlayColor] property represents the color of the Overlay that is displayed when the Widget is selected.
     /// It defaults to a transparent color.
     @Default(Color(0x00000000)) final Color selectedOverlayColor,
+
+    /// The size of the icon.
+    ///
+    /// The [defaultIconSize] property represents the size of the icon.
+    /// It defaults to 24.
+    @Default(24) final double defaultIconSize,
   }) = _StickerWidgetConfig;
 }

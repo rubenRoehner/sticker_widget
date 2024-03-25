@@ -21,6 +21,7 @@ class DraggableIconWidget extends DraggableWidget {
           child: Icon(
             icon,
             color: color,
+            size: config.defaultIconSize,
           ),
         );
 }

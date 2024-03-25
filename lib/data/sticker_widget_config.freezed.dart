@@ -117,6 +117,12 @@ mixin _$StickerWidgetConfig {
   /// It defaults to a transparent color.
   Color get selectedOverlayColor => throw _privateConstructorUsedError;
 
+  /// The size of the icon.
+  ///
+  /// The [defaultIconSize] property represents the size of the icon.
+  /// It defaults to 24.
+  double get defaultIconSize => throw _privateConstructorUsedError;
+
   @JsonKey(ignore: true)
   $StickerWidgetConfigCopyWith<StickerWidgetConfig> get copyWith =>
       throw _privateConstructorUsedError;
@@ -148,7 +154,8 @@ abstract class $StickerWidgetConfigCopyWith<$Res> {
       List<double> translationYSnapValues,
       double rotationSnapThreshold,
       double translationSnapThreshold,
-      Color selectedOverlayColor});
+      Color selectedOverlayColor,
+      double defaultIconSize});
 }
 
 /// @nodoc
@@ -184,6 +191,7 @@ class _$StickerWidgetConfigCopyWithImpl<$Res, $Val extends StickerWidgetConfig>
     Object? rotationSnapThreshold = null,
     Object? translationSnapThreshold = null,
     Object? selectedOverlayColor = null,
+    Object? defaultIconSize = null,
   }) {
     return _then(_value.copyWith(
       canvasSize: null == canvasSize
@@ -266,6 +274,10 @@ class _$StickerWidgetConfigCopyWithImpl<$Res, $Val extends StickerWidgetConfig>
           ? _value.selectedOverlayColor
           : selectedOverlayColor // ignore: cast_nullable_to_non_nullable
               as Color,
+      defaultIconSize: null == defaultIconSize
+          ? _value.defaultIconSize
+          : defaultIconSize // ignore: cast_nullable_to_non_nullable
+              as double,
     ) as $Val);
   }
 }
@@ -298,7 +310,8 @@ abstract class _$$StickerWidgetConfigImplCopyWith<$Res>
       List<double> translationYSnapValues,
       double rotationSnapThreshold,
       double translationSnapThreshold,
-      Color selectedOverlayColor});
+      Color selectedOverlayColor,
+      double defaultIconSize});
 }
 
 /// @nodoc
@@ -332,6 +345,7 @@ class __$$StickerWidgetConfigImplCopyWithImpl<$Res>
     Object? rotationSnapThreshold = null,
     Object? translationSnapThreshold = null,
     Object? selectedOverlayColor = null,
+    Object? defaultIconSize = null,
   }) {
     return _then(_$StickerWidgetConfigImpl(
       canvasSize: null == canvasSize
@@ -414,6 +428,10 @@ class __$$StickerWidgetConfigImplCopyWithImpl<$Res>
           ? _value.selectedOverlayColor
           : selectedOverlayColor // ignore: cast_nullable_to_non_nullable
               as Color,
+      defaultIconSize: null == defaultIconSize
+          ? _value.defaultIconSize
+          : defaultIconSize // ignore: cast_nullable_to_non_nullable
+              as double,
     ));
   }
 }
@@ -441,7 +459,8 @@ class _$StickerWidgetConfigImpl implements _StickerWidgetConfig {
       final List<double> translationYSnapValues = const [0],
       this.rotationSnapThreshold = 0.015,
       this.translationSnapThreshold = 0.8,
-      this.selectedOverlayColor = const Color(0x00000000)})
+      this.selectedOverlayColor = const Color(0x00000000),
+      this.defaultIconSize = 24})
       : _rotationSnapValues = rotationSnapValues,
         _translationXSnapValues = translationXSnapValues,
         _translationYSnapValues = translationYSnapValues;
@@ -617,9 +636,17 @@ class _$StickerWidgetConfigImpl implements _StickerWidgetConfig {
   @JsonKey()
   final Color selectedOverlayColor;
 
+  /// The size of the icon.
+  ///
+  /// The [defaultIconSize] property represents the size of the icon.
+  /// It defaults to 24.
+  @override
+  @JsonKey()
+  final double defaultIconSize;
+
   @override
   String toString() {
-    return 'StickerWidgetConfig(canvasSize: $canvasSize, borderColor: $borderColor, iconColor: $iconColor, showDone: $showDone, showClose: $showClose, showFlip: $showFlip, showStack: $showStack, showLock: $showLock, showAllBorders: $showAllBorders, shouldMove: $shouldMove, shouldRotate: $shouldRotate, shouldScale: $shouldScale, minScale: $minScale, maxScale: $maxScale, rotationSnapValues: $rotationSnapValues, translationXSnapValues: $translationXSnapValues, translationYSnapValues: $translationYSnapValues, rotationSnapThreshold: $rotationSnapThreshold, translationSnapThreshold: $translationSnapThreshold, selectedOverlayColor: $selectedOverlayColor)';
+    return 'StickerWidgetConfig(canvasSize: $canvasSize, borderColor: $borderColor, iconColor: $iconColor, showDone: $showDone, showClose: $showClose, showFlip: $showFlip, showStack: $showStack, showLock: $showLock, showAllBorders: $showAllBorders, shouldMove: $shouldMove, shouldRotate: $shouldRotate, shouldScale: $shouldScale, minScale: $minScale, maxScale: $maxScale, rotationSnapValues: $rotationSnapValues, translationXSnapValues: $translationXSnapValues, translationYSnapValues: $translationYSnapValues, rotationSnapThreshold: $rotationSnapThreshold, translationSnapThreshold: $translationSnapThreshold, selectedOverlayColor: $selectedOverlayColor, defaultIconSize: $defaultIconSize)';
   }
 
   @override
@@ -667,7 +694,9 @@ class _$StickerWidgetConfigImpl implements _StickerWidgetConfig {
                     other.translationSnapThreshold, translationSnapThreshold) ||
                 other.translationSnapThreshold == translationSnapThreshold) &&
             (identical(other.selectedOverlayColor, selectedOverlayColor) ||
-                other.selectedOverlayColor == selectedOverlayColor));
+                other.selectedOverlayColor == selectedOverlayColor) &&
+            (identical(other.defaultIconSize, defaultIconSize) ||
+                other.defaultIconSize == defaultIconSize));
   }
 
   @override
@@ -692,7 +721,8 @@ class _$StickerWidgetConfigImpl implements _StickerWidgetConfig {
         const DeepCollectionEquality().hash(_translationYSnapValues),
         rotationSnapThreshold,
         translationSnapThreshold,
-        selectedOverlayColor
+        selectedOverlayColor,
+        defaultIconSize
       ]);
 
   @JsonKey(ignore: true)
@@ -724,7 +754,8 @@ abstract class _StickerWidgetConfig implements StickerWidgetConfig {
       final List<double> translationYSnapValues,
       final double rotationSnapThreshold,
       final double translationSnapThreshold,
-      final Color selectedOverlayColor}) = _$StickerWidgetConfigImpl;
+      final Color selectedOverlayColor,
+      final double defaultIconSize}) = _$StickerWidgetConfigImpl;
 
   @override
 
@@ -847,6 +878,13 @@ abstract class _StickerWidgetConfig implements StickerWidgetConfig {
   /// The [selectedOverlayColor] property represents the color of the Overlay that is displayed when the Widget is selected.
   /// It defaults to a transparent color.
   Color get selectedOverlayColor;
+  @override
+
+  /// The size of the icon.
+  ///
+  /// The [defaultIconSize] property represents the size of the icon.
+  /// It defaults to 24.
+  double get defaultIconSize;
   @override
   @JsonKey(ignore: true)
   _$$StickerWidgetConfigImplCopyWith<_$StickerWidgetConfigImpl> get copyWith =>
