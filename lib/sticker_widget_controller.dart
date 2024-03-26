@@ -113,7 +113,7 @@ class StickerWidgetController {
   }
 
   /// Method to add an Image to the list of draggable widgets.
-  DraggableImageWidget addImageWidget(String filePath) {
+  DraggableImageWidget addImageWidget(String filePath, Size size) {
     // Generate a unique key for the widget.
     Key key = _getNewKey();
     DraggableWidgetData data = _getNewDraggableWidgetData(key);
@@ -124,6 +124,7 @@ class StickerWidgetController {
       config: config,
       data: data,
       path: filePath,
+      imageSize: size,
     );
 
     _widgets[key] = widget;
@@ -299,6 +300,7 @@ class StickerWidgetController {
           data: data,
           config: config,
           path: imageWidget.path,
+          imageSize: imageWidget.imageSize,
         );
         break;
       case DraggableWidgetType.icon:

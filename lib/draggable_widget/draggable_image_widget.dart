@@ -5,6 +5,7 @@ import 'package:sticker_widget/draggable_widget/draggable_widget.dart';
 /// A widget that represents an image that can be dragged within a draggable area.
 class DraggableImageWidget extends DraggableWidget {
   final String path;
+  final Size imageSize;
 
   /// Creates a [DraggableImageWidget].
   ///
@@ -14,8 +15,13 @@ class DraggableImageWidget extends DraggableWidget {
     required super.data,
     required super.config,
     required this.path,
+    required this.imageSize,
   }) : super(
           type: DraggableWidgetType.image,
-          child: Image.file(File(path)),
+          child: Image.file(
+            File(path),
+            width: imageSize.width,
+            height: imageSize.height,
+          ),
         );
 }
