@@ -243,8 +243,6 @@ class StickerGestureDetectorState extends State<StickerGestureDetector> {
 
       final MapEntry<double, double> minErrorEntry =
           absoluteErrors.entries.reduce((a, b) => a.value < b.value ? a : b);
-      print(horizontalSnapPoints);
-      print(minErrorEntry);
       if (minErrorEntry.value <=
           widget.stickerWidgetConfig.translationSnapThreshold) {
         dx = minErrorEntry.key - snapPosition;
