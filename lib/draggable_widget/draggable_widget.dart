@@ -31,6 +31,7 @@ class DraggableWidget extends StatelessWidget {
     required this.type,
   });
 
+  final GlobalKey layerKey = GlobalKey();
   final GlobalKey childrenKey = GlobalKey();
 
   @override
@@ -57,6 +58,7 @@ class DraggableWidget extends StatelessWidget {
         data.updateScale(s);
         data.updateTransform(m);
       },
+      layerKey: layerKey,
       childrenKey: childrenKey,
       child: SizedBox(
         width: config.canvasSize.width,
@@ -64,7 +66,7 @@ class DraggableWidget extends StatelessWidget {
         child: Transform(
           transform: data.transform,
           child: FittedBox(
-            key: childrenKey,
+            key: layerKey,
             fit: BoxFit.scaleDown,
             child: Stack(
               children: [
@@ -93,6 +95,7 @@ class DraggableWidget extends StatelessWidget {
                         : const Color(0x00000000),
                   ),
                   child: Transform.flip(
+                    key: childrenKey,
                     flipX: data.isFlipped,
                     child: child,
                   ),

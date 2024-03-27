@@ -65,7 +65,9 @@ class StickerGestureDetector extends StatefulWidget {
 
   /// GlobalKey for accessing the child widget.
   ///
-  /// The [childrenKey] is used to access the child widget's context and size.
+  /// The [layerKey] is used to access the child widget's context and size.
+  final GlobalKey layerKey;
+
   final GlobalKey childrenKey;
 
   /// StickerWidgetConfig.
@@ -92,6 +94,7 @@ class StickerGestureDetector extends StatefulWidget {
     required this.minScale,
     required this.maxScale,
     required this.isSelected,
+    required this.layerKey,
     required this.childrenKey,
     required this.initialMatrix,
   });
@@ -222,22 +225,44 @@ class StickerGestureDetectorState extends State<StickerGestureDetector> {
 
     Offset center = _findTransformedRectangleCenter(
         matrix,
-        widget.childrenKey.currentContext!.size!,
+        widget.layerKey.currentContext!.size!,
         widget.stickerWidgetConfig.canvasSize);
 
-    for (var snapPosition
+    double rotation = atan2(matrix[1], matrix[0]);
+
+    List<double> horizontalSnapPoints = _findHorizontalSnapPoints(
+        rotation, widget.childrenKey.currentContext!.size!, center);
+
+    List<double> verticalSnapPoints = _findVerticalSnapPoints(
+        rotation, widget.childrenKey.currentContext!.size!, center);
+    for (final double snapPosition
         in widget.stickerWidgetConfig.translationXSnapValues) {
-      if (absoluteError(center.dx, snapPosition) <=
+      final Map<double, double> absoluteErrors = Map.fromEntries(
+          horizontalSnapPoints
+              .map((e) => MapEntry(e, absoluteError(e, snapPosition))));
+
+      final MapEntry<double, double> minErrorEntry =
+          absoluteErrors.entries.reduce((a, b) => a.value < b.value ? a : b);
+      print(horizontalSnapPoints);
+      print(minErrorEntry);
+      if (minErrorEntry.value <=
           widget.stickerWidgetConfig.translationSnapThreshold) {
-        dx = center.dx - snapPosition;
+        dx = minErrorEntry.key - snapPosition;
       }
     }
 
-    for (var snapPosition
+    for (final double snapPosition
         in widget.stickerWidgetConfig.translationYSnapValues) {
-      if (absoluteError(center.dy, snapPosition) <=
+      final Map<double, double> absoluteErrors = Map.fromEntries(
+          verticalSnapPoints
+              .map((e) => MapEntry(e, absoluteError(e, snapPosition))));
+
+      final MapEntry<double, double> minErrorEntry =
+          absoluteErrors.entries.reduce((a, b) => a.value < b.value ? a : b);
+
+      if (minErrorEntry.value <=
           widget.stickerWidgetConfig.translationSnapThreshold) {
-        dy = center.dy - snapPosition;
+        dy = minErrorEntry.key - snapPosition;
       }
     }
 
@@ -264,6 +289,44 @@ class StickerGestureDetectorState extends State<StickerGestureDetector> {
         canvasCenter.dy - transformedCenter.y);
 
     return transformedCanvasCenter;
+  }
+
+  List<double> _findHorizontalSnapPoints(
+      double rotation, Size rectangleSize, Offset center) {
+    if (rotation == 0 || rotation == pi) {
+      return [
+        center.dx - rectangleSize.width / 2,
+        center.dx,
+        center.dx + rectangleSize.width / 2
+      ];
+    }
+    if (rotation == pi / 2 || rotation == 3 * pi / 2) {
+      return [
+        center.dx - rectangleSize.height / 2,
+        center.dx,
+        center.dx + rectangleSize.height / 2
+      ];
+    }
+    return [center.dx];
+  }
+
+  List<double> _findVerticalSnapPoints(
+      double rotation, Size rectangleSize, Offset center) {
+    if (rotation == 0 || rotation == pi) {
+      return [
+        center.dy - rectangleSize.height / 2,
+        center.dy,
+        center.dy + rectangleSize.height / 2
+      ];
+    }
+    if (rotation == pi / 2 || rotation == 3 * pi / 2) {
+      return [
+        center.dy - rectangleSize.width / 2,
+        center.dy,
+        center.dy + rectangleSize.width / 2
+      ];
+    }
+    return [center.dx];
   }
 
   // Helper function for scaling matrix.

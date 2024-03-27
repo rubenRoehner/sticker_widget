@@ -34,13 +34,16 @@ class _MyHomePageState extends State<MyHomePage> {
   final StickerWidgetController controller = StickerWidgetController(
     config: const StickerWidgetConfig(
       canvasSize: Size(500, 300),
-      translationSnapThreshold: 1.5,
+      translationSnapThreshold: 5,
       selectedOverlayColor: Color.fromARGB(100, 0, 122, 255),
+      showAllBorders: false,
     ),
   );
 
   @override
   void initState() {
+    controller.addTextWidget(
+        textStyle: const TextStyle(color: CupertinoColors.white));
     controller.addIconWidget(
       CupertinoIcons.square_fill,
       CupertinoColors.white,
