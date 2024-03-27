@@ -77,6 +77,8 @@ class StickerGestureDetector extends StatefulWidget {
 
   final Matrix4 initialMatrix;
 
+  final double canvasScale;
+
   const StickerGestureDetector({
     super.key,
     required this.onUpdate,
@@ -97,6 +99,7 @@ class StickerGestureDetector extends StatefulWidget {
     required this.layerKey,
     required this.childrenKey,
     required this.initialMatrix,
+    required this.canvasScale,
   });
 
   @override
@@ -209,8 +212,8 @@ class StickerGestureDetectorState extends State<StickerGestureDetector> {
 
   // Helper function for translation matrix.
   Matrix4 _translate(Offset translation) {
-    var dx = translation.dx;
-    var dy = translation.dy;
+    var dx = translation.dx / widget.canvasScale;
+    var dy = translation.dy / widget.canvasScale;
 
     Matrix4 translationMatrix =
         Matrix4(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, dx, dy, 0, 1);

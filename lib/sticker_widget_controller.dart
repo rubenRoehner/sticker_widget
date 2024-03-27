@@ -19,7 +19,16 @@ class StickerWidgetController {
   /// StickerWidget's configuration
   StickerWidgetConfig config;
 
-  StickerWidgetController({this.config = const StickerWidgetConfig()});
+  /// The transformation controller for controlling the scale and position of the canvas.
+  ///
+  late final TransformationController canvasTransformationController;
+
+  StickerWidgetController(
+      {this.config = const StickerWidgetConfig(),
+      TransformationController? canvasTransformationController}) {
+    this.canvasTransformationController =
+        canvasTransformationController ?? TransformationController();
+  }
 
   /// List to store draggable widgets.
   final Map<Key, DraggableWidget> _widgets = {};
@@ -283,7 +292,9 @@ class StickerWidgetController {
             widget as DraggableTextFieldWidget;
         _widgets[textFieldWidget.key!] = DraggableTextFieldWidget(
           key: textFieldWidget.key,
-          data: data,
+          data: data.copyWith(
+              canvasScale:
+                  canvasTransformationController.value.getMaxScaleOnAxis()),
           config: config,
           textEditingController: textFieldWidget.textEditingController,
           textStyle: textFieldWidget.textStyle,
@@ -297,7 +308,9 @@ class StickerWidgetController {
         DraggableImageWidget imageWidget = widget as DraggableImageWidget;
         _widgets[imageWidget.key!] = DraggableImageWidget(
           key: imageWidget.key,
-          data: data,
+          data: data.copyWith(
+              canvasScale:
+                  canvasTransformationController.value.getMaxScaleOnAxis()),
           config: config,
           path: imageWidget.path,
           imageSize: imageWidget.imageSize,
@@ -307,7 +320,9 @@ class StickerWidgetController {
         DraggableIconWidget iconWidget = widget as DraggableIconWidget;
         _widgets[iconWidget.key!] = DraggableIconWidget(
           key: iconWidget.key,
-          data: data,
+          data: data.copyWith(
+              canvasScale:
+                  canvasTransformationController.value.getMaxScaleOnAxis()),
           config: config,
           icon: iconWidget.icon,
           color: iconWidget.color,
@@ -317,7 +332,9 @@ class StickerWidgetController {
         _widgets[widget.key!] = DraggableWidget(
           type: widget.type,
           key: widget.key,
-          data: data,
+          data: data.copyWith(
+              canvasScale:
+                  canvasTransformationController.value.getMaxScaleOnAxis()),
           config: config,
           child: widget.child,
         );
@@ -372,6 +389,7 @@ class StickerWidgetController {
       layerIndex: _widgets.length,
       startTransform: () => _isTransformingStreamController.add(true),
       endTransform: () => _isTransformingStreamController.add(false),
+      canvasScale: canvasTransformationController.value.getMaxScaleOnAxis(),
     );
   }
 

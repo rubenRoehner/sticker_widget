@@ -23,10 +23,6 @@ class StickerWidget extends StatelessWidget {
   ///
   final EdgeInsets contentPadding;
 
-  /// The transformation controller for controlling the scale and position of the sticker.
-  ///
-  final TransformationController? transformationController;
-
   /// The minimum scale value for the sticker.
   ///
   final double minScale;
@@ -42,7 +38,6 @@ class StickerWidget extends StatelessWidget {
     required this.controller,
     this.contentPadding =
         const EdgeInsets.symmetric(horizontal: 48, vertical: 180),
-    this.transformationController,
     this.minScale = 0.4,
     this.maxScale = 2.5,
     required this.child,
@@ -54,7 +49,7 @@ class StickerWidget extends StatelessWidget {
     return InteractiveViewer(
       constrained: false,
       boundaryMargin: contentPadding,
-      transformationController: transformationController,
+      transformationController: controller.canvasTransformationController,
       minScale: minScale,
       maxScale: maxScale,
       child: SizedBox(
