@@ -31,6 +31,10 @@ class StickerWidget extends StatelessWidget {
   ///
   final double maxScale;
 
+  /// The [topLayer] widget to be displayed on top of the sticker. Can bes used to display guidelines or other widgets.
+  ///
+  final Widget? topLayer;
+
   /// Constructor to initialize the widget with a controller and a child widget.
   ///
   const StickerWidget({
@@ -41,6 +45,7 @@ class StickerWidget extends StatelessWidget {
     this.minScale = 0.4,
     this.maxScale = 2.5,
     required this.child,
+    this.topLayer,
   });
 
   @override
@@ -83,6 +88,7 @@ class StickerWidget extends StatelessWidget {
                   );
                 },
               ),
+              if (topLayer != null) topLayer!,
             ],
           ),
         ),
