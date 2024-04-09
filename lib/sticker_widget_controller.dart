@@ -401,4 +401,8 @@ class StickerWidgetController {
     int nrRnd = min + rnd.nextInt(max - min);
     return Key('draggable-${DateTime.now().millisecondsSinceEpoch}-$nrRnd');
   }
+
+  void repaint() {
+    _widgetsStreamController.add(getCurrentWidgets);
+  }
 }
