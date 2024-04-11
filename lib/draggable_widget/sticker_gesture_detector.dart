@@ -152,6 +152,7 @@ class StickerGestureDetectorState extends State<StickerGestureDetector> {
         widget.initialMatrix.getTranslation().y);
     scaleUpdater.value = widget.initialMatrix.getMaxScaleOnAxis();
     recordOldScale = scaleUpdater.value;
+    recordScale = scaleUpdater.value;
     rotationUpdater.value =
         atan2(widget.initialMatrix[1], widget.initialMatrix[0]);
     super.initState();
