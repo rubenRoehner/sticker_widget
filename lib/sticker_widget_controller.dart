@@ -403,6 +403,7 @@ class StickerWidgetController {
   }
 
   void repaint() {
+    _widgetsStreamController.add(List.empty());
     _widgetsStreamController.add(List.of(getCurrentWidgets));
   }
 }
