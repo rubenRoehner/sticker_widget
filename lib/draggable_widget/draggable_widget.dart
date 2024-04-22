@@ -39,9 +39,9 @@ class DraggableWidget extends StatelessWidget {
     return StickerGestureDetector(
       stickerWidgetConfig: config,
       isSelected: data.isSelected,
-      shouldTranslate: config.shouldMove,
-      shouldRotate: config.shouldRotate,
-      shouldScale: config.shouldScale,
+      shouldTranslate: data.isLocked ? false : config.shouldMove,
+      shouldRotate: data.isLocked ? false : config.shouldRotate,
+      shouldScale: data.isLocked ? false : config.shouldScale,
       minScale: config.minScale,
       maxScale: config.maxScale,
       initialMatrix: data.transform,
