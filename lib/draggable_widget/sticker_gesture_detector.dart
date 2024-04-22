@@ -107,9 +107,6 @@ class StickerGestureDetector extends StatefulWidget {
 }
 
 class StickerGestureDetectorState extends State<StickerGestureDetector> {
-  // Matrix for handling translation, scaling, and rotation.
-  Matrix4 matrix = Matrix4.identity();
-
   // Current and previous scale values.
   double recordScale = 1;
   double recordOldScale = 0;
@@ -145,19 +142,6 @@ class StickerGestureDetectorState extends State<StickerGestureDetector> {
     onUpdate: (oldVal, newVal) => newVal - oldVal,
   );
 
-  @override
-  void initState() {
-    matrix = widget.initialMatrix;
-    translationUpdater.value = Offset(widget.initialMatrix.getTranslation().x,
-        widget.initialMatrix.getTranslation().y);
-    scaleUpdater.value = widget.initialMatrix.getMaxScaleOnAxis();
-    recordOldScale = scaleUpdater.value;
-    recordScale = scaleUpdater.value;
-    rotationUpdater.value =
-        atan2(widget.initialMatrix[1], widget.initialMatrix[0]);
-    super.initState();
-  }
-
   void onScaleStart(ScaleStartDetails details) {
     if (!widget.isSelected) {
       return;
@@ -180,11 +164,13 @@ class StickerGestureDetectorState extends State<StickerGestureDetector> {
 
     widget.onScaleStart();
 
+    Matrix4 matrix = widget.initialMatrix;
+
     // Handle translation.
     if (widget.shouldTranslate) {
       Offset translationDelta = translationUpdater.update(details.focalPoint);
       matrix = _translate(translationDelta) * matrix;
-      matrix = _translationSnap() * matrix;
+      matrix = _translationSnap(matrix) * matrix;
     }
 
     final focalPointAlignment = widget.focalPointAlignment;
@@ -204,7 +190,7 @@ class StickerGestureDetectorState extends State<StickerGestureDetector> {
 
     // Handle rotation.
     if (widget.shouldRotate && details.rotation != 0.0) {
-      matrix = _rotate(details.rotation, focalPoint) * matrix;
+      matrix = _rotate(matrix, details.rotation, focalPoint) * matrix;
     }
 
     // Notify the callback with the updated scale and matrix.
@@ -223,7 +209,7 @@ class StickerGestureDetectorState extends State<StickerGestureDetector> {
   }
 
   // Helper function for translation matrix.
-  Matrix4 _translationSnap() {
+  Matrix4 _translationSnap(Matrix4 matrix) {
     var dx = 0.0;
     var dy = 0.0;
 
@@ -340,7 +326,7 @@ class StickerGestureDetectorState extends State<StickerGestureDetector> {
   }
 
   // Helper function for rotating matrix.
-  Matrix4 _rotate(double angle, Offset focalPoint) {
+  Matrix4 _rotate(Matrix4 matrix, double angle, Offset focalPoint) {
     double toBeRotated = 0;
     double rotation = atan2(matrix[1], matrix[0]);
     double deltaAngle = rotationUpdater.update(angle);
