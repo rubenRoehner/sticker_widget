@@ -249,7 +249,20 @@ class StickerWidgetController {
   }
 
   /// Method to change the layering of a widget.
-  void updateLayer(Key key) {
+  void updateLayerUp(Key key) {
+    DraggableWidget widget = _widgets[key]!;
+    int index = widget.data.layerIndex;
+    if (index != _widgets.length - 1) {
+      DraggableWidget other = _widgets.values
+          .firstWhere((element) => element.data.layerIndex == index + 1);
+      updateDraggableWidget(
+          widget, widget.data.copyWith(layerIndex: index + 1));
+      updateDraggableWidget(other, other.data.copyWith(layerIndex: index));
+    }
+    _widgetsStreamController.add(getCurrentWidgets);
+  }
+
+  void updateLayerDown(Key key) {
     DraggableWidget widget = _widgets[key]!;
     int index = widget.data.layerIndex;
     if (index != 0) {
@@ -380,7 +393,7 @@ class StickerWidgetController {
       transform: Matrix4.identity(),
       onSelect: () => _selectWidget(key),
       onDeleteButtonPressed: () => deleteWidget(key),
-      onLayerButtonPressed: () => updateLayer(key),
+      onLayerButtonPressed: () => updateLayerDown(key),
       onDoneButtonPressed: () => clearAllBorders(),
       onFlipButtonPressed: () => toggleFlip(key),
       onLockPressed: () => toggleLock(key),
