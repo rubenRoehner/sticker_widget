@@ -79,7 +79,6 @@ class StickerWidget extends StatelessWidget {
               // A positioned.fill Stack to overlay draggable widgets on top of the main content.
               StreamBuilder(
                 stream: controller.widgets,
-                initialData: controller.getCurrentWidgets,
                 builder: (context, widgets) {
                   return Positioned.fill(
                     child: Stack(

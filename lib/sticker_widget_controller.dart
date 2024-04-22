@@ -118,7 +118,7 @@ class StickerWidgetController {
   /// Method to update an existing TextField.
   void updateTextWidget(DraggableTextFieldWidget textFieldWidget) {
     _widgets[textFieldWidget.key!] = textFieldWidget;
-    _widgetsStreamController.add(getCurrentWidgets);
+    _widgetsStreamController.add(List.of(getCurrentWidgets));
   }
 
   /// Method to add an Image to the list of draggable widgets.
@@ -146,7 +146,7 @@ class StickerWidgetController {
   /// Method to update an existing DraggableImage.
   void updateImageWidget(DraggableImageWidget imageWidget) {
     _widgets[imageWidget.key!] = imageWidget;
-    _widgetsStreamController.add(getCurrentWidgets);
+    _widgetsStreamController.add(List.of(getCurrentWidgets));
   }
 
   /// Method to add an Icon to the list of draggable widgets.
@@ -173,7 +173,7 @@ class StickerWidgetController {
   /// Method to update an existing Image.
   void updateIconWidget(DraggableIconWidget iconWidget) {
     _widgets[iconWidget.key!] = iconWidget;
-    _widgetsStreamController.add(getCurrentWidgets);
+    _widgetsStreamController.add(List.of(getCurrentWidgets));
   }
 
   /// Method to clear the selected widget.
