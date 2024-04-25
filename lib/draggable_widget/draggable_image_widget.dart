@@ -18,14 +18,10 @@ class DraggableImageWidget extends DraggableWidget {
     required this.imageSize,
   }) : super(
           type: DraggableWidgetType.image,
-          child: SizedBox(
+          child: Image.file(
+            File(path),
             width: imageSize.width,
             height: imageSize.height,
-            child: Image.file(
-              File(path),
-              width: imageSize.width,
-              height: imageSize.height,
-            ),
           ),
         );
 }
