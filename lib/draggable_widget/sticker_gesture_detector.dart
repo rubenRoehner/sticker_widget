@@ -225,6 +225,7 @@ class StickerGestureDetectorState extends State<StickerGestureDetector> {
 
     List<double> verticalSnapPoints = _findVerticalSnapPoints(
         rotation, widget.childrenKey.currentContext!.size!, center);
+
     for (final double snapPosition
         in widget.stickerWidgetConfig.translationXSnapValues) {
       final Map<double, double> absoluteErrors = Map.fromEntries(
@@ -283,16 +284,16 @@ class StickerGestureDetectorState extends State<StickerGestureDetector> {
       double rotation, Size rectangleSize, Offset center) {
     if (rotation == 0 || rotation == pi) {
       return [
-        center.dx - rectangleSize.width / 2,
         center.dx,
-        center.dx + rectangleSize.width / 2
+        center.dx + rectangleSize.width / 2,
+        center.dx + rectangleSize.width,
       ];
     }
     if (rotation == pi / 2 || rotation == 3 * pi / 2) {
       return [
-        center.dx - rectangleSize.height / 2,
         center.dx,
-        center.dx + rectangleSize.height / 2
+        center.dx + rectangleSize.height / 2,
+        center.dx + rectangleSize.height,
       ];
     }
     return [center.dx];
@@ -302,16 +303,16 @@ class StickerGestureDetectorState extends State<StickerGestureDetector> {
       double rotation, Size rectangleSize, Offset center) {
     if (rotation == 0 || rotation == pi) {
       return [
-        center.dy - rectangleSize.height / 2,
         center.dy,
-        center.dy + rectangleSize.height / 2
+        center.dy + rectangleSize.height / 2,
+        center.dy + rectangleSize.height,
       ];
     }
     if (rotation == pi / 2 || rotation == 3 * pi / 2) {
       return [
-        center.dy - rectangleSize.width / 2,
         center.dy,
-        center.dy + rectangleSize.width / 2
+        center.dy + rectangleSize.width / 2,
+        center.dy + rectangleSize.width,
       ];
     }
     return [center.dx];
