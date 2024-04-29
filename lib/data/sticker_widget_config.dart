@@ -13,46 +13,6 @@ class StickerWidgetConfig with _$StickerWidgetConfig {
     /// The [canvasSize] property represents the size of the underlying canvas.
     @Default(Size(500, 500)) final Size canvasSize,
 
-    /// The color of the border.
-    ///
-    /// The [borderColor] property represents the color of the border.
-    @Default(Color(0xFFFFFFFF)) final Color borderColor,
-
-    /// The color of the icon.
-    ///
-    /// The [iconColor] property represents the color of the icon.
-    @Default(Color(0xFF000000)) final Color iconColor,
-
-    /// Whether to show the "Done" button.
-    ///
-    /// The [showDone] property determines whether to show the "Done" button.
-    @Default(true) final bool showDone,
-
-    /// Whether to show the "Close" button.
-    ///
-    /// The [showClose] property determines whether to show the "Close" button.
-    @Default(true) final bool showClose,
-
-    /// Whether to show the "Flip" button.
-    ///
-    /// The [showFlip] property determines whether to show the "Flip" button.
-    @Default(true) final bool showFlip,
-
-    /// Whether to show the "Stack" button.
-    ///
-    /// The [showStack] property determines whether to show the "Stack" button.
-    @Default(true) final bool showStack,
-
-    /// Whether to show the "Lock" button.
-    ///
-    /// The [showLock] property determines whether to show the "Lock" button.
-    @Default(true) final bool showLock,
-
-    /// Whether to show all borders.
-    ///
-    /// The [showAllBorders] property determines whether to show all borders.
-    @Default(true) final bool showAllBorders,
-
     /// Whether the widget should be movable.
     ///
     /// The [shouldMove] property determines whether the widget should be movable.

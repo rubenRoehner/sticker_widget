@@ -109,6 +109,10 @@ mixin _$DraggableWidgetData {
   ///
   /// The [isLocked] property indicates whether the draggable widget is locked or not.
   bool get isLocked => throw _privateConstructorUsedError;
+
+  /// The scale factor of the canvas.
+  ///
+  /// The [canvasScale] property represents the scale factor of the canvas.
   double get canvasScale => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -508,6 +512,10 @@ class _$DraggableWidgetDataImpl implements _DraggableWidgetData {
   @override
   @JsonKey()
   final bool isLocked;
+
+  /// The scale factor of the canvas.
+  ///
+  /// The [canvasScale] property represents the scale factor of the canvas.
   @override
   @JsonKey()
   final double canvasScale;
@@ -714,6 +722,10 @@ abstract class _DraggableWidgetData implements DraggableWidgetData {
   /// The [isLocked] property indicates whether the draggable widget is locked or not.
   bool get isLocked;
   @override
+
+  /// The scale factor of the canvas.
+  ///
+  /// The [canvasScale] property represents the scale factor of the canvas.
   double get canvasScale;
   @override
   @JsonKey(ignore: true)

@@ -21,46 +21,6 @@ mixin _$StickerWidgetConfig {
   /// The [canvasSize] property represents the size of the underlying canvas.
   Size get canvasSize => throw _privateConstructorUsedError;
 
-  /// The color of the border.
-  ///
-  /// The [borderColor] property represents the color of the border.
-  Color get borderColor => throw _privateConstructorUsedError;
-
-  /// The color of the icon.
-  ///
-  /// The [iconColor] property represents the color of the icon.
-  Color get iconColor => throw _privateConstructorUsedError;
-
-  /// Whether to show the "Done" button.
-  ///
-  /// The [showDone] property determines whether to show the "Done" button.
-  bool get showDone => throw _privateConstructorUsedError;
-
-  /// Whether to show the "Close" button.
-  ///
-  /// The [showClose] property determines whether to show the "Close" button.
-  bool get showClose => throw _privateConstructorUsedError;
-
-  /// Whether to show the "Flip" button.
-  ///
-  /// The [showFlip] property determines whether to show the "Flip" button.
-  bool get showFlip => throw _privateConstructorUsedError;
-
-  /// Whether to show the "Stack" button.
-  ///
-  /// The [showStack] property determines whether to show the "Stack" button.
-  bool get showStack => throw _privateConstructorUsedError;
-
-  /// Whether to show the "Lock" button.
-  ///
-  /// The [showLock] property determines whether to show the "Lock" button.
-  bool get showLock => throw _privateConstructorUsedError;
-
-  /// Whether to show all borders.
-  ///
-  /// The [showAllBorders] property determines whether to show all borders.
-  bool get showAllBorders => throw _privateConstructorUsedError;
-
   /// Whether the widget should be movable.
   ///
   /// The [shouldMove] property determines whether the widget should be movable.
@@ -136,14 +96,6 @@ abstract class $StickerWidgetConfigCopyWith<$Res> {
   @useResult
   $Res call(
       {Size canvasSize,
-      Color borderColor,
-      Color iconColor,
-      bool showDone,
-      bool showClose,
-      bool showFlip,
-      bool showStack,
-      bool showLock,
-      bool showAllBorders,
       bool shouldMove,
       bool shouldRotate,
       bool shouldScale,
@@ -172,14 +124,6 @@ class _$StickerWidgetConfigCopyWithImpl<$Res, $Val extends StickerWidgetConfig>
   @override
   $Res call({
     Object? canvasSize = null,
-    Object? borderColor = null,
-    Object? iconColor = null,
-    Object? showDone = null,
-    Object? showClose = null,
-    Object? showFlip = null,
-    Object? showStack = null,
-    Object? showLock = null,
-    Object? showAllBorders = null,
     Object? shouldMove = null,
     Object? shouldRotate = null,
     Object? shouldScale = null,
@@ -198,38 +142,6 @@ class _$StickerWidgetConfigCopyWithImpl<$Res, $Val extends StickerWidgetConfig>
           ? _value.canvasSize
           : canvasSize // ignore: cast_nullable_to_non_nullable
               as Size,
-      borderColor: null == borderColor
-          ? _value.borderColor
-          : borderColor // ignore: cast_nullable_to_non_nullable
-              as Color,
-      iconColor: null == iconColor
-          ? _value.iconColor
-          : iconColor // ignore: cast_nullable_to_non_nullable
-              as Color,
-      showDone: null == showDone
-          ? _value.showDone
-          : showDone // ignore: cast_nullable_to_non_nullable
-              as bool,
-      showClose: null == showClose
-          ? _value.showClose
-          : showClose // ignore: cast_nullable_to_non_nullable
-              as bool,
-      showFlip: null == showFlip
-          ? _value.showFlip
-          : showFlip // ignore: cast_nullable_to_non_nullable
-              as bool,
-      showStack: null == showStack
-          ? _value.showStack
-          : showStack // ignore: cast_nullable_to_non_nullable
-              as bool,
-      showLock: null == showLock
-          ? _value.showLock
-          : showLock // ignore: cast_nullable_to_non_nullable
-              as bool,
-      showAllBorders: null == showAllBorders
-          ? _value.showAllBorders
-          : showAllBorders // ignore: cast_nullable_to_non_nullable
-              as bool,
       shouldMove: null == shouldMove
           ? _value.shouldMove
           : shouldMove // ignore: cast_nullable_to_non_nullable
@@ -292,14 +204,6 @@ abstract class _$$StickerWidgetConfigImplCopyWith<$Res>
   @useResult
   $Res call(
       {Size canvasSize,
-      Color borderColor,
-      Color iconColor,
-      bool showDone,
-      bool showClose,
-      bool showFlip,
-      bool showStack,
-      bool showLock,
-      bool showAllBorders,
       bool shouldMove,
       bool shouldRotate,
       bool shouldScale,
@@ -326,14 +230,6 @@ class __$$StickerWidgetConfigImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? canvasSize = null,
-    Object? borderColor = null,
-    Object? iconColor = null,
-    Object? showDone = null,
-    Object? showClose = null,
-    Object? showFlip = null,
-    Object? showStack = null,
-    Object? showLock = null,
-    Object? showAllBorders = null,
     Object? shouldMove = null,
     Object? shouldRotate = null,
     Object? shouldScale = null,
@@ -352,38 +248,6 @@ class __$$StickerWidgetConfigImplCopyWithImpl<$Res>
           ? _value.canvasSize
           : canvasSize // ignore: cast_nullable_to_non_nullable
               as Size,
-      borderColor: null == borderColor
-          ? _value.borderColor
-          : borderColor // ignore: cast_nullable_to_non_nullable
-              as Color,
-      iconColor: null == iconColor
-          ? _value.iconColor
-          : iconColor // ignore: cast_nullable_to_non_nullable
-              as Color,
-      showDone: null == showDone
-          ? _value.showDone
-          : showDone // ignore: cast_nullable_to_non_nullable
-              as bool,
-      showClose: null == showClose
-          ? _value.showClose
-          : showClose // ignore: cast_nullable_to_non_nullable
-              as bool,
-      showFlip: null == showFlip
-          ? _value.showFlip
-          : showFlip // ignore: cast_nullable_to_non_nullable
-              as bool,
-      showStack: null == showStack
-          ? _value.showStack
-          : showStack // ignore: cast_nullable_to_non_nullable
-              as bool,
-      showLock: null == showLock
-          ? _value.showLock
-          : showLock // ignore: cast_nullable_to_non_nullable
-              as bool,
-      showAllBorders: null == showAllBorders
-          ? _value.showAllBorders
-          : showAllBorders // ignore: cast_nullable_to_non_nullable
-              as bool,
       shouldMove: null == shouldMove
           ? _value.shouldMove
           : shouldMove // ignore: cast_nullable_to_non_nullable
@@ -441,14 +305,6 @@ class __$$StickerWidgetConfigImplCopyWithImpl<$Res>
 class _$StickerWidgetConfigImpl implements _StickerWidgetConfig {
   const _$StickerWidgetConfigImpl(
       {this.canvasSize = const Size(500, 500),
-      this.borderColor = const Color(0xFFFFFFFF),
-      this.iconColor = const Color(0xFF000000),
-      this.showDone = true,
-      this.showClose = true,
-      this.showFlip = true,
-      this.showStack = true,
-      this.showLock = true,
-      this.showAllBorders = true,
       this.shouldMove = true,
       this.shouldRotate = true,
       this.shouldScale = true,
@@ -471,62 +327,6 @@ class _$StickerWidgetConfigImpl implements _StickerWidgetConfig {
   @override
   @JsonKey()
   final Size canvasSize;
-
-  /// The color of the border.
-  ///
-  /// The [borderColor] property represents the color of the border.
-  @override
-  @JsonKey()
-  final Color borderColor;
-
-  /// The color of the icon.
-  ///
-  /// The [iconColor] property represents the color of the icon.
-  @override
-  @JsonKey()
-  final Color iconColor;
-
-  /// Whether to show the "Done" button.
-  ///
-  /// The [showDone] property determines whether to show the "Done" button.
-  @override
-  @JsonKey()
-  final bool showDone;
-
-  /// Whether to show the "Close" button.
-  ///
-  /// The [showClose] property determines whether to show the "Close" button.
-  @override
-  @JsonKey()
-  final bool showClose;
-
-  /// Whether to show the "Flip" button.
-  ///
-  /// The [showFlip] property determines whether to show the "Flip" button.
-  @override
-  @JsonKey()
-  final bool showFlip;
-
-  /// Whether to show the "Stack" button.
-  ///
-  /// The [showStack] property determines whether to show the "Stack" button.
-  @override
-  @JsonKey()
-  final bool showStack;
-
-  /// Whether to show the "Lock" button.
-  ///
-  /// The [showLock] property determines whether to show the "Lock" button.
-  @override
-  @JsonKey()
-  final bool showLock;
-
-  /// Whether to show all borders.
-  ///
-  /// The [showAllBorders] property determines whether to show all borders.
-  @override
-  @JsonKey()
-  final bool showAllBorders;
 
   /// Whether the widget should be movable.
   ///
@@ -646,7 +446,7 @@ class _$StickerWidgetConfigImpl implements _StickerWidgetConfig {
 
   @override
   String toString() {
-    return 'StickerWidgetConfig(canvasSize: $canvasSize, borderColor: $borderColor, iconColor: $iconColor, showDone: $showDone, showClose: $showClose, showFlip: $showFlip, showStack: $showStack, showLock: $showLock, showAllBorders: $showAllBorders, shouldMove: $shouldMove, shouldRotate: $shouldRotate, shouldScale: $shouldScale, minScale: $minScale, maxScale: $maxScale, rotationSnapValues: $rotationSnapValues, translationXSnapValues: $translationXSnapValues, translationYSnapValues: $translationYSnapValues, rotationSnapThreshold: $rotationSnapThreshold, translationSnapThreshold: $translationSnapThreshold, selectedOverlayColor: $selectedOverlayColor, defaultIconSize: $defaultIconSize)';
+    return 'StickerWidgetConfig(canvasSize: $canvasSize, shouldMove: $shouldMove, shouldRotate: $shouldRotate, shouldScale: $shouldScale, minScale: $minScale, maxScale: $maxScale, rotationSnapValues: $rotationSnapValues, translationXSnapValues: $translationXSnapValues, translationYSnapValues: $translationYSnapValues, rotationSnapThreshold: $rotationSnapThreshold, translationSnapThreshold: $translationSnapThreshold, selectedOverlayColor: $selectedOverlayColor, defaultIconSize: $defaultIconSize)';
   }
 
   @override
@@ -656,22 +456,6 @@ class _$StickerWidgetConfigImpl implements _StickerWidgetConfig {
             other is _$StickerWidgetConfigImpl &&
             (identical(other.canvasSize, canvasSize) ||
                 other.canvasSize == canvasSize) &&
-            (identical(other.borderColor, borderColor) ||
-                other.borderColor == borderColor) &&
-            (identical(other.iconColor, iconColor) ||
-                other.iconColor == iconColor) &&
-            (identical(other.showDone, showDone) ||
-                other.showDone == showDone) &&
-            (identical(other.showClose, showClose) ||
-                other.showClose == showClose) &&
-            (identical(other.showFlip, showFlip) ||
-                other.showFlip == showFlip) &&
-            (identical(other.showStack, showStack) ||
-                other.showStack == showStack) &&
-            (identical(other.showLock, showLock) ||
-                other.showLock == showLock) &&
-            (identical(other.showAllBorders, showAllBorders) ||
-                other.showAllBorders == showAllBorders) &&
             (identical(other.shouldMove, shouldMove) ||
                 other.shouldMove == shouldMove) &&
             (identical(other.shouldRotate, shouldRotate) ||
@@ -700,30 +484,21 @@ class _$StickerWidgetConfigImpl implements _StickerWidgetConfig {
   }
 
   @override
-  int get hashCode => Object.hashAll([
-        runtimeType,
-        canvasSize,
-        borderColor,
-        iconColor,
-        showDone,
-        showClose,
-        showFlip,
-        showStack,
-        showLock,
-        showAllBorders,
-        shouldMove,
-        shouldRotate,
-        shouldScale,
-        minScale,
-        maxScale,
-        const DeepCollectionEquality().hash(_rotationSnapValues),
-        const DeepCollectionEquality().hash(_translationXSnapValues),
-        const DeepCollectionEquality().hash(_translationYSnapValues),
-        rotationSnapThreshold,
-        translationSnapThreshold,
-        selectedOverlayColor,
-        defaultIconSize
-      ]);
+  int get hashCode => Object.hash(
+      runtimeType,
+      canvasSize,
+      shouldMove,
+      shouldRotate,
+      shouldScale,
+      minScale,
+      maxScale,
+      const DeepCollectionEquality().hash(_rotationSnapValues),
+      const DeepCollectionEquality().hash(_translationXSnapValues),
+      const DeepCollectionEquality().hash(_translationYSnapValues),
+      rotationSnapThreshold,
+      translationSnapThreshold,
+      selectedOverlayColor,
+      defaultIconSize);
 
   @JsonKey(ignore: true)
   @override
@@ -736,14 +511,6 @@ class _$StickerWidgetConfigImpl implements _StickerWidgetConfig {
 abstract class _StickerWidgetConfig implements StickerWidgetConfig {
   const factory _StickerWidgetConfig(
       {final Size canvasSize,
-      final Color borderColor,
-      final Color iconColor,
-      final bool showDone,
-      final bool showClose,
-      final bool showFlip,
-      final bool showStack,
-      final bool showLock,
-      final bool showAllBorders,
       final bool shouldMove,
       final bool shouldRotate,
       final bool shouldScale,
@@ -763,54 +530,6 @@ abstract class _StickerWidgetConfig implements StickerWidgetConfig {
   ///
   /// The [canvasSize] property represents the size of the underlying canvas.
   Size get canvasSize;
-  @override
-
-  /// The color of the border.
-  ///
-  /// The [borderColor] property represents the color of the border.
-  Color get borderColor;
-  @override
-
-  /// The color of the icon.
-  ///
-  /// The [iconColor] property represents the color of the icon.
-  Color get iconColor;
-  @override
-
-  /// Whether to show the "Done" button.
-  ///
-  /// The [showDone] property determines whether to show the "Done" button.
-  bool get showDone;
-  @override
-
-  /// Whether to show the "Close" button.
-  ///
-  /// The [showClose] property determines whether to show the "Close" button.
-  bool get showClose;
-  @override
-
-  /// Whether to show the "Flip" button.
-  ///
-  /// The [showFlip] property determines whether to show the "Flip" button.
-  bool get showFlip;
-  @override
-
-  /// Whether to show the "Stack" button.
-  ///
-  /// The [showStack] property determines whether to show the "Stack" button.
-  bool get showStack;
-  @override
-
-  /// Whether to show the "Lock" button.
-  ///
-  /// The [showLock] property determines whether to show the "Lock" button.
-  bool get showLock;
-  @override
-
-  /// Whether to show all borders.
-  ///
-  /// The [showAllBorders] property determines whether to show all borders.
-  bool get showAllBorders;
   @override
 
   /// Whether the widget should be movable.

@@ -220,7 +220,7 @@ class StickerGestureDetectorState extends State<StickerGestureDetector> {
 
     double rotation = atan2(matrix[1], matrix[0]);
 
-    Size childrenSize = widget.childrenKey.currentContext!.size! * recordScale;
+    Size childrenSize = widget.childrenKey.currentContext!.size! * matrix[0];
 
     List<double> horizontalSnapPoints =
         _findHorizontalSnapPoints(rotation, childrenSize, center);

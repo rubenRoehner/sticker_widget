@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:sticker_widget/data/sticker_widget_config.dart';
 import 'package:sticker_widget/data/draggable_widget_data.dart';
 import 'package:vector_math/vector_math_64.dart';
-import 'draggable_widget_action.dart';
 import 'sticker_gesture_detector.dart';
 
 class DraggableWidget extends StatelessWidget {
@@ -95,76 +94,6 @@ class DraggableWidget extends StatelessWidget {
         ),
       ),
     );
-  }
-
-  List<Widget> actionWidgets() {
-    // Widgets for interaction (e.g., delete, flip, etc.).
-    if (!(config.showAllBorders && data.isSelected)) {
-      return List.empty();
-    }
-    if (data.isLocked) {
-      return [
-        DraggableWidgetAction(
-          icon: CupertinoIcons.lock,
-          borderColor: config.borderColor,
-          iconColor: config.iconColor,
-          scale: data.scale,
-          onTap: data.onLockPressed,
-          left: 0,
-          right: 0,
-        ),
-      ];
-    }
-    return [
-      if (config.showDone)
-        DraggableWidgetAction(
-          icon: CupertinoIcons.check_mark,
-          borderColor: config.borderColor,
-          iconColor: config.iconColor,
-          scale: data.scale,
-          onTap: data.onDoneButtonPressed,
-          right: 0,
-        ),
-      if (config.showClose)
-        DraggableWidgetAction(
-          icon: CupertinoIcons.xmark,
-          borderColor: config.borderColor,
-          iconColor: config.iconColor,
-          scale: data.scale,
-          left: 0,
-          onTap: data.onDeleteButtonPressed,
-        ),
-      if (config.showFlip)
-        DraggableWidgetAction(
-          icon: CupertinoIcons.perspective,
-          borderColor: config.borderColor,
-          iconColor: config.iconColor,
-          scale: data.scale,
-          onTap: data.onFlipButtonPressed,
-          bottom: 0,
-          left: 0,
-        ),
-      if (config.showStack)
-        DraggableWidgetAction(
-          icon: CupertinoIcons.layers,
-          borderColor: config.borderColor,
-          iconColor: config.iconColor,
-          scale: data.scale,
-          onTap: data.onLayerButtonPressed,
-          bottom: 0,
-          right: 0,
-        ),
-      if (config.showLock)
-        DraggableWidgetAction(
-          icon: CupertinoIcons.lock_open,
-          borderColor: config.borderColor,
-          iconColor: config.iconColor,
-          scale: data.scale,
-          onTap: data.onLockPressed,
-          left: 0,
-          right: 0,
-        ),
-    ];
   }
 }
 
