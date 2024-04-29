@@ -184,7 +184,7 @@ class StickerGestureDetectorState extends State<StickerGestureDetector> {
       if (sc > widget.minScale && sc < widget.maxScale) {
         recordScale = sc;
         double scaleDelta = scaleUpdater.update(details.scale);
-        matrix = _scale(scaleDelta, focalPoint) * matrix;
+        matrix = _scale(scaleDelta) * matrix;
       }
     }
 
@@ -220,11 +220,13 @@ class StickerGestureDetectorState extends State<StickerGestureDetector> {
 
     double rotation = atan2(matrix[1], matrix[0]);
 
-    List<double> horizontalSnapPoints = _findHorizontalSnapPoints(
-        rotation, widget.childrenKey.currentContext!.size!, center);
+    Size childrenSize = widget.childrenKey.currentContext!.size! * recordScale;
 
-    List<double> verticalSnapPoints = _findVerticalSnapPoints(
-        rotation, widget.childrenKey.currentContext!.size!, center);
+    List<double> horizontalSnapPoints =
+        _findHorizontalSnapPoints(rotation, childrenSize, center);
+
+    List<double> verticalSnapPoints =
+        _findVerticalSnapPoints(rotation, childrenSize, center);
 
     for (final double snapPosition
         in widget.stickerWidgetConfig.translationXSnapValues) {
@@ -286,14 +288,14 @@ class StickerGestureDetectorState extends State<StickerGestureDetector> {
       return [
         center.dx,
         center.dx + rectangleSize.width / 2,
-        center.dx + rectangleSize.width,
+        center.dx - rectangleSize.width / 2,
       ];
     }
     if (rotation == pi / 2 || rotation == 3 * pi / 2) {
       return [
         center.dx,
         center.dx + rectangleSize.height / 2,
-        center.dx + rectangleSize.height,
+        center.dx - rectangleSize.height / 2,
       ];
     }
     return [center.dx];
@@ -305,25 +307,22 @@ class StickerGestureDetectorState extends State<StickerGestureDetector> {
       return [
         center.dy,
         center.dy + rectangleSize.height / 2,
-        center.dy + rectangleSize.height,
+        center.dy - rectangleSize.height / 2,
       ];
     }
     if (rotation == pi / 2 || rotation == 3 * pi / 2) {
       return [
         center.dy,
         center.dy + rectangleSize.width / 2,
-        center.dy + rectangleSize.width,
+        center.dy - rectangleSize.width / 2,
       ];
     }
     return [center.dx];
   }
 
   // Helper function for scaling matrix.
-  Matrix4 _scale(double scale, Offset focalPoint) {
-    var dx = (1 - scale) * focalPoint.dx;
-    var dy = (1 - scale) * focalPoint.dy;
-
-    return Matrix4(scale, 0, 0, 0, 0, scale, 0, 0, 0, 0, 1, 0, dx, dy, 0, 1);
+  Matrix4 _scale(double scale) {
+    return Matrix4.identity().scaled(scale, scale, 1.0);
   }
 
   // Helper function for rotating matrix.

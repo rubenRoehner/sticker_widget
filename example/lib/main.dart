@@ -37,6 +37,8 @@ class _MyHomePageState extends State<MyHomePage> {
       translationSnapThreshold: 5,
       selectedOverlayColor: Color.fromARGB(100, 0, 122, 255),
       showAllBorders: false,
+      maxScale: 10,
+      minScale: 0.01,
     ),
   );
 

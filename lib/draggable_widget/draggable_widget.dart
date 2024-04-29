@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:sticker_widget/data/sticker_widget_config.dart';
 import 'package:sticker_widget/data/draggable_widget_data.dart';
+import 'package:vector_math/vector_math_64.dart';
 import 'draggable_widget_action.dart';
 import 'sticker_gesture_detector.dart';
 
@@ -65,44 +66,30 @@ class DraggableWidget extends StatelessWidget {
         width: config.canvasSize.width,
         height: config.canvasSize.height,
         child: Transform(
-          transform: data.transform,
-          child: FittedBox(
-            key: layerKey,
-            fit: BoxFit.scaleDown,
-            child: Stack(
-              children: [
-                Container(
-                  margin: config.showAllBorders
-                      ? EdgeInsets.all(
-                          DraggableWidgetAction.defaultCircleRadius /
-                              data.scale)
-                      : EdgeInsetsDirectional.zero,
-                  padding: config.showAllBorders
-                      ? EdgeInsets.all(
-                          DraggableWidgetAction.defaultCircleRadius /
-                              data.scale)
-                      : EdgeInsetsDirectional.zero,
-                  decoration: (config.showAllBorders && data.isSelected)
-                      ? BoxDecoration(
-                          border: Border.all(
-                            color: config.borderColor,
-                            width: 1.5 / data.scale,
-                          ),
-                        )
-                      : null,
+          transform: Matrix4.compose(
+            data.transform.getTranslation(),
+            Quaternion.identity(),
+            Vector3.all(1.0),
+          ),
+          alignment: Alignment.topLeft,
+          child: Align(
+            alignment: Alignment.topLeft,
+            child: FittedBox(
+              key: layerKey,
+              fit: BoxFit.scaleDown,
+              child: Transform(
+                key: childrenKey,
+                transform: data.transform.clone()
+                  ..setTranslation(Vector3.zero()),
+                child: Container(
                   foregroundDecoration: BoxDecoration(
                     color: data.isSelected
                         ? config.selectedOverlayColor
                         : const Color(0x00000000),
                   ),
-                  child: Transform.flip(
-                    key: childrenKey,
-                    flipX: data.isFlipped,
-                    child: child,
-                  ),
+                  child: child,
                 ),
-                ...actionWidgets(),
-              ],
+              ),
             ),
           ),
         ),
