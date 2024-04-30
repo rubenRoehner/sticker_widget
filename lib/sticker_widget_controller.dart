@@ -195,6 +195,11 @@ class StickerWidgetController {
     _editingTextStreamController.add(null);
   }
 
+  /// Method to clear the textwidget that is currently being edited.
+  void clearEditingWidget() {
+    _editingTextStreamController.add(null);
+  }
+
   /// Method to highlight the border of a specific widget.
   void _selectWidget(Key? selectKey) {
     _widgets.forEach((key, value) {
