@@ -11,7 +11,7 @@ import 'package:sticker_widget/data/draggable_widget_data.dart';
 import 'package:sticker_widget/draggable_widget/draggable_widget.dart';
 import 'package:sticker_widget/draggable_widget/draggable_icon_widget.dart';
 import 'package:sticker_widget/draggable_widget/draggable_image_widget.dart';
-import 'package:sticker_widget/draggable_widget/draggable_text_field_widget.dart';
+import 'package:sticker_widget/draggable_widget/draggable_text_widget.dart';
 import 'package:sticker_widget/sticker_widget.dart';
 
 /// A Dart class StickerWidgetController used for managing a list of draggable widgets and their properties.
@@ -45,6 +45,10 @@ class StickerWidgetController {
   final StreamController<bool> _isTransformingStreamController =
       StreamController.broadcast();
 
+  /// StreamController to keep track of selected DraggableWidget.
+  final StreamController<Key?> _editingTextStreamController =
+      StreamController.broadcast();
+
   /// Returns stream of DraggableWidget's.
   Stream<bool> get isTransforming => _isTransformingStreamController.stream;
 
@@ -61,6 +65,16 @@ class StickerWidgetController {
         _widgetsStreamController.stream,
         _selectedWidgetStreamController.stream,
         (list, key) => list.firstWhereOrNull((element) => element.key == key),
+      );
+
+  /// Returns stream of selected DraggableWidget.
+  Stream<DraggableTextWidget?> get editingTextWidget => Rx.combineLatest2(
+        _widgetsStreamController.stream,
+        _editingTextStreamController.stream,
+        (list, key) => list
+            .where((element) => element.key == key)
+            .whereType<DraggableTextWidget>()
+            .firstOrNull,
       );
 
   ///  Method to add a custom widget to the list of draggable widgets.
@@ -86,7 +100,7 @@ class StickerWidgetController {
   }
 
   /// Method to add a TextField to the list of draggable widgets.
-  DraggableTextFieldWidget addTextWidget(
+  DraggableTextWidget addTextWidget(
       {TextStyle textStyle = const TextStyle(),
       TextAlign textAlign = TextAlign.center,
       bool upperCase = false}) {
@@ -95,15 +109,14 @@ class StickerWidgetController {
     DraggableWidgetData data = _getNewDraggableWidgetData(key);
 
     // Create a DraggableWidget with specified properties.
-    final DraggableTextFieldWidget widget = DraggableTextFieldWidget(
+    final DraggableTextWidget widget = DraggableTextWidget(
       key: key,
       config: config,
       data: data,
-      textEditingController: TextEditingController(text: "Moments"),
+      text: '',
       textAlign: textAlign,
       textStyle: textStyle,
       upperCase: upperCase,
-      showTextField: false,
       setShowTextField: (showTextField) =>
           _setShowTextField(key, showTextField),
     );
@@ -116,7 +129,7 @@ class StickerWidgetController {
   }
 
   /// Method to update an existing TextField.
-  void updateTextWidget(DraggableTextFieldWidget textFieldWidget) {
+  void updateTextWidget(DraggableTextWidget textFieldWidget) {
     _widgets[textFieldWidget.key!] = textFieldWidget;
     _widgetsStreamController.add(List.of(getCurrentWidgets));
   }
@@ -194,8 +207,7 @@ class StickerWidgetController {
           _widgets[key]!,
           _widgets[key]!.data.copyWith(isSelected: false),
         );
-        if (_widgets[key] is DraggableTextFieldWidget &&
-            (_widgets[key] as DraggableTextFieldWidget).showTextField) {
+        if (_widgets[key] is DraggableTextWidget) {
           _setShowTextField(key, false);
         }
       }
@@ -277,43 +289,28 @@ class StickerWidgetController {
 
   /// Method to update the transform matrix of a widget.
   void _setShowTextField(Key key, bool showTextField) {
-    if (_widgets.containsKey(key) &&
-        _widgets[key] is DraggableTextFieldWidget) {
-      DraggableTextFieldWidget textFieldWidget =
-          _widgets[key] as DraggableTextFieldWidget;
-
-      _widgets[key] = DraggableTextFieldWidget(
-        key: key,
-        data: textFieldWidget.data,
-        config: config,
-        textEditingController: textFieldWidget.textEditingController,
-        textStyle: textFieldWidget.textStyle,
-        textAlign: textFieldWidget.textAlign,
-        upperCase: textFieldWidget.upperCase,
-        showTextField: showTextField,
-        setShowTextField: textFieldWidget.setShowTextField,
-      );
+    if (_widgets.containsKey(key) && _widgets[key] is DraggableTextWidget) {
+      _editingTextStreamController.add(showTextField ? key : null);
+    } else {
+      _editingTextStreamController.add(null);
     }
-    _widgetsStreamController.add(getCurrentWidgets);
   }
 
   /// Method to update the draggable widget.
   void updateDraggableWidget(DraggableWidget widget, DraggableWidgetData data) {
     switch (widget.type) {
       case DraggableWidgetType.text:
-        DraggableTextFieldWidget textFieldWidget =
-            widget as DraggableTextFieldWidget;
-        _widgets[textFieldWidget.key!] = DraggableTextFieldWidget(
+        DraggableTextWidget textFieldWidget = widget as DraggableTextWidget;
+        _widgets[textFieldWidget.key!] = DraggableTextWidget(
           key: textFieldWidget.key,
           data: data.copyWith(
               canvasScale:
                   canvasTransformationController.value.getMaxScaleOnAxis()),
           config: config,
-          textEditingController: textFieldWidget.textEditingController,
+          text: textFieldWidget.text,
           textStyle: textFieldWidget.textStyle,
           textAlign: textFieldWidget.textAlign,
           upperCase: textFieldWidget.upperCase,
-          showTextField: textFieldWidget.showTextField,
           setShowTextField: textFieldWidget.setShowTextField,
         );
         break;
