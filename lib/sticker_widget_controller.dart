@@ -192,6 +192,7 @@ class StickerWidgetController {
   /// Method to clear the selected widget.
   void clearAllBorders() {
     _selectWidget(null);
+    _editingTextStreamController.add(null);
   }
 
   /// Method to highlight the border of a specific widget.
