@@ -202,11 +202,17 @@ class StickerWidgetController {
 
   /// Method to highlight the border of a specific widget.
   void _selectWidget(Key? selectKey) {
+    bool unSelect = false;
     _widgets.forEach((key, value) {
       if (key == selectKey) {
+        if (_widgets[key]!.data.isSelected) {
+          unSelect = true;
+        }
         updateDraggableWidget(
           _widgets[key]!,
-          _widgets[key]!.data.copyWith(isSelected: true),
+          _widgets[key]!.data.copyWith(
+                isSelected: !_widgets[key]!.data.isSelected,
+              ),
         );
       } else {
         updateDraggableWidget(
@@ -218,6 +224,9 @@ class StickerWidgetController {
         }
       }
     });
+    if (unSelect) {
+      selectKey = null;
+    }
     _widgetsStreamController.add(getCurrentWidgets);
     _selectedWidgetStreamController.add(selectKey);
   }
