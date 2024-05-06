@@ -29,22 +29,6 @@ class StickerGestureDetector extends StatefulWidget {
   final bool shouldScale;
   final bool shouldRotate;
 
-  /// Flag to clip the child widget.
-  ///
-  /// When [clipChild] is true, the child widget will be clipped to its parent's bounds.
-  final bool clipChild;
-
-  /// Behavior when handling hit tests.
-  ///
-  /// By default, the gesture detector defers to the child widget for hit testing.
-  final HitTestBehavior behavior;
-
-  /// Alignment of the focal point.
-  ///
-  /// The [focalPointAlignment] determines the alignment of the focal point used for scaling and rotating the widget.
-  /// If not specified, the focal point will be the local focal point of the gesture.
-  final Alignment? focalPointAlignment;
-
   /// Callback functions for scale start and end.
   ///
   /// The [onScaleStart] function is called when a scale gesture starts.
@@ -55,7 +39,7 @@ class StickerGestureDetector extends StatefulWidget {
   /// Callback function for tap gesture.
   ///
   /// The [onTap] function is called when the widget is tapped.
-  final VoidCallback onTap;
+  final void Function()? onTap;
 
   /// Minimum and maximum scale values.
   ///
@@ -87,12 +71,9 @@ class StickerGestureDetector extends StatefulWidget {
     this.shouldTranslate = true,
     this.shouldScale = true,
     this.shouldRotate = true,
-    this.clipChild = true,
-    this.focalPointAlignment,
-    this.behavior = HitTestBehavior.deferToChild,
     required this.onScaleStart,
     required this.onScaleEnd,
-    required this.onTap,
+    this.onTap,
     required this.minScale,
     required this.maxScale,
     required this.isSelected,
@@ -113,18 +94,14 @@ class StickerGestureDetectorState extends State<StickerGestureDetector> {
 
   @override
   Widget build(BuildContext context) {
-    // Wrap the child widget in a ClipRect if clipping is enabled.
-    Widget child =
-        widget.clipChild ? ClipRect(child: widget.child) : widget.child;
-
     // Create a GestureDetector to handle gestures.
     return GestureDetector(
-      behavior: widget.behavior,
-      onScaleStart: onScaleStart,
-      onScaleUpdate: onScaleUpdate,
-      onScaleEnd: onScaleEnd,
+      onScaleStart: widget.isSelected ? onScaleStart : null,
+      onScaleUpdate: widget.isSelected ? onScaleUpdate : null,
+      onScaleEnd: widget.isSelected ? onScaleEnd : null,
+      excludeFromSemantics: widget.isSelected,
       onTap: widget.onTap,
-      child: child,
+      child: widget.child,
     );
   }
 
@@ -173,10 +150,7 @@ class StickerGestureDetectorState extends State<StickerGestureDetector> {
       matrix = _translationSnap(matrix) * matrix;
     }
 
-    final focalPointAlignment = widget.focalPointAlignment;
-    final focalPoint = focalPointAlignment == null
-        ? details.localFocalPoint
-        : focalPointAlignment.alongSize(context.size!);
+    final focalPoint = details.localFocalPoint;
 
     // Handle scaling.
     if (widget.shouldScale && details.scale != 1.0) {

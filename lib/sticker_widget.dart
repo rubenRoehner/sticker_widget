@@ -1,7 +1,6 @@
 library sticker_widget;
 
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/services.dart';
 import 'package:sticker_widget/sticker_widget_controller.dart';
 
 /// A Flutter widget class StickerWidget, which is used to display draggable stickers.
@@ -51,48 +50,50 @@ class StickerWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // A RepaintBoundary widget used to isolate and capture the sticker and its contents as an image.
-    return InteractiveViewer(
-      constrained: false,
-      boundaryMargin: contentPadding,
-      transformationController: controller.canvasTransformationController,
-      minScale: minScale,
-      maxScale: maxScale,
-      child: SizedBox(
-        height: controller.config.canvasSize.height,
-        width: controller.config.canvasSize.width,
-        child: RepaintBoundary(
-          key: globalKey,
-          child: Stack(
-            alignment: Alignment.center,
-            children: [
-              // The main child widget (content) displayed on the sticker.
-              GestureDetector(
-                onTap: () {
-                  if (MediaQuery.of(context).viewInsets.bottom != 0) {
-                    SystemChannels.textInput.invokeMethod('TextInput.hide');
-                  } else {
-                    controller.clearAllBorders();
-                  }
-                },
-                child: child,
-              ),
-              // A positioned.fill Stack to overlay draggable widgets on top of the main content.
-              StreamBuilder(
-                stream: controller.widgets,
-                initialData: controller.getCurrentWidgets,
-                builder: (context, widgets) {
-                  return Positioned.fill(
-                    child: Stack(
-                      children: widgets.data ?? List.empty(),
+    return StreamBuilder<bool>(
+        stream: controller.selectedWidget.map((event) => event != null),
+        builder: (context, snapshot) {
+          return InteractiveViewer(
+            constrained: false,
+            boundaryMargin: contentPadding,
+            transformationController: controller.canvasTransformationController,
+            minScale: minScale,
+            maxScale: maxScale,
+            panEnabled: !(snapshot.data ?? false),
+            scaleEnabled: !(snapshot.data ?? false),
+            child: SizedBox(
+              height: controller.config.canvasSize.height,
+              width: controller.config.canvasSize.width,
+              child: RepaintBoundary(
+                key: globalKey,
+                child: Stack(
+                  alignment: Alignment.center,
+                  clipBehavior: Clip.none,
+                  children: [
+                    // The main child widget (content) displayed on the sticker.
+                    GestureDetector(
+                      onTap: () {
+                        controller.clearAllBorders();
+                      },
+                      child: child,
                     ),
-                  );
-                },
+                    // A positioned.fill Stack to overlay draggable widgets on top of the main content.
+                    StreamBuilder(
+                      stream: controller.widgets,
+                      builder: (context, widgets) {
+                        return Positioned.fill(
+                          child: Stack(
+                            children: widgets.data ?? List.empty(),
+                          ),
+                        );
+                      },
+                    ),
+                    if (topLayer != null) topLayer!,
+                  ],
+                ),
               ),
-              if (topLayer != null) topLayer!,
-            ],
-          ),
-        ),
-      ),
-    );
+            ),
+          );
+        });
   }
 }

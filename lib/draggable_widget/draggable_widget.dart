@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:sticker_widget/data/sticker_widget_config.dart';
 import 'package:sticker_widget/data/draggable_widget_data.dart';
-import 'package:vector_math/vector_math_64.dart';
 import 'sticker_gesture_detector.dart';
 
 class DraggableWidget extends StatelessWidget {
@@ -46,15 +45,9 @@ class DraggableWidget extends StatelessWidget {
       maxScale: config.maxScale,
       initialMatrix: data.transform,
       canvasScale: data.canvasScale,
-      onTap: () {
-        data.onSelect();
-      },
-      onScaleStart: () {
-        data.startTransform();
-      },
-      onScaleEnd: () {
-        data.endTransform();
-      },
+      onScaleStart: data.startTransform,
+      onScaleEnd: data.endTransform,
+      onTap: data.onSelect,
       onUpdate: (s, m) {
         data.updateScale(s);
         data.updateTransform(m);
@@ -62,33 +55,21 @@ class DraggableWidget extends StatelessWidget {
       layerKey: layerKey,
       childrenKey: childrenKey,
       child: SizedBox(
+        key: layerKey,
         width: config.canvasSize.width,
         height: config.canvasSize.height,
         child: Transform(
-          transform: Matrix4.compose(
-            data.transform.getTranslation(),
-            Quaternion.identity(),
-            Vector3.all(1.0),
-          ),
-          alignment: Alignment.topLeft,
-          child: Align(
-            alignment: Alignment.topLeft,
-            child: FittedBox(
-              key: layerKey,
-              fit: BoxFit.scaleDown,
-              child: Transform(
-                key: childrenKey,
-                transform: data.transform.clone()
-                  ..setTranslation(Vector3.zero()),
-                child: Container(
-                  foregroundDecoration: BoxDecoration(
-                    color: data.isSelected
-                        ? config.selectedOverlayColor
-                        : const Color(0x00000000),
-                  ),
-                  child: child,
-                ),
+          transform: data.transform.clone(),
+          child: FittedBox(
+            fit: BoxFit.scaleDown,
+            child: Container(
+              key: childrenKey,
+              foregroundDecoration: BoxDecoration(
+                color: data.isSelected
+                    ? config.selectedOverlayColor
+                    : const Color(0x00000000),
               ),
+              child: child,
             ),
           ),
         ),

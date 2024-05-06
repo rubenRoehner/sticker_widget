@@ -34,10 +34,11 @@ class _MyHomePageState extends State<MyHomePage> {
   final StickerWidgetController controller = StickerWidgetController(
     config: const StickerWidgetConfig(
       canvasSize: Size(500, 300),
-      translationSnapThreshold: 5,
+      translationSnapThreshold: 3,
       selectedOverlayColor: Color.fromARGB(100, 0, 122, 255),
       maxScale: 10,
       minScale: 0.01,
+      defaultIconSize: 96,
     ),
   );
 
@@ -83,7 +84,7 @@ class _MyHomePageState extends State<MyHomePage> {
         middle: const Text('Sticker Widget'),
         trailing: GestureDetector(
           onTap: () {
-            controller.addTextWidget();
+            controller.addTextWidget(textStyle: const TextStyle(fontSize: 64));
           },
           child: const Icon(CupertinoIcons.add),
         ),
