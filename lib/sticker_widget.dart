@@ -79,10 +79,8 @@ class StickerWidget extends StatelessWidget {
                     StreamBuilder(
                       stream: controller.widgets,
                       builder: (context, widgets) {
-                        return Positioned.fill(
-                          child: Stack(
-                            children: widgets.data ?? List.empty(),
-                          ),
+                        return Stack(
+                          children: widgets.data ?? List.empty(),
                         );
                       },
                     ),
