@@ -59,7 +59,9 @@ class DraggableWidget extends StatelessWidget {
         width: config.canvasSize.width,
         height: config.canvasSize.height,
         child: Transform(
-          transform: data.transform.clone(),
+          transform: data.transform.clone()
+            ..translate(
+                -config.canvasSize.width / 2, -config.canvasSize.height / 2),
           child: FittedBox(
             fit: BoxFit.scaleDown,
             child: Container(

@@ -67,8 +67,6 @@ class StickerWidget extends StatelessWidget {
               child: RepaintBoundary(
                 key: globalKey,
                 child: Stack(
-                  alignment: Alignment.center,
-                  clipBehavior: Clip.none,
                   children: [
                     // The main child widget (content) displayed on the sticker.
                     GestureDetector(
