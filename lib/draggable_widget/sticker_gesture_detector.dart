@@ -190,7 +190,7 @@ class StickerGestureDetectorState extends State<StickerGestureDetector> {
     Offset center = _findTransformedRectangleCenter(
         matrix,
         widget.layerKey.currentContext!.size!,
-        widget.stickerWidgetConfig.canvasSize);
+        widget.stickerWidgetConfig.layerSize);
 
     double rotation = atan2(matrix[1], matrix[0]);
 

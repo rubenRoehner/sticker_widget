@@ -13,6 +13,11 @@ class StickerWidgetConfig with _$StickerWidgetConfig {
     /// The [canvasSize] property represents the size of the underlying canvas.
     @Default(Size(500, 500)) final Size canvasSize,
 
+    /// The size of the underlying canvas.
+    ///
+    /// The [canvasSize] property represents the size of the underlying canvas.
+    @Default(Size(500, 500)) final Size layerSize,
+
     /// Whether the widget should be movable.
     ///
     /// The [shouldMove] property determines whether the widget should be movable.

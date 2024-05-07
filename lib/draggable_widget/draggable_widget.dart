@@ -56,8 +56,8 @@ class DraggableWidget extends StatelessWidget {
       childrenKey: childrenKey,
       child: SizedBox(
         key: layerKey,
-        width: config.canvasSize.width,
-        height: config.canvasSize.height,
+        width: config.layerSize.width,
+        height: config.layerSize.height,
         child: Transform(
           transform: data.transform.clone()
             ..translate(

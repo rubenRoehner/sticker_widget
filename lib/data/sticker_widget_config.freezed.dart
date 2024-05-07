@@ -21,6 +21,11 @@ mixin _$StickerWidgetConfig {
   /// The [canvasSize] property represents the size of the underlying canvas.
   Size get canvasSize => throw _privateConstructorUsedError;
 
+  /// The size of the underlying canvas.
+  ///
+  /// The [canvasSize] property represents the size of the underlying canvas.
+  Size get layerSize => throw _privateConstructorUsedError;
+
   /// Whether the widget should be movable.
   ///
   /// The [shouldMove] property determines whether the widget should be movable.
@@ -96,6 +101,7 @@ abstract class $StickerWidgetConfigCopyWith<$Res> {
   @useResult
   $Res call(
       {Size canvasSize,
+      Size layerSize,
       bool shouldMove,
       bool shouldRotate,
       bool shouldScale,
@@ -124,6 +130,7 @@ class _$StickerWidgetConfigCopyWithImpl<$Res, $Val extends StickerWidgetConfig>
   @override
   $Res call({
     Object? canvasSize = null,
+    Object? layerSize = null,
     Object? shouldMove = null,
     Object? shouldRotate = null,
     Object? shouldScale = null,
@@ -141,6 +148,10 @@ class _$StickerWidgetConfigCopyWithImpl<$Res, $Val extends StickerWidgetConfig>
       canvasSize: null == canvasSize
           ? _value.canvasSize
           : canvasSize // ignore: cast_nullable_to_non_nullable
+              as Size,
+      layerSize: null == layerSize
+          ? _value.layerSize
+          : layerSize // ignore: cast_nullable_to_non_nullable
               as Size,
       shouldMove: null == shouldMove
           ? _value.shouldMove
@@ -204,6 +215,7 @@ abstract class _$$StickerWidgetConfigImplCopyWith<$Res>
   @useResult
   $Res call(
       {Size canvasSize,
+      Size layerSize,
       bool shouldMove,
       bool shouldRotate,
       bool shouldScale,
@@ -230,6 +242,7 @@ class __$$StickerWidgetConfigImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? canvasSize = null,
+    Object? layerSize = null,
     Object? shouldMove = null,
     Object? shouldRotate = null,
     Object? shouldScale = null,
@@ -247,6 +260,10 @@ class __$$StickerWidgetConfigImplCopyWithImpl<$Res>
       canvasSize: null == canvasSize
           ? _value.canvasSize
           : canvasSize // ignore: cast_nullable_to_non_nullable
+              as Size,
+      layerSize: null == layerSize
+          ? _value.layerSize
+          : layerSize // ignore: cast_nullable_to_non_nullable
               as Size,
       shouldMove: null == shouldMove
           ? _value.shouldMove
@@ -305,6 +322,7 @@ class __$$StickerWidgetConfigImplCopyWithImpl<$Res>
 class _$StickerWidgetConfigImpl implements _StickerWidgetConfig {
   const _$StickerWidgetConfigImpl(
       {this.canvasSize = const Size(500, 500),
+      this.layerSize = const Size(500, 500),
       this.shouldMove = true,
       this.shouldRotate = true,
       this.shouldScale = true,
@@ -327,6 +345,13 @@ class _$StickerWidgetConfigImpl implements _StickerWidgetConfig {
   @override
   @JsonKey()
   final Size canvasSize;
+
+  /// The size of the underlying canvas.
+  ///
+  /// The [canvasSize] property represents the size of the underlying canvas.
+  @override
+  @JsonKey()
+  final Size layerSize;
 
   /// Whether the widget should be movable.
   ///
@@ -446,7 +471,7 @@ class _$StickerWidgetConfigImpl implements _StickerWidgetConfig {
 
   @override
   String toString() {
-    return 'StickerWidgetConfig(canvasSize: $canvasSize, shouldMove: $shouldMove, shouldRotate: $shouldRotate, shouldScale: $shouldScale, minScale: $minScale, maxScale: $maxScale, rotationSnapValues: $rotationSnapValues, translationXSnapValues: $translationXSnapValues, translationYSnapValues: $translationYSnapValues, rotationSnapThreshold: $rotationSnapThreshold, translationSnapThreshold: $translationSnapThreshold, selectedOverlayColor: $selectedOverlayColor, defaultIconSize: $defaultIconSize)';
+    return 'StickerWidgetConfig(canvasSize: $canvasSize, layerSize: $layerSize, shouldMove: $shouldMove, shouldRotate: $shouldRotate, shouldScale: $shouldScale, minScale: $minScale, maxScale: $maxScale, rotationSnapValues: $rotationSnapValues, translationXSnapValues: $translationXSnapValues, translationYSnapValues: $translationYSnapValues, rotationSnapThreshold: $rotationSnapThreshold, translationSnapThreshold: $translationSnapThreshold, selectedOverlayColor: $selectedOverlayColor, defaultIconSize: $defaultIconSize)';
   }
 
   @override
@@ -456,6 +481,8 @@ class _$StickerWidgetConfigImpl implements _StickerWidgetConfig {
             other is _$StickerWidgetConfigImpl &&
             (identical(other.canvasSize, canvasSize) ||
                 other.canvasSize == canvasSize) &&
+            (identical(other.layerSize, layerSize) ||
+                other.layerSize == layerSize) &&
             (identical(other.shouldMove, shouldMove) ||
                 other.shouldMove == shouldMove) &&
             (identical(other.shouldRotate, shouldRotate) ||
@@ -487,6 +514,7 @@ class _$StickerWidgetConfigImpl implements _StickerWidgetConfig {
   int get hashCode => Object.hash(
       runtimeType,
       canvasSize,
+      layerSize,
       shouldMove,
       shouldRotate,
       shouldScale,
@@ -511,6 +539,7 @@ class _$StickerWidgetConfigImpl implements _StickerWidgetConfig {
 abstract class _StickerWidgetConfig implements StickerWidgetConfig {
   const factory _StickerWidgetConfig(
       {final Size canvasSize,
+      final Size layerSize,
       final bool shouldMove,
       final bool shouldRotate,
       final bool shouldScale,
@@ -530,6 +559,12 @@ abstract class _StickerWidgetConfig implements StickerWidgetConfig {
   ///
   /// The [canvasSize] property represents the size of the underlying canvas.
   Size get canvasSize;
+  @override
+
+  /// The size of the underlying canvas.
+  ///
+  /// The [canvasSize] property represents the size of the underlying canvas.
+  Size get layerSize;
   @override
 
   /// Whether the widget should be movable.
