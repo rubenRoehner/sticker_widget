@@ -64,28 +64,30 @@ class StickerWidget extends StatelessWidget {
             child: SizedBox(
               height: controller.config.canvasSize.height,
               width: controller.config.canvasSize.width,
-              child: RepaintBoundary(
-                key: globalKey,
-                child: Stack(
-                  children: [
-                    // The main child widget (content) displayed on the sticker.
-                    GestureDetector(
-                      onTap: () {
-                        controller.clearAllBorders();
-                      },
-                      child: child,
-                    ),
-                    // A positioned.fill Stack to overlay draggable widgets on top of the main content.
-                    StreamBuilder(
-                      stream: controller.widgets,
-                      builder: (context, widgets) {
-                        return Stack(
-                          children: widgets.data ?? List.empty(),
-                        );
-                      },
-                    ),
-                    if (topLayer != null) topLayer!,
-                  ],
+              child: ClipRect(
+                child: RepaintBoundary(
+                  key: globalKey,
+                  child: Stack(
+                    children: [
+                      // The main child widget (content) displayed on the sticker.
+                      GestureDetector(
+                        onTap: () {
+                          controller.clearAllBorders();
+                        },
+                        child: child,
+                      ),
+                      // A positioned.fill Stack to overlay draggable widgets on top of the main content.
+                      StreamBuilder(
+                        stream: controller.widgets,
+                        builder: (context, widgets) {
+                          return Stack(
+                            children: widgets.data ?? List.empty(),
+                          );
+                        },
+                      ),
+                      if (topLayer != null) topLayer!,
+                    ],
+                  ),
                 ),
               ),
             ),

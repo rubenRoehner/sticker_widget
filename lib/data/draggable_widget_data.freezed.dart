@@ -23,44 +23,6 @@ mixin _$DraggableWidgetData {
   /// This can be used to perform any necessary actions or updates in the parent widget.
   void Function() get onSelect => throw _privateConstructorUsedError;
 
-  /// A callback function that is called when the flip button is pressed.
-  ///
-  /// The [onFlipButtonPressed] function is required and should be provided by the parent widget.
-  /// It will be called when the user presses the flip button on the draggable widget.
-  void Function() get onFlipButtonPressed => throw _privateConstructorUsedError;
-
-  /// A required callback function that is called when the done button is pressed.
-  ///
-  /// The [onDoneButtonPressed] function is required and should be provided by the parent widget.
-  /// It will be called when the user presses the done button on the draggable widget.
-  void Function() get onDoneButtonPressed => throw _privateConstructorUsedError;
-
-  /// A callback function that is called when the lock button is pressed.
-  ///
-  /// The [onLockPressed] function is required and should be provided by the parent widget.
-  /// It will be called when the user presses the lock button on the draggable widget.
-  void Function() get onLockPressed => throw _privateConstructorUsedError;
-
-  /// A callback function that is called when the delete button is pressed.
-  ///
-  /// The [onDeleteButtonPressed] function is required and should be provided by the parent widget.
-  /// It will be called when the user presses the delete button on the draggable widget.
-  void Function() get onDeleteButtonPressed =>
-      throw _privateConstructorUsedError;
-
-  /// A callback function that is called when the layer button is pressed.
-  ///
-  /// The [onLayerButtonPressed] function is required and should be provided by the parent widget.
-  /// It will be called when the user presses the layer button on the draggable widget.
-  void Function() get onLayerButtonPressed =>
-      throw _privateConstructorUsedError;
-
-  /// A callback function that is called when the scale is updated.
-  ///
-  /// The [updateScale] function is required and should be provided by the parent widget.
-  /// It will be called when the user updates the scale of the draggable widget.
-  void Function(double) get updateScale => throw _privateConstructorUsedError;
-
   /// A callback function that is called when the transform is updated.
   ///
   /// The [updateTransform] function is required and should be provided by the parent widget.
@@ -90,20 +52,10 @@ mixin _$DraggableWidgetData {
   /// The [layerIndex] property represents the index of the layer to which the draggable widget belongs.
   int get layerIndex => throw _privateConstructorUsedError;
 
-  /// The scale of the widget.
-  ///
-  /// The [scale] property represents the scale factor of the draggable widget.
-  double get scale => throw _privateConstructorUsedError;
-
   /// Whether the widget is currently selected.
   ///
   /// The [isSelected] property indicates whether the draggable widget is currently selected or not.
   bool get isSelected => throw _privateConstructorUsedError;
-
-  /// Whether the widget is flipped.
-  ///
-  /// The [isFlipped] property indicates whether the draggable widget is flipped or not.
-  bool get isFlipped => throw _privateConstructorUsedError;
 
   /// Whether the widget is locked.
   ///
@@ -128,20 +80,12 @@ abstract class $DraggableWidgetDataCopyWith<$Res> {
   @useResult
   $Res call(
       {void Function() onSelect,
-      void Function() onFlipButtonPressed,
-      void Function() onDoneButtonPressed,
-      void Function() onLockPressed,
-      void Function() onDeleteButtonPressed,
-      void Function() onLayerButtonPressed,
-      void Function(double) updateScale,
       void Function(Matrix4) updateTransform,
       void Function() startTransform,
       void Function() endTransform,
       Matrix4 transform,
       int layerIndex,
-      double scale,
       bool isSelected,
-      bool isFlipped,
       bool isLocked,
       double canvasScale});
 }
@@ -160,20 +104,12 @@ class _$DraggableWidgetDataCopyWithImpl<$Res, $Val extends DraggableWidgetData>
   @override
   $Res call({
     Object? onSelect = null,
-    Object? onFlipButtonPressed = null,
-    Object? onDoneButtonPressed = null,
-    Object? onLockPressed = null,
-    Object? onDeleteButtonPressed = null,
-    Object? onLayerButtonPressed = null,
-    Object? updateScale = null,
     Object? updateTransform = null,
     Object? startTransform = null,
     Object? endTransform = null,
     Object? transform = null,
     Object? layerIndex = null,
-    Object? scale = null,
     Object? isSelected = null,
-    Object? isFlipped = null,
     Object? isLocked = null,
     Object? canvasScale = null,
   }) {
@@ -182,30 +118,6 @@ class _$DraggableWidgetDataCopyWithImpl<$Res, $Val extends DraggableWidgetData>
           ? _value.onSelect
           : onSelect // ignore: cast_nullable_to_non_nullable
               as void Function(),
-      onFlipButtonPressed: null == onFlipButtonPressed
-          ? _value.onFlipButtonPressed
-          : onFlipButtonPressed // ignore: cast_nullable_to_non_nullable
-              as void Function(),
-      onDoneButtonPressed: null == onDoneButtonPressed
-          ? _value.onDoneButtonPressed
-          : onDoneButtonPressed // ignore: cast_nullable_to_non_nullable
-              as void Function(),
-      onLockPressed: null == onLockPressed
-          ? _value.onLockPressed
-          : onLockPressed // ignore: cast_nullable_to_non_nullable
-              as void Function(),
-      onDeleteButtonPressed: null == onDeleteButtonPressed
-          ? _value.onDeleteButtonPressed
-          : onDeleteButtonPressed // ignore: cast_nullable_to_non_nullable
-              as void Function(),
-      onLayerButtonPressed: null == onLayerButtonPressed
-          ? _value.onLayerButtonPressed
-          : onLayerButtonPressed // ignore: cast_nullable_to_non_nullable
-              as void Function(),
-      updateScale: null == updateScale
-          ? _value.updateScale
-          : updateScale // ignore: cast_nullable_to_non_nullable
-              as void Function(double),
       updateTransform: null == updateTransform
           ? _value.updateTransform
           : updateTransform // ignore: cast_nullable_to_non_nullable
@@ -226,17 +138,9 @@ class _$DraggableWidgetDataCopyWithImpl<$Res, $Val extends DraggableWidgetData>
           ? _value.layerIndex
           : layerIndex // ignore: cast_nullable_to_non_nullable
               as int,
-      scale: null == scale
-          ? _value.scale
-          : scale // ignore: cast_nullable_to_non_nullable
-              as double,
       isSelected: null == isSelected
           ? _value.isSelected
           : isSelected // ignore: cast_nullable_to_non_nullable
-              as bool,
-      isFlipped: null == isFlipped
-          ? _value.isFlipped
-          : isFlipped // ignore: cast_nullable_to_non_nullable
               as bool,
       isLocked: null == isLocked
           ? _value.isLocked
@@ -260,20 +164,12 @@ abstract class _$$DraggableWidgetDataImplCopyWith<$Res>
   @useResult
   $Res call(
       {void Function() onSelect,
-      void Function() onFlipButtonPressed,
-      void Function() onDoneButtonPressed,
-      void Function() onLockPressed,
-      void Function() onDeleteButtonPressed,
-      void Function() onLayerButtonPressed,
-      void Function(double) updateScale,
       void Function(Matrix4) updateTransform,
       void Function() startTransform,
       void Function() endTransform,
       Matrix4 transform,
       int layerIndex,
-      double scale,
       bool isSelected,
-      bool isFlipped,
       bool isLocked,
       double canvasScale});
 }
@@ -290,20 +186,12 @@ class __$$DraggableWidgetDataImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? onSelect = null,
-    Object? onFlipButtonPressed = null,
-    Object? onDoneButtonPressed = null,
-    Object? onLockPressed = null,
-    Object? onDeleteButtonPressed = null,
-    Object? onLayerButtonPressed = null,
-    Object? updateScale = null,
     Object? updateTransform = null,
     Object? startTransform = null,
     Object? endTransform = null,
     Object? transform = null,
     Object? layerIndex = null,
-    Object? scale = null,
     Object? isSelected = null,
-    Object? isFlipped = null,
     Object? isLocked = null,
     Object? canvasScale = null,
   }) {
@@ -312,30 +200,6 @@ class __$$DraggableWidgetDataImplCopyWithImpl<$Res>
           ? _value.onSelect
           : onSelect // ignore: cast_nullable_to_non_nullable
               as void Function(),
-      onFlipButtonPressed: null == onFlipButtonPressed
-          ? _value.onFlipButtonPressed
-          : onFlipButtonPressed // ignore: cast_nullable_to_non_nullable
-              as void Function(),
-      onDoneButtonPressed: null == onDoneButtonPressed
-          ? _value.onDoneButtonPressed
-          : onDoneButtonPressed // ignore: cast_nullable_to_non_nullable
-              as void Function(),
-      onLockPressed: null == onLockPressed
-          ? _value.onLockPressed
-          : onLockPressed // ignore: cast_nullable_to_non_nullable
-              as void Function(),
-      onDeleteButtonPressed: null == onDeleteButtonPressed
-          ? _value.onDeleteButtonPressed
-          : onDeleteButtonPressed // ignore: cast_nullable_to_non_nullable
-              as void Function(),
-      onLayerButtonPressed: null == onLayerButtonPressed
-          ? _value.onLayerButtonPressed
-          : onLayerButtonPressed // ignore: cast_nullable_to_non_nullable
-              as void Function(),
-      updateScale: null == updateScale
-          ? _value.updateScale
-          : updateScale // ignore: cast_nullable_to_non_nullable
-              as void Function(double),
       updateTransform: null == updateTransform
           ? _value.updateTransform
           : updateTransform // ignore: cast_nullable_to_non_nullable
@@ -356,17 +220,9 @@ class __$$DraggableWidgetDataImplCopyWithImpl<$Res>
           ? _value.layerIndex
           : layerIndex // ignore: cast_nullable_to_non_nullable
               as int,
-      scale: null == scale
-          ? _value.scale
-          : scale // ignore: cast_nullable_to_non_nullable
-              as double,
       isSelected: null == isSelected
           ? _value.isSelected
           : isSelected // ignore: cast_nullable_to_non_nullable
-              as bool,
-      isFlipped: null == isFlipped
-          ? _value.isFlipped
-          : isFlipped // ignore: cast_nullable_to_non_nullable
               as bool,
       isLocked: null == isLocked
           ? _value.isLocked
@@ -385,20 +241,12 @@ class __$$DraggableWidgetDataImplCopyWithImpl<$Res>
 class _$DraggableWidgetDataImpl implements _DraggableWidgetData {
   const _$DraggableWidgetDataImpl(
       {required this.onSelect,
-      required this.onFlipButtonPressed,
-      required this.onDoneButtonPressed,
-      required this.onLockPressed,
-      required this.onDeleteButtonPressed,
-      required this.onLayerButtonPressed,
-      required this.updateScale,
       required this.updateTransform,
       required this.startTransform,
       required this.endTransform,
       required this.transform,
       required this.layerIndex,
-      this.scale = 1.0,
       this.isSelected = false,
-      this.isFlipped = false,
       this.isLocked = false,
       this.canvasScale = 1});
 
@@ -409,48 +257,6 @@ class _$DraggableWidgetDataImpl implements _DraggableWidgetData {
   /// This can be used to perform any necessary actions or updates in the parent widget.
   @override
   final void Function() onSelect;
-
-  /// A callback function that is called when the flip button is pressed.
-  ///
-  /// The [onFlipButtonPressed] function is required and should be provided by the parent widget.
-  /// It will be called when the user presses the flip button on the draggable widget.
-  @override
-  final void Function() onFlipButtonPressed;
-
-  /// A required callback function that is called when the done button is pressed.
-  ///
-  /// The [onDoneButtonPressed] function is required and should be provided by the parent widget.
-  /// It will be called when the user presses the done button on the draggable widget.
-  @override
-  final void Function() onDoneButtonPressed;
-
-  /// A callback function that is called when the lock button is pressed.
-  ///
-  /// The [onLockPressed] function is required and should be provided by the parent widget.
-  /// It will be called when the user presses the lock button on the draggable widget.
-  @override
-  final void Function() onLockPressed;
-
-  /// A callback function that is called when the delete button is pressed.
-  ///
-  /// The [onDeleteButtonPressed] function is required and should be provided by the parent widget.
-  /// It will be called when the user presses the delete button on the draggable widget.
-  @override
-  final void Function() onDeleteButtonPressed;
-
-  /// A callback function that is called when the layer button is pressed.
-  ///
-  /// The [onLayerButtonPressed] function is required and should be provided by the parent widget.
-  /// It will be called when the user presses the layer button on the draggable widget.
-  @override
-  final void Function() onLayerButtonPressed;
-
-  /// A callback function that is called when the scale is updated.
-  ///
-  /// The [updateScale] function is required and should be provided by the parent widget.
-  /// It will be called when the user updates the scale of the draggable widget.
-  @override
-  final void Function(double) updateScale;
 
   /// A callback function that is called when the transform is updated.
   ///
@@ -485,26 +291,12 @@ class _$DraggableWidgetDataImpl implements _DraggableWidgetData {
   @override
   final int layerIndex;
 
-  /// The scale of the widget.
-  ///
-  /// The [scale] property represents the scale factor of the draggable widget.
-  @override
-  @JsonKey()
-  final double scale;
-
   /// Whether the widget is currently selected.
   ///
   /// The [isSelected] property indicates whether the draggable widget is currently selected or not.
   @override
   @JsonKey()
   final bool isSelected;
-
-  /// Whether the widget is flipped.
-  ///
-  /// The [isFlipped] property indicates whether the draggable widget is flipped or not.
-  @override
-  @JsonKey()
-  final bool isFlipped;
 
   /// Whether the widget is locked.
   ///
@@ -522,7 +314,7 @@ class _$DraggableWidgetDataImpl implements _DraggableWidgetData {
 
   @override
   String toString() {
-    return 'DraggableWidgetData(onSelect: $onSelect, onFlipButtonPressed: $onFlipButtonPressed, onDoneButtonPressed: $onDoneButtonPressed, onLockPressed: $onLockPressed, onDeleteButtonPressed: $onDeleteButtonPressed, onLayerButtonPressed: $onLayerButtonPressed, updateScale: $updateScale, updateTransform: $updateTransform, startTransform: $startTransform, endTransform: $endTransform, transform: $transform, layerIndex: $layerIndex, scale: $scale, isSelected: $isSelected, isFlipped: $isFlipped, isLocked: $isLocked, canvasScale: $canvasScale)';
+    return 'DraggableWidgetData(onSelect: $onSelect, updateTransform: $updateTransform, startTransform: $startTransform, endTransform: $endTransform, transform: $transform, layerIndex: $layerIndex, isSelected: $isSelected, isLocked: $isLocked, canvasScale: $canvasScale)';
   }
 
   @override
@@ -532,18 +324,6 @@ class _$DraggableWidgetDataImpl implements _DraggableWidgetData {
             other is _$DraggableWidgetDataImpl &&
             (identical(other.onSelect, onSelect) ||
                 other.onSelect == onSelect) &&
-            (identical(other.onFlipButtonPressed, onFlipButtonPressed) ||
-                other.onFlipButtonPressed == onFlipButtonPressed) &&
-            (identical(other.onDoneButtonPressed, onDoneButtonPressed) ||
-                other.onDoneButtonPressed == onDoneButtonPressed) &&
-            (identical(other.onLockPressed, onLockPressed) ||
-                other.onLockPressed == onLockPressed) &&
-            (identical(other.onDeleteButtonPressed, onDeleteButtonPressed) ||
-                other.onDeleteButtonPressed == onDeleteButtonPressed) &&
-            (identical(other.onLayerButtonPressed, onLayerButtonPressed) ||
-                other.onLayerButtonPressed == onLayerButtonPressed) &&
-            (identical(other.updateScale, updateScale) ||
-                other.updateScale == updateScale) &&
             (identical(other.updateTransform, updateTransform) ||
                 other.updateTransform == updateTransform) &&
             (identical(other.startTransform, startTransform) ||
@@ -554,11 +334,8 @@ class _$DraggableWidgetDataImpl implements _DraggableWidgetData {
                 other.transform == transform) &&
             (identical(other.layerIndex, layerIndex) ||
                 other.layerIndex == layerIndex) &&
-            (identical(other.scale, scale) || other.scale == scale) &&
             (identical(other.isSelected, isSelected) ||
                 other.isSelected == isSelected) &&
-            (identical(other.isFlipped, isFlipped) ||
-                other.isFlipped == isFlipped) &&
             (identical(other.isLocked, isLocked) ||
                 other.isLocked == isLocked) &&
             (identical(other.canvasScale, canvasScale) ||
@@ -569,20 +346,12 @@ class _$DraggableWidgetDataImpl implements _DraggableWidgetData {
   int get hashCode => Object.hash(
       runtimeType,
       onSelect,
-      onFlipButtonPressed,
-      onDoneButtonPressed,
-      onLockPressed,
-      onDeleteButtonPressed,
-      onLayerButtonPressed,
-      updateScale,
       updateTransform,
       startTransform,
       endTransform,
       transform,
       layerIndex,
-      scale,
       isSelected,
-      isFlipped,
       isLocked,
       canvasScale);
 
@@ -597,20 +366,12 @@ class _$DraggableWidgetDataImpl implements _DraggableWidgetData {
 abstract class _DraggableWidgetData implements DraggableWidgetData {
   const factory _DraggableWidgetData(
       {required final void Function() onSelect,
-      required final void Function() onFlipButtonPressed,
-      required final void Function() onDoneButtonPressed,
-      required final void Function() onLockPressed,
-      required final void Function() onDeleteButtonPressed,
-      required final void Function() onLayerButtonPressed,
-      required final void Function(double) updateScale,
       required final void Function(Matrix4) updateTransform,
       required final void Function() startTransform,
       required final void Function() endTransform,
       required final Matrix4 transform,
       required final int layerIndex,
-      final double scale,
       final bool isSelected,
-      final bool isFlipped,
       final bool isLocked,
       final double canvasScale}) = _$DraggableWidgetDataImpl;
 
@@ -622,48 +383,6 @@ abstract class _DraggableWidgetData implements DraggableWidgetData {
   /// It will be called when the user selects the draggable widget.
   /// This can be used to perform any necessary actions or updates in the parent widget.
   void Function() get onSelect;
-  @override
-
-  /// A callback function that is called when the flip button is pressed.
-  ///
-  /// The [onFlipButtonPressed] function is required and should be provided by the parent widget.
-  /// It will be called when the user presses the flip button on the draggable widget.
-  void Function() get onFlipButtonPressed;
-  @override
-
-  /// A required callback function that is called when the done button is pressed.
-  ///
-  /// The [onDoneButtonPressed] function is required and should be provided by the parent widget.
-  /// It will be called when the user presses the done button on the draggable widget.
-  void Function() get onDoneButtonPressed;
-  @override
-
-  /// A callback function that is called when the lock button is pressed.
-  ///
-  /// The [onLockPressed] function is required and should be provided by the parent widget.
-  /// It will be called when the user presses the lock button on the draggable widget.
-  void Function() get onLockPressed;
-  @override
-
-  /// A callback function that is called when the delete button is pressed.
-  ///
-  /// The [onDeleteButtonPressed] function is required and should be provided by the parent widget.
-  /// It will be called when the user presses the delete button on the draggable widget.
-  void Function() get onDeleteButtonPressed;
-  @override
-
-  /// A callback function that is called when the layer button is pressed.
-  ///
-  /// The [onLayerButtonPressed] function is required and should be provided by the parent widget.
-  /// It will be called when the user presses the layer button on the draggable widget.
-  void Function() get onLayerButtonPressed;
-  @override
-
-  /// A callback function that is called when the scale is updated.
-  ///
-  /// The [updateScale] function is required and should be provided by the parent widget.
-  /// It will be called when the user updates the scale of the draggable widget.
-  void Function(double) get updateScale;
   @override
 
   /// A callback function that is called when the transform is updated.
@@ -699,22 +418,10 @@ abstract class _DraggableWidgetData implements DraggableWidgetData {
   int get layerIndex;
   @override
 
-  /// The scale of the widget.
-  ///
-  /// The [scale] property represents the scale factor of the draggable widget.
-  double get scale;
-  @override
-
   /// Whether the widget is currently selected.
   ///
   /// The [isSelected] property indicates whether the draggable widget is currently selected or not.
   bool get isSelected;
-  @override
-
-  /// Whether the widget is flipped.
-  ///
-  /// The [isFlipped] property indicates whether the draggable widget is flipped or not.
-  bool get isFlipped;
   @override
 
   /// Whether the widget is locked.

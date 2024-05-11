@@ -12,7 +12,7 @@ class StickerGestureDetector extends StatefulWidget {
   ///
   /// The [onUpdate] function is called whenever there is a change in the scale or matrix of the widget.
   /// It receives the updated scale and matrix as parameters.
-  final void Function(double scale, Matrix4 matrix) onUpdate;
+  final void Function(Matrix4 matrix) onUpdate;
 
   /// The child widget wrapped by the gesture detector.
   final Widget child;
@@ -168,7 +168,7 @@ class StickerGestureDetectorState extends State<StickerGestureDetector> {
     }
 
     // Notify the callback with the updated scale and matrix.
-    widget.onUpdate(recordScale, matrix);
+    widget.onUpdate(matrix);
   }
 
   // Helper function for translation matrix.
@@ -187,14 +187,13 @@ class StickerGestureDetectorState extends State<StickerGestureDetector> {
     var dx = 0.0;
     var dy = 0.0;
 
-    Offset center = _findTransformedRectangleCenter(
-        matrix,
-        widget.layerKey.currentContext!.size!,
-        widget.stickerWidgetConfig.layerSize);
+    Size childrenSize =
+        widget.childrenKey.currentContext!.size! * matrix.getMaxScaleOnAxis();
+
+    Offset center =
+        Offset(matrix.getTranslation().x, matrix.getTranslation().y);
 
     double rotation = atan2(matrix[1], matrix[0]);
-
-    Size childrenSize = widget.childrenKey.currentContext!.size! * matrix[0];
 
     List<double> horizontalSnapPoints =
         _findHorizontalSnapPoints(rotation, childrenSize, center);
@@ -212,7 +211,7 @@ class StickerGestureDetectorState extends State<StickerGestureDetector> {
           absoluteErrors.entries.reduce((a, b) => a.value < b.value ? a : b);
       if (minErrorEntry.value <=
           widget.stickerWidgetConfig.translationSnapThreshold) {
-        dx = minErrorEntry.key - snapPosition;
+        dx = snapPosition - minErrorEntry.key;
       }
     }
 
@@ -227,7 +226,7 @@ class StickerGestureDetectorState extends State<StickerGestureDetector> {
 
       if (minErrorEntry.value <=
           widget.stickerWidgetConfig.translationSnapThreshold) {
-        dy = minErrorEntry.key - snapPosition;
+        dy = snapPosition - minErrorEntry.key;
       }
     }
 
@@ -235,25 +234,6 @@ class StickerGestureDetectorState extends State<StickerGestureDetector> {
         Matrix4(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, dx, dy, 0, 1);
 
     return translationMatrix;
-  }
-
-  Offset _findTransformedRectangleCenter(
-      Matrix4 transformationMatrix, Size rectangleSize, Size canvasSize) {
-    // Calculate the center point of the rectangle in its own coordinate system
-    Vector3 rectangleCenter =
-        Vector3(rectangleSize.width / 2, rectangleSize.height / 2, 0);
-
-    // Apply the transformation matrix to the rectangle center
-    Vector3 transformedCenter =
-        transformationMatrix.transform3(rectangleCenter);
-
-    // Calculate the center point of the transformed rectangle in the canvas coordinate system
-    Offset canvasCenter = Offset(canvasSize.width / 2, canvasSize.height / 2);
-    Offset transformedCanvasCenter = Offset(
-        canvasCenter.dx - transformedCenter.x,
-        canvasCenter.dy - transformedCenter.y);
-
-    return transformedCanvasCenter;
   }
 
   List<double> _findHorizontalSnapPoints(
@@ -296,7 +276,7 @@ class StickerGestureDetectorState extends State<StickerGestureDetector> {
 
   // Helper function for scaling matrix.
   Matrix4 _scale(double scale) {
-    return Matrix4.identity().scaled(scale, scale, 1.0);
+    return Matrix4.identity().scaled(scale, scale, scale);
   }
 
   // Helper function for rotating matrix.

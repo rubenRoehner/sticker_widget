@@ -244,28 +244,6 @@ class StickerWidgetController {
     _widgetsStreamController.add(getCurrentWidgets);
   }
 
-  /// Method to flip a widget.
-  void toggleFlip(Key key) {
-    if (_widgets.containsKey(key)) {
-      updateDraggableWidget(
-        _widgets[key]!,
-        _widgets[key]!.data.copyWith(
-              isFlipped: !_widgets[key]!.data.isFlipped,
-            ),
-      );
-    }
-    _widgetsStreamController.add(getCurrentWidgets);
-  }
-
-  /// Method to update the scale of a widget.
-  void _updateScale(Key key, double scale) {
-    if (_widgets.containsKey(key)) {
-      updateDraggableWidget(
-          _widgets[key]!, _widgets[key]!.data.copyWith(scale: scale));
-    }
-    _widgetsStreamController.add(getCurrentWidgets);
-  }
-
   /// Method to update the transform matrix of a widget.
   void _updateTransform(Key key, Matrix4 transform) {
     if (_widgets.containsKey(key)) {
@@ -404,12 +382,6 @@ class StickerWidgetController {
     return DraggableWidgetData(
       transform: Matrix4.identity(),
       onSelect: () => _selectWidget(key),
-      onDeleteButtonPressed: () => deleteWidget(key),
-      onLayerButtonPressed: () => updateLayerDown(key),
-      onDoneButtonPressed: () => clearAllBorders(),
-      onFlipButtonPressed: () => toggleFlip(key),
-      onLockPressed: () => toggleLock(key),
-      updateScale: (scale) => _updateScale(key, scale),
       updateTransform: (transform) => _updateTransform(key, transform),
       layerIndex: _widgets.length,
       startTransform: () => _isTransformingStreamController.add(true),
