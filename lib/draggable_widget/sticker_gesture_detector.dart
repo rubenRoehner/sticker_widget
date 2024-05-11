@@ -59,6 +59,10 @@ class StickerGestureDetector extends StatefulWidget {
   /// The [stickerWidgetConfig] contains configuration options for the sticker widget.
   final StickerWidgetConfig stickerWidgetConfig;
 
+  final List<double> Function() getXSnapValues;
+
+  final List<double> Function() getYSnapValues;
+
   final Matrix4 initialMatrix;
 
   final double canvasScale;
@@ -81,6 +85,8 @@ class StickerGestureDetector extends StatefulWidget {
     required this.childrenKey,
     required this.initialMatrix,
     required this.canvasScale,
+    required this.getXSnapValues,
+    required this.getYSnapValues,
   });
 
   @override
@@ -201,8 +207,11 @@ class StickerGestureDetectorState extends State<StickerGestureDetector> {
     List<double> verticalSnapPoints =
         _findVerticalSnapPoints(rotation, childrenSize, center);
 
-    for (final double snapPosition
-        in widget.stickerWidgetConfig.translationXSnapValues) {
+    final List<double> translationXSnapValues =
+        widget.stickerWidgetConfig.translationXSnapValues +
+            widget.getXSnapValues();
+
+    for (final double snapPosition in translationXSnapValues) {
       final Map<double, double> absoluteErrors = Map.fromEntries(
           horizontalSnapPoints
               .map((e) => MapEntry(e, absoluteError(e, snapPosition))));
@@ -215,8 +224,11 @@ class StickerGestureDetectorState extends State<StickerGestureDetector> {
       }
     }
 
-    for (final double snapPosition
-        in widget.stickerWidgetConfig.translationYSnapValues) {
+    final List<double> translationYSnapValues =
+        widget.stickerWidgetConfig.translationYSnapValues +
+            widget.getYSnapValues();
+
+    for (final double snapPosition in translationYSnapValues) {
       final Map<double, double> absoluteErrors = Map.fromEntries(
           verticalSnapPoints
               .map((e) => MapEntry(e, absoluteError(e, snapPosition))));

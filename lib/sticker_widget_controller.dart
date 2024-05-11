@@ -387,7 +387,29 @@ class StickerWidgetController {
       startTransform: () => _isTransformingStreamController.add(true),
       endTransform: () => _isTransformingStreamController.add(false),
       canvasScale: canvasTransformationController.value.getMaxScaleOnAxis(),
+      getTranslationXSnapValues: () => getTranslationXSnapValues(key),
+      getTranslationYSnapValues: () => getTranslationYSnapValues(key),
     );
+  }
+
+  List<double> getTranslationXSnapValues(Key widgetsKey) {
+    List<double> snapValues = [];
+    for (var widget in getCurrentWidgets) {
+      if (widget.key != widgetsKey) {
+        snapValues.addAll(widget.getXSnapValues());
+      }
+    }
+    return snapValues;
+  }
+
+  List<double> getTranslationYSnapValues(Key widgetsKey) {
+    List<double> snapValues = [];
+    for (var widget in getCurrentWidgets) {
+      if (widget.key != widgetsKey) {
+        snapValues.addAll(widget.getYSnapValues());
+      }
+    }
+    return snapValues;
   }
 
   /// Helper function to generate a new Key.

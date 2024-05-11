@@ -31,6 +31,8 @@ class DraggableWidgetData with _$DraggableWidgetData {
     /// The [endTransform] function is required and should be provided by the parent widget.
     /// It will be called when the user finishes transforming the draggable widget.
     required final void Function() endTransform,
+    required final List<double> Function() getTranslationXSnapValues,
+    required final List<double> Function() getTranslationYSnapValues,
 
     /// The current transform of the widget.
     ///

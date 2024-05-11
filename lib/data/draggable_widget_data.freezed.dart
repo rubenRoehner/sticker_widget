@@ -41,6 +41,10 @@ mixin _$DraggableWidgetData {
   /// The [endTransform] function is required and should be provided by the parent widget.
   /// It will be called when the user finishes transforming the draggable widget.
   void Function() get endTransform => throw _privateConstructorUsedError;
+  List<double> Function() get getTranslationXSnapValues =>
+      throw _privateConstructorUsedError;
+  List<double> Function() get getTranslationYSnapValues =>
+      throw _privateConstructorUsedError;
 
   /// The current transform of the widget.
   ///
@@ -83,6 +87,8 @@ abstract class $DraggableWidgetDataCopyWith<$Res> {
       void Function(Matrix4) updateTransform,
       void Function() startTransform,
       void Function() endTransform,
+      List<double> Function() getTranslationXSnapValues,
+      List<double> Function() getTranslationYSnapValues,
       Matrix4 transform,
       int layerIndex,
       bool isSelected,
@@ -107,6 +113,8 @@ class _$DraggableWidgetDataCopyWithImpl<$Res, $Val extends DraggableWidgetData>
     Object? updateTransform = null,
     Object? startTransform = null,
     Object? endTransform = null,
+    Object? getTranslationXSnapValues = null,
+    Object? getTranslationYSnapValues = null,
     Object? transform = null,
     Object? layerIndex = null,
     Object? isSelected = null,
@@ -130,6 +138,14 @@ class _$DraggableWidgetDataCopyWithImpl<$Res, $Val extends DraggableWidgetData>
           ? _value.endTransform
           : endTransform // ignore: cast_nullable_to_non_nullable
               as void Function(),
+      getTranslationXSnapValues: null == getTranslationXSnapValues
+          ? _value.getTranslationXSnapValues
+          : getTranslationXSnapValues // ignore: cast_nullable_to_non_nullable
+              as List<double> Function(),
+      getTranslationYSnapValues: null == getTranslationYSnapValues
+          ? _value.getTranslationYSnapValues
+          : getTranslationYSnapValues // ignore: cast_nullable_to_non_nullable
+              as List<double> Function(),
       transform: null == transform
           ? _value.transform
           : transform // ignore: cast_nullable_to_non_nullable
@@ -167,6 +183,8 @@ abstract class _$$DraggableWidgetDataImplCopyWith<$Res>
       void Function(Matrix4) updateTransform,
       void Function() startTransform,
       void Function() endTransform,
+      List<double> Function() getTranslationXSnapValues,
+      List<double> Function() getTranslationYSnapValues,
       Matrix4 transform,
       int layerIndex,
       bool isSelected,
@@ -189,6 +207,8 @@ class __$$DraggableWidgetDataImplCopyWithImpl<$Res>
     Object? updateTransform = null,
     Object? startTransform = null,
     Object? endTransform = null,
+    Object? getTranslationXSnapValues = null,
+    Object? getTranslationYSnapValues = null,
     Object? transform = null,
     Object? layerIndex = null,
     Object? isSelected = null,
@@ -212,6 +232,14 @@ class __$$DraggableWidgetDataImplCopyWithImpl<$Res>
           ? _value.endTransform
           : endTransform // ignore: cast_nullable_to_non_nullable
               as void Function(),
+      getTranslationXSnapValues: null == getTranslationXSnapValues
+          ? _value.getTranslationXSnapValues
+          : getTranslationXSnapValues // ignore: cast_nullable_to_non_nullable
+              as List<double> Function(),
+      getTranslationYSnapValues: null == getTranslationYSnapValues
+          ? _value.getTranslationYSnapValues
+          : getTranslationYSnapValues // ignore: cast_nullable_to_non_nullable
+              as List<double> Function(),
       transform: null == transform
           ? _value.transform
           : transform // ignore: cast_nullable_to_non_nullable
@@ -244,6 +272,8 @@ class _$DraggableWidgetDataImpl implements _DraggableWidgetData {
       required this.updateTransform,
       required this.startTransform,
       required this.endTransform,
+      required this.getTranslationXSnapValues,
+      required this.getTranslationYSnapValues,
       required this.transform,
       required this.layerIndex,
       this.isSelected = false,
@@ -278,6 +308,10 @@ class _$DraggableWidgetDataImpl implements _DraggableWidgetData {
   /// It will be called when the user finishes transforming the draggable widget.
   @override
   final void Function() endTransform;
+  @override
+  final List<double> Function() getTranslationXSnapValues;
+  @override
+  final List<double> Function() getTranslationYSnapValues;
 
   /// The current transform of the widget.
   ///
@@ -314,7 +348,7 @@ class _$DraggableWidgetDataImpl implements _DraggableWidgetData {
 
   @override
   String toString() {
-    return 'DraggableWidgetData(onSelect: $onSelect, updateTransform: $updateTransform, startTransform: $startTransform, endTransform: $endTransform, transform: $transform, layerIndex: $layerIndex, isSelected: $isSelected, isLocked: $isLocked, canvasScale: $canvasScale)';
+    return 'DraggableWidgetData(onSelect: $onSelect, updateTransform: $updateTransform, startTransform: $startTransform, endTransform: $endTransform, getTranslationXSnapValues: $getTranslationXSnapValues, getTranslationYSnapValues: $getTranslationYSnapValues, transform: $transform, layerIndex: $layerIndex, isSelected: $isSelected, isLocked: $isLocked, canvasScale: $canvasScale)';
   }
 
   @override
@@ -330,6 +364,12 @@ class _$DraggableWidgetDataImpl implements _DraggableWidgetData {
                 other.startTransform == startTransform) &&
             (identical(other.endTransform, endTransform) ||
                 other.endTransform == endTransform) &&
+            (identical(other.getTranslationXSnapValues,
+                    getTranslationXSnapValues) ||
+                other.getTranslationXSnapValues == getTranslationXSnapValues) &&
+            (identical(other.getTranslationYSnapValues,
+                    getTranslationYSnapValues) ||
+                other.getTranslationYSnapValues == getTranslationYSnapValues) &&
             (identical(other.transform, transform) ||
                 other.transform == transform) &&
             (identical(other.layerIndex, layerIndex) ||
@@ -349,6 +389,8 @@ class _$DraggableWidgetDataImpl implements _DraggableWidgetData {
       updateTransform,
       startTransform,
       endTransform,
+      getTranslationXSnapValues,
+      getTranslationYSnapValues,
       transform,
       layerIndex,
       isSelected,
@@ -369,6 +411,8 @@ abstract class _DraggableWidgetData implements DraggableWidgetData {
       required final void Function(Matrix4) updateTransform,
       required final void Function() startTransform,
       required final void Function() endTransform,
+      required final List<double> Function() getTranslationXSnapValues,
+      required final List<double> Function() getTranslationYSnapValues,
       required final Matrix4 transform,
       required final int layerIndex,
       final bool isSelected,
@@ -404,6 +448,10 @@ abstract class _DraggableWidgetData implements DraggableWidgetData {
   /// The [endTransform] function is required and should be provided by the parent widget.
   /// It will be called when the user finishes transforming the draggable widget.
   void Function() get endTransform;
+  @override
+  List<double> Function() get getTranslationXSnapValues;
+  @override
+  List<double> Function() get getTranslationYSnapValues;
   @override
 
   /// The current transform of the widget.

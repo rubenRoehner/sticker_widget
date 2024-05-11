@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/cupertino.dart';
 import 'package:sticker_widget/data/sticker_widget_config.dart';
 import 'package:sticker_widget/data/draggable_widget_data.dart';
@@ -53,6 +55,8 @@ class DraggableWidget extends StatelessWidget {
       },
       layerKey: layerKey,
       childrenKey: childrenKey,
+      getXSnapValues: data.getTranslationXSnapValues,
+      getYSnapValues: data.getTranslationYSnapValues,
       child: SizedBox(
         key: layerKey,
         width: config.layerSize.width,
@@ -76,6 +80,58 @@ class DraggableWidget extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  List<double> getXSnapValues() {
+    Size rectangleSize =
+        childrenKey.currentContext!.size! * data.transform.getMaxScaleOnAxis();
+
+    Offset center = Offset(
+        data.transform.getTranslation().x, data.transform.getTranslation().y);
+
+    double rotation = atan2(data.transform[1], data.transform[0]);
+
+    if (rotation == 0 || rotation == pi) {
+      return [
+        center.dx,
+        center.dx + rectangleSize.width / 2,
+        center.dx - rectangleSize.width / 2,
+      ];
+    }
+    if (rotation == pi / 2 || rotation == 3 * pi / 2) {
+      return [
+        center.dx,
+        center.dx + rectangleSize.height / 2,
+        center.dx - rectangleSize.height / 2,
+      ];
+    }
+
+    return [center.dx];
+  }
+
+  List<double> getYSnapValues() {
+    Size rectangleSize =
+        childrenKey.currentContext!.size! * data.transform.getMaxScaleOnAxis();
+
+    Offset center = Offset(
+        data.transform.getTranslation().x, data.transform.getTranslation().y);
+
+    double rotation = atan2(data.transform[1], data.transform[0]);
+    if (rotation == 0 || rotation == pi) {
+      return [
+        center.dy,
+        center.dy + rectangleSize.height / 2,
+        center.dy - rectangleSize.height / 2,
+      ];
+    }
+    if (rotation == pi / 2 || rotation == 3 * pi / 2) {
+      return [
+        center.dy,
+        center.dy + rectangleSize.width / 2,
+        center.dy - rectangleSize.width / 2,
+      ];
+    }
+    return [center.dx];
   }
 }
 
