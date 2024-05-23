@@ -156,7 +156,7 @@ class StickerGestureDetectorState extends State<StickerGestureDetector> {
       matrix = _translationSnap(matrix) * matrix;
     }
 
-    final focalPoint = details.localFocalPoint;
+    final focalPoint = Alignment.center.alongSize(context.size!);
 
     // Handle scaling.
     if (widget.shouldScale && details.scale != 1.0) {
@@ -320,10 +320,7 @@ class StickerGestureDetectorState extends State<StickerGestureDetector> {
     double c = cos(toBeRotated);
     double s = sin(toBeRotated);
 
-    double dx = (1 - c) * focalPoint.dx + s * focalPoint.dy;
-    double dy = (1 - c) * focalPoint.dy - s * focalPoint.dx;
-
-    return Matrix4(c, s, 0, 0, -s, c, 0, 0, 0, 0, 1, 0, dx, dy, 0, 1);
+    return Matrix4(c, s, 0, 0, -s, c, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
   }
 }
 
