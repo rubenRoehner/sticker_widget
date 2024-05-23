@@ -59,8 +59,8 @@ class DraggableWidget extends StatelessWidget {
       getYSnapValues: data.getTranslationYSnapValues,
       child: SizedBox(
         key: layerKey,
-        width: config.layerSize.width,
-        height: config.layerSize.height,
+        width: config.canvasSize.width,
+        height: config.canvasSize.height,
         child: Transform(
           transform: data.transform,
           alignment: Alignment.center,
