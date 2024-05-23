@@ -1,4 +1,5 @@
 import 'dart:math';
+import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:sticker_widget/data/sticker_widget_config.dart';
 import 'package:vector_math/vector_math_64.dart';
@@ -47,11 +48,6 @@ class StickerGestureDetector extends StatefulWidget {
   final double minScale;
   final double maxScale;
 
-  /// GlobalKey for accessing the child widget.
-  ///
-  /// The [layerKey] is used to access the child widget's context and size.
-  final GlobalKey layerKey;
-
   final GlobalKey childrenKey;
 
   /// StickerWidgetConfig.
@@ -81,7 +77,6 @@ class StickerGestureDetector extends StatefulWidget {
     required this.minScale,
     required this.maxScale,
     required this.isSelected,
-    required this.layerKey,
     required this.childrenKey,
     required this.initialMatrix,
     required this.canvasScale,
@@ -111,11 +106,7 @@ class StickerGestureDetectorState extends State<StickerGestureDetector> {
     );
   }
 
-  // ValueUpdater instances to track translation, scale, and rotation changes.
-  ValueUpdater<Offset> translationUpdater = ValueUpdater(
-    value: Offset.zero,
-    onUpdate: (oldVal, newVal) => newVal - oldVal,
-  );
+  // ValueUpdater instances to track scale and rotation changes.
   ValueUpdater<double> scaleUpdater = ValueUpdater(
     value: 1.0,
     onUpdate: (oldVal, newVal) => newVal / oldVal,
@@ -130,7 +121,6 @@ class StickerGestureDetectorState extends State<StickerGestureDetector> {
       return;
     }
     widget.onScaleStart();
-    translationUpdater.value = details.focalPoint;
     recordOldScale = recordScale;
     scaleUpdater.value = 1.0;
     rotationUpdater.value = 0.0;
@@ -151,12 +141,14 @@ class StickerGestureDetectorState extends State<StickerGestureDetector> {
 
     // Handle translation.
     if (widget.shouldTranslate) {
-      Offset translationDelta = translationUpdater.update(details.focalPoint);
-      matrix = _translate(translationDelta) * matrix;
+      matrix = _translate(details.focalPointDelta) * matrix;
       matrix = _translationSnap(matrix) * matrix;
     }
 
-    final focalPoint = Alignment.center.alongSize(context.size!);
+    final Offset focalPoint = Offset(
+      matrix.getTranslation().x,
+      matrix.getTranslation().y,
+    );
 
     // Handle scaling.
     if (widget.shouldScale && details.scale != 1.0) {
@@ -164,7 +156,7 @@ class StickerGestureDetectorState extends State<StickerGestureDetector> {
       if (sc > widget.minScale && sc < widget.maxScale) {
         recordScale = sc;
         double scaleDelta = scaleUpdater.update(details.scale);
-        matrix = _scale(scaleDelta) * matrix;
+        matrix = _scale(scaleDelta, focalPoint) * matrix;
       }
     }
 
@@ -179,8 +171,8 @@ class StickerGestureDetectorState extends State<StickerGestureDetector> {
 
   // Helper function for translation matrix.
   Matrix4 _translate(Offset translation) {
-    var dx = translation.dx / widget.canvasScale;
-    var dy = translation.dy / widget.canvasScale;
+    var dx = translation.dx;
+    var dy = translation.dy;
 
     Matrix4 translationMatrix =
         Matrix4(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, dx, dy, 0, 1);
@@ -287,8 +279,10 @@ class StickerGestureDetectorState extends State<StickerGestureDetector> {
   }
 
   // Helper function for scaling matrix.
-  Matrix4 _scale(double scale) {
-    return Matrix4.identity().scaled(scale, scale, scale);
+  Matrix4 _scale(double scale, Offset focalPoint) {
+    var dx = (1 - scale) * focalPoint.dx;
+    var dy = (1 - scale) * focalPoint.dy;
+    return Matrix4(scale, 0, 0, 0, 0, scale, 0, 0, 0, 0, 1, 0, dx, dy, 0, 1);
   }
 
   // Helper function for rotating matrix.
@@ -310,6 +304,10 @@ class StickerGestureDetectorState extends State<StickerGestureDetector> {
           absoluteError((rotation + deltaAngle), snapPosition) <=
               widget.stickerWidgetConfig.rotationSnapThreshold) {
         toBeRotated = snapPosition - rotation;
+
+        if (widget.stickerWidgetConfig.enableHapticFeedbackOnRotation) {
+          HapticFeedback.lightImpact();
+        }
         break;
       } else {
         toBeRotated = 0;
@@ -320,7 +318,10 @@ class StickerGestureDetectorState extends State<StickerGestureDetector> {
     double c = cos(toBeRotated);
     double s = sin(toBeRotated);
 
-    return Matrix4(c, s, 0, 0, -s, c, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+    double dx = (1 - c) * focalPoint.dx + s * focalPoint.dy;
+    double dy = (1 - c) * focalPoint.dy - s * focalPoint.dx;
+
+    return Matrix4(c, s, 0, 0, -s, c, 0, 0, 0, 0, 1, 0, dx, dy, 0, 1);
   }
 }
 

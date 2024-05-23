@@ -31,8 +31,6 @@ class DraggableWidget extends StatelessWidget {
     required this.config,
     required this.type,
   });
-
-  final GlobalKey layerKey = GlobalKey();
   final GlobalKey childrenKey = GlobalKey();
 
   @override
@@ -53,14 +51,12 @@ class DraggableWidget extends StatelessWidget {
       onUpdate: (m) {
         data.updateTransform(m);
       },
-      layerKey: layerKey,
       childrenKey: childrenKey,
       getXSnapValues: data.getTranslationXSnapValues,
       getYSnapValues: data.getTranslationYSnapValues,
       child: SizedBox(
-        key: layerKey,
-        width: config.canvasSize.width,
-        height: config.canvasSize.height,
+        width: config.layerSize.width,
+        height: config.layerSize.height,
         child: Transform(
           transform: data.transform,
           alignment: Alignment.center,
