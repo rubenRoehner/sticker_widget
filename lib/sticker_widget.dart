@@ -53,48 +53,47 @@ class StickerWidget extends StatelessWidget {
     return StreamBuilder<bool>(
         stream: controller.selectedWidget.map((event) => event != null),
         builder: (context, snapshot) {
-          final bool isWidgetSelected = snapshot.data ?? false;
           return InteractiveViewer(
             constrained: false,
             boundaryMargin: contentPadding,
             transformationController: controller.canvasTransformationController,
             minScale: minScale,
             maxScale: maxScale,
-            panEnabled: !isWidgetSelected,
-            scaleEnabled: !isWidgetSelected,
             child: SizedBox(
               height: controller.config.canvasSize.height,
               width: controller.config.canvasSize.width,
-              child: ClipRect(
+              child: RepaintBoundary(
                 key: globalKey,
-                child: Stack(
-                  children: [
-                    GestureDetector(
-                      onTap: () {
-                        controller.clearAllBorders();
-                      },
-                      child: child,
-                    ),
-                    StreamBuilder(
-                      stream: controller.widgets,
-                      initialData: controller.getCurrentWidgets,
-                      builder: (context, widgets) {
-                        return Stack(
-                          children: widgets.data
-                                  ?.map(
-                                    (widget) => Positioned(
-                                      top: 0,
-                                      left: 0,
-                                      child: widget,
-                                    ),
-                                  )
-                                  .toList() ??
-                              List.empty(),
-                        );
-                      },
-                    ),
-                    if (topLayer != null) topLayer!,
-                  ],
+                child: ClipRect(
+                  child: Stack(
+                    children: [
+                      GestureDetector(
+                        onTap: () {
+                          controller.clearAllBorders();
+                        },
+                        child: child,
+                      ),
+                      StreamBuilder(
+                        stream: controller.widgets,
+                        initialData: controller.getCurrentWidgets,
+                        builder: (context, widgets) {
+                          return Stack(
+                            children: widgets.data
+                                    ?.map(
+                                      (widget) => Positioned(
+                                        top: 0,
+                                        left: 0,
+                                        child: widget,
+                                      ),
+                                    )
+                                    .toList() ??
+                                List.empty(),
+                          );
+                        },
+                      ),
+                      if (topLayer != null) topLayer!,
+                    ],
+                  ),
                 ),
               ),
             ),
