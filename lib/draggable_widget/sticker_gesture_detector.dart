@@ -141,7 +141,8 @@ class StickerGestureDetectorState extends State<StickerGestureDetector> {
 
     // Handle translation.
     if (widget.shouldTranslate) {
-      matrix.translate(_translationSnap(matrix, details.focalPointDelta));
+      matrix.translate(_translationSnap(
+          matrix, details.focalPointDelta / matrix.getMaxScaleOnAxis()));
     }
 
     // Handle scaling.
