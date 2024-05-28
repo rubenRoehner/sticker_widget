@@ -302,21 +302,23 @@ class StickerGestureDetectorState extends State<StickerGestureDetector> {
       }
       snapPosition = radians(snapPosition);
 
-      if (absoluteError((rotation + deltaAngle), snapPosition) >
-          widget.stickerWidgetConfig.rotationSnapThreshold) {
-        toBeRotated = deltaAngle;
-      } else if (rotation != snapPosition &&
+      if (rotation != snapPosition &&
           absoluteError((rotation + deltaAngle), snapPosition) <=
-              widget.stickerWidgetConfig.rotationSnapThreshold) {
+              widget.stickerWidgetConfig.rotationToSnapThreshold) {
         toBeRotated = snapPosition - rotation;
 
         if (widget.stickerWidgetConfig.enableHapticFeedbackOnRotation) {
           HapticFeedback.mediumImpact();
         }
+
         break;
-      } else {
+      } else if (rotation == snapPosition &&
+          absoluteError((rotation + deltaAngle), snapPosition) <=
+              widget.stickerWidgetConfig.rotationFromSnapThreshold) {
         toBeRotated = 0;
         break;
+      } else {
+        toBeRotated = deltaAngle;
       }
     }
 

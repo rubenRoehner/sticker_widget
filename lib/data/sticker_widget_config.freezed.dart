@@ -69,7 +69,12 @@ mixin _$StickerWidgetConfig {
   /// The rotation snap threshold.
   ///
   /// The [rotationSnapThreshold] property represents the rotation snap threshold.
-  double get rotationSnapThreshold => throw _privateConstructorUsedError;
+  double get rotationFromSnapThreshold => throw _privateConstructorUsedError;
+
+  /// The rotation snap threshold.
+  ///
+  /// The [rotationSnapThreshold] property represents the rotation snap threshold.
+  double get rotationToSnapThreshold => throw _privateConstructorUsedError;
 
   /// The translation snap threshold.
   ///
@@ -112,7 +117,8 @@ abstract class $StickerWidgetConfigCopyWith<$Res> {
       List<double> rotationSnapValues,
       List<double> translationXSnapValues,
       List<double> translationYSnapValues,
-      double rotationSnapThreshold,
+      double rotationFromSnapThreshold,
+      double rotationToSnapThreshold,
       double translationSnapThreshold,
       Color selectedOverlayColor,
       double defaultIconSize,
@@ -143,7 +149,8 @@ class _$StickerWidgetConfigCopyWithImpl<$Res, $Val extends StickerWidgetConfig>
     Object? rotationSnapValues = null,
     Object? translationXSnapValues = null,
     Object? translationYSnapValues = null,
-    Object? rotationSnapThreshold = null,
+    Object? rotationFromSnapThreshold = null,
+    Object? rotationToSnapThreshold = null,
     Object? translationSnapThreshold = null,
     Object? selectedOverlayColor = null,
     Object? defaultIconSize = null,
@@ -191,9 +198,13 @@ class _$StickerWidgetConfigCopyWithImpl<$Res, $Val extends StickerWidgetConfig>
           ? _value.translationYSnapValues
           : translationYSnapValues // ignore: cast_nullable_to_non_nullable
               as List<double>,
-      rotationSnapThreshold: null == rotationSnapThreshold
-          ? _value.rotationSnapThreshold
-          : rotationSnapThreshold // ignore: cast_nullable_to_non_nullable
+      rotationFromSnapThreshold: null == rotationFromSnapThreshold
+          ? _value.rotationFromSnapThreshold
+          : rotationFromSnapThreshold // ignore: cast_nullable_to_non_nullable
+              as double,
+      rotationToSnapThreshold: null == rotationToSnapThreshold
+          ? _value.rotationToSnapThreshold
+          : rotationToSnapThreshold // ignore: cast_nullable_to_non_nullable
               as double,
       translationSnapThreshold: null == translationSnapThreshold
           ? _value.translationSnapThreshold
@@ -238,7 +249,8 @@ abstract class _$$StickerWidgetConfigImplCopyWith<$Res>
       List<double> rotationSnapValues,
       List<double> translationXSnapValues,
       List<double> translationYSnapValues,
-      double rotationSnapThreshold,
+      double rotationFromSnapThreshold,
+      double rotationToSnapThreshold,
       double translationSnapThreshold,
       Color selectedOverlayColor,
       double defaultIconSize,
@@ -267,7 +279,8 @@ class __$$StickerWidgetConfigImplCopyWithImpl<$Res>
     Object? rotationSnapValues = null,
     Object? translationXSnapValues = null,
     Object? translationYSnapValues = null,
-    Object? rotationSnapThreshold = null,
+    Object? rotationFromSnapThreshold = null,
+    Object? rotationToSnapThreshold = null,
     Object? translationSnapThreshold = null,
     Object? selectedOverlayColor = null,
     Object? defaultIconSize = null,
@@ -315,9 +328,13 @@ class __$$StickerWidgetConfigImplCopyWithImpl<$Res>
           ? _value._translationYSnapValues
           : translationYSnapValues // ignore: cast_nullable_to_non_nullable
               as List<double>,
-      rotationSnapThreshold: null == rotationSnapThreshold
-          ? _value.rotationSnapThreshold
-          : rotationSnapThreshold // ignore: cast_nullable_to_non_nullable
+      rotationFromSnapThreshold: null == rotationFromSnapThreshold
+          ? _value.rotationFromSnapThreshold
+          : rotationFromSnapThreshold // ignore: cast_nullable_to_non_nullable
+              as double,
+      rotationToSnapThreshold: null == rotationToSnapThreshold
+          ? _value.rotationToSnapThreshold
+          : rotationToSnapThreshold // ignore: cast_nullable_to_non_nullable
               as double,
       translationSnapThreshold: null == translationSnapThreshold
           ? _value.translationSnapThreshold
@@ -357,7 +374,8 @@ class _$StickerWidgetConfigImpl implements _StickerWidgetConfig {
       final List<double> rotationSnapValues = const [0, 90, 180, 270],
       final List<double> translationXSnapValues = const [0],
       final List<double> translationYSnapValues = const [0],
-      this.rotationSnapThreshold = 0.015,
+      this.rotationFromSnapThreshold = 0.015,
+      this.rotationToSnapThreshold = 0.015,
       this.translationSnapThreshold = 0.8,
       this.selectedOverlayColor = const Color(0x00000000),
       this.defaultIconSize = 24,
@@ -472,7 +490,14 @@ class _$StickerWidgetConfigImpl implements _StickerWidgetConfig {
   /// The [rotationSnapThreshold] property represents the rotation snap threshold.
   @override
   @JsonKey()
-  final double rotationSnapThreshold;
+  final double rotationFromSnapThreshold;
+
+  /// The rotation snap threshold.
+  ///
+  /// The [rotationSnapThreshold] property represents the rotation snap threshold.
+  @override
+  @JsonKey()
+  final double rotationToSnapThreshold;
 
   /// The translation snap threshold.
   ///
@@ -505,7 +530,7 @@ class _$StickerWidgetConfigImpl implements _StickerWidgetConfig {
 
   @override
   String toString() {
-    return 'StickerWidgetConfig(canvasSize: $canvasSize, layerSize: $layerSize, shouldMove: $shouldMove, shouldRotate: $shouldRotate, shouldScale: $shouldScale, minScale: $minScale, maxScale: $maxScale, rotationSnapValues: $rotationSnapValues, translationXSnapValues: $translationXSnapValues, translationYSnapValues: $translationYSnapValues, rotationSnapThreshold: $rotationSnapThreshold, translationSnapThreshold: $translationSnapThreshold, selectedOverlayColor: $selectedOverlayColor, defaultIconSize: $defaultIconSize, enableHapticFeedbackOnRotation: $enableHapticFeedbackOnRotation, rotationSpeed: $rotationSpeed)';
+    return 'StickerWidgetConfig(canvasSize: $canvasSize, layerSize: $layerSize, shouldMove: $shouldMove, shouldRotate: $shouldRotate, shouldScale: $shouldScale, minScale: $minScale, maxScale: $maxScale, rotationSnapValues: $rotationSnapValues, translationXSnapValues: $translationXSnapValues, translationYSnapValues: $translationYSnapValues, rotationFromSnapThreshold: $rotationFromSnapThreshold, rotationToSnapThreshold: $rotationToSnapThreshold, translationSnapThreshold: $translationSnapThreshold, selectedOverlayColor: $selectedOverlayColor, defaultIconSize: $defaultIconSize, enableHapticFeedbackOnRotation: $enableHapticFeedbackOnRotation, rotationSpeed: $rotationSpeed)';
   }
 
   @override
@@ -533,8 +558,12 @@ class _$StickerWidgetConfigImpl implements _StickerWidgetConfig {
                 other._translationXSnapValues, _translationXSnapValues) &&
             const DeepCollectionEquality().equals(
                 other._translationYSnapValues, _translationYSnapValues) &&
-            (identical(other.rotationSnapThreshold, rotationSnapThreshold) ||
-                other.rotationSnapThreshold == rotationSnapThreshold) &&
+            (identical(other.rotationFromSnapThreshold,
+                    rotationFromSnapThreshold) ||
+                other.rotationFromSnapThreshold == rotationFromSnapThreshold) &&
+            (identical(
+                    other.rotationToSnapThreshold, rotationToSnapThreshold) ||
+                other.rotationToSnapThreshold == rotationToSnapThreshold) &&
             (identical(
                     other.translationSnapThreshold, translationSnapThreshold) ||
                 other.translationSnapThreshold == translationSnapThreshold) &&
@@ -563,7 +592,8 @@ class _$StickerWidgetConfigImpl implements _StickerWidgetConfig {
       const DeepCollectionEquality().hash(_rotationSnapValues),
       const DeepCollectionEquality().hash(_translationXSnapValues),
       const DeepCollectionEquality().hash(_translationYSnapValues),
-      rotationSnapThreshold,
+      rotationFromSnapThreshold,
+      rotationToSnapThreshold,
       translationSnapThreshold,
       selectedOverlayColor,
       defaultIconSize,
@@ -590,7 +620,8 @@ abstract class _StickerWidgetConfig implements StickerWidgetConfig {
       final List<double> rotationSnapValues,
       final List<double> translationXSnapValues,
       final List<double> translationYSnapValues,
-      final double rotationSnapThreshold,
+      final double rotationFromSnapThreshold,
+      final double rotationToSnapThreshold,
       final double translationSnapThreshold,
       final Color selectedOverlayColor,
       final double defaultIconSize,
@@ -662,7 +693,13 @@ abstract class _StickerWidgetConfig implements StickerWidgetConfig {
   /// The rotation snap threshold.
   ///
   /// The [rotationSnapThreshold] property represents the rotation snap threshold.
-  double get rotationSnapThreshold;
+  double get rotationFromSnapThreshold;
+  @override
+
+  /// The rotation snap threshold.
+  ///
+  /// The [rotationSnapThreshold] property represents the rotation snap threshold.
+  double get rotationToSnapThreshold;
   @override
 
   /// The translation snap threshold.

@@ -61,7 +61,12 @@ class StickerWidgetConfig with _$StickerWidgetConfig {
     /// The rotation snap threshold.
     ///
     /// The [rotationSnapThreshold] property represents the rotation snap threshold.
-    @Default(0.015) final double rotationSnapThreshold,
+    @Default(0.015) final double rotationFromSnapThreshold,
+
+    /// The rotation snap threshold.
+    ///
+    /// The [rotationSnapThreshold] property represents the rotation snap threshold.
+    @Default(0.015) final double rotationToSnapThreshold,
 
     /// The translation snap threshold.
     ///
