@@ -141,14 +141,8 @@ class StickerGestureDetectorState extends State<StickerGestureDetector> {
 
     // Handle translation.
     if (widget.shouldTranslate) {
-      matrix = _translate(details.focalPointDelta) * matrix;
-      matrix = _translationSnap(matrix) * matrix;
+      matrix.translate(_translationSnap(matrix, details.focalPointDelta));
     }
-
-    final Offset focalPoint = Offset(
-      matrix.getTranslation().x,
-      matrix.getTranslation().y,
-    );
 
     // Handle scaling.
     if (widget.shouldScale && details.scale != 1.0) {
@@ -156,18 +150,18 @@ class StickerGestureDetectorState extends State<StickerGestureDetector> {
       if (sc > widget.minScale && sc < widget.maxScale) {
         recordScale = sc;
         double scaleDelta = scaleUpdater.update(details.scale);
-        matrix = _scale(scaleDelta, focalPoint) * matrix;
+        matrix.scale(scaleDelta, scaleDelta, scaleDelta);
       }
     }
 
     // Handle rotation.
     if (widget.shouldRotate && details.rotation != 0.0) {
-      matrix = _rotate(
-            matrix,
-            details.rotation * widget.stickerWidgetConfig.rotationSpeed,
-            focalPoint,
-          ) *
-          matrix;
+      matrix.rotateZ(
+        _rotate(
+          matrix,
+          details.rotation * widget.stickerWidgetConfig.rotationSpeed,
+        ),
+      );
     }
 
     // Notify the callback with the updated scale and matrix.
@@ -175,20 +169,9 @@ class StickerGestureDetectorState extends State<StickerGestureDetector> {
   }
 
   // Helper function for translation matrix.
-  Matrix4 _translate(Offset translation) {
-    var dx = translation.dx;
-    var dy = translation.dy;
-
-    Matrix4 translationMatrix =
-        Matrix4(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, dx, dy, 0, 1);
-
-    return translationMatrix;
-  }
-
-  // Helper function for translation matrix.
-  Matrix4 _translationSnap(Matrix4 matrix) {
-    var dx = 0.0;
-    var dy = 0.0;
+  Vector3 _translationSnap(Matrix4 matrix, Offset translation) {
+    double dx = translation.dx;
+    double dy = translation.dy;
 
     Size childrenSize =
         widget.childrenKey.currentContext!.size! * matrix.getMaxScaleOnAxis();
@@ -211,10 +194,11 @@ class StickerGestureDetectorState extends State<StickerGestureDetector> {
     for (final double snapPosition in translationXSnapValues) {
       final Map<double, double> absoluteErrors = Map.fromEntries(
           horizontalSnapPoints
-              .map((e) => MapEntry(e, absoluteError(e, snapPosition))));
+              .map((e) => MapEntry(e, absoluteError(e + dx, snapPosition))));
 
       final MapEntry<double, double> minErrorEntry =
           absoluteErrors.entries.reduce((a, b) => a.value < b.value ? a : b);
+
       if (minErrorEntry.value <=
           widget.stickerWidgetConfig.translationSnapThreshold) {
         dx = snapPosition - minErrorEntry.key;
@@ -228,7 +212,7 @@ class StickerGestureDetectorState extends State<StickerGestureDetector> {
     for (final double snapPosition in translationYSnapValues) {
       final Map<double, double> absoluteErrors = Map.fromEntries(
           verticalSnapPoints
-              .map((e) => MapEntry(e, absoluteError(e, snapPosition))));
+              .map((e) => MapEntry(e, absoluteError(e + dy, snapPosition))));
 
       final MapEntry<double, double> minErrorEntry =
           absoluteErrors.entries.reduce((a, b) => a.value < b.value ? a : b);
@@ -239,10 +223,7 @@ class StickerGestureDetectorState extends State<StickerGestureDetector> {
       }
     }
 
-    Matrix4 translationMatrix =
-        Matrix4(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, dx, dy, 0, 1);
-
-    return translationMatrix;
+    return Vector3(dx, dy, 0);
   }
 
   List<double> _findHorizontalSnapPoints(
@@ -283,15 +264,8 @@ class StickerGestureDetectorState extends State<StickerGestureDetector> {
     return [center.dx];
   }
 
-  // Helper function for scaling matrix.
-  Matrix4 _scale(double scale, Offset focalPoint) {
-    var dx = (1 - scale) * focalPoint.dx;
-    var dy = (1 - scale) * focalPoint.dy;
-    return Matrix4(scale, 0, 0, 0, 0, scale, 0, 0, 0, 0, 1, 0, dx, dy, 0, 1);
-  }
-
   // Helper function for rotating matrix.
-  Matrix4 _rotate(Matrix4 matrix, double angle, Offset focalPoint) {
+  double _rotate(Matrix4 matrix, double angle) {
     double toBeRotated = 0;
     double rotation = atan2(matrix[1], matrix[0]);
     double deltaAngle = rotationUpdater.update(angle);
@@ -322,13 +296,7 @@ class StickerGestureDetectorState extends State<StickerGestureDetector> {
       }
     }
 
-    double c = cos(toBeRotated);
-    double s = sin(toBeRotated);
-
-    double dx = (1 - c) * focalPoint.dx + s * focalPoint.dy;
-    double dy = (1 - c) * focalPoint.dy - s * focalPoint.dx;
-
-    return Matrix4(c, s, 0, 0, -s, c, 0, 0, 0, 0, 1, 0, dx, dy, 0, 1);
+    return toBeRotated;
   }
 }
 

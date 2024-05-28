@@ -38,7 +38,7 @@ class _MyHomePageState extends State<MyHomePage> {
       layerSize: Size(1080 * 10, 1350),
       translationXSnapValues: [-1080 * 5, 0, 1080 * 3],
       translationYSnapValues: [-1350 / 2, 0, 1350 / 2],
-      translationSnapThreshold: 3,
+      translationSnapThreshold: 5,
       selectedOverlayColor: Color.fromARGB(100, 0, 122, 255),
       maxScale: 10,
       minScale: 0.01,
