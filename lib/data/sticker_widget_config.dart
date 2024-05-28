@@ -80,5 +80,6 @@ class StickerWidgetConfig with _$StickerWidgetConfig {
     /// It defaults to 24.
     @Default(24) final double defaultIconSize,
     @Default(false) final bool enableHapticFeedbackOnRotation,
+    @Default(1.0) final double rotationSpeed,
   }) = _StickerWidgetConfig;
 }

@@ -162,7 +162,12 @@ class StickerGestureDetectorState extends State<StickerGestureDetector> {
 
     // Handle rotation.
     if (widget.shouldRotate && details.rotation != 0.0) {
-      matrix = _rotate(matrix, details.rotation, focalPoint) * matrix;
+      matrix = _rotate(
+            matrix,
+            details.rotation * widget.stickerWidgetConfig.rotationSpeed,
+            focalPoint,
+          ) *
+          matrix;
     }
 
     // Notify the callback with the updated scale and matrix.
@@ -306,7 +311,7 @@ class StickerGestureDetectorState extends State<StickerGestureDetector> {
         toBeRotated = snapPosition - rotation;
 
         if (widget.stickerWidgetConfig.enableHapticFeedbackOnRotation) {
-          HapticFeedback.lightImpact();
+          HapticFeedback.mediumImpact();
         }
         break;
       } else {
