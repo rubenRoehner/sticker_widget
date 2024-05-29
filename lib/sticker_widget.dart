@@ -59,6 +59,7 @@ class StickerWidget extends StatelessWidget {
             transformationController: controller.canvasTransformationController,
             minScale: minScale,
             maxScale: maxScale,
+            alignment: Alignment.center,
             child: SizedBox(
               height: controller.config.canvasSize.height,
               width: controller.config.canvasSize.width,
