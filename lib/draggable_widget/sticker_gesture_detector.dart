@@ -141,8 +141,14 @@ class StickerGestureDetectorState extends State<StickerGestureDetector> {
 
     // Handle translation.
     if (widget.shouldTranslate) {
-      matrix.translate(_translationSnap(
-          matrix, details.focalPointDelta / matrix.getMaxScaleOnAxis()));
+      Vector3 delta =
+          Vector3(details.focalPointDelta.dx, details.focalPointDelta.dy, 0);
+
+      Matrix4 inverse =
+          Matrix4.inverted(matrix.clone()..setTranslationRaw(0.0, 0.0, 0.0));
+
+      delta = inverse.transform3(delta);
+      matrix.translate(_translationSnap(matrix, delta));
     }
 
     // Handle scaling.
@@ -170,9 +176,9 @@ class StickerGestureDetectorState extends State<StickerGestureDetector> {
   }
 
   // Helper function for translation matrix.
-  Vector3 _translationSnap(Matrix4 matrix, Offset translation) {
-    double dx = translation.dx;
-    double dy = translation.dy;
+  Vector3 _translationSnap(Matrix4 matrix, Vector3 translation) {
+    double dx = translation.x;
+    double dy = translation.y;
 
     Size childrenSize =
         widget.childrenKey.currentContext!.size! * matrix.getMaxScaleOnAxis();
