@@ -61,8 +61,6 @@ class StickerGestureDetector extends StatefulWidget {
 
   final Matrix4 initialMatrix;
 
-  final double canvasScale;
-
   const StickerGestureDetector({
     super.key,
     required this.onUpdate,
@@ -79,7 +77,6 @@ class StickerGestureDetector extends StatefulWidget {
     required this.isSelected,
     required this.childrenKey,
     required this.initialMatrix,
-    required this.canvasScale,
     required this.getXSnapValues,
     required this.getYSnapValues,
   });

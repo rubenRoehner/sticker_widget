@@ -66,11 +66,6 @@ mixin _$DraggableWidgetData {
   /// The [isLocked] property indicates whether the draggable widget is locked or not.
   bool get isLocked => throw _privateConstructorUsedError;
 
-  /// The scale factor of the canvas.
-  ///
-  /// The [canvasScale] property represents the scale factor of the canvas.
-  double get canvasScale => throw _privateConstructorUsedError;
-
   @JsonKey(ignore: true)
   $DraggableWidgetDataCopyWith<DraggableWidgetData> get copyWith =>
       throw _privateConstructorUsedError;
@@ -92,8 +87,7 @@ abstract class $DraggableWidgetDataCopyWith<$Res> {
       Matrix4 transform,
       int layerIndex,
       bool isSelected,
-      bool isLocked,
-      double canvasScale});
+      bool isLocked});
 }
 
 /// @nodoc
@@ -119,7 +113,6 @@ class _$DraggableWidgetDataCopyWithImpl<$Res, $Val extends DraggableWidgetData>
     Object? layerIndex = null,
     Object? isSelected = null,
     Object? isLocked = null,
-    Object? canvasScale = null,
   }) {
     return _then(_value.copyWith(
       onSelect: null == onSelect
@@ -162,10 +155,6 @@ class _$DraggableWidgetDataCopyWithImpl<$Res, $Val extends DraggableWidgetData>
           ? _value.isLocked
           : isLocked // ignore: cast_nullable_to_non_nullable
               as bool,
-      canvasScale: null == canvasScale
-          ? _value.canvasScale
-          : canvasScale // ignore: cast_nullable_to_non_nullable
-              as double,
     ) as $Val);
   }
 }
@@ -188,8 +177,7 @@ abstract class _$$DraggableWidgetDataImplCopyWith<$Res>
       Matrix4 transform,
       int layerIndex,
       bool isSelected,
-      bool isLocked,
-      double canvasScale});
+      bool isLocked});
 }
 
 /// @nodoc
@@ -213,7 +201,6 @@ class __$$DraggableWidgetDataImplCopyWithImpl<$Res>
     Object? layerIndex = null,
     Object? isSelected = null,
     Object? isLocked = null,
-    Object? canvasScale = null,
   }) {
     return _then(_$DraggableWidgetDataImpl(
       onSelect: null == onSelect
@@ -256,10 +243,6 @@ class __$$DraggableWidgetDataImplCopyWithImpl<$Res>
           ? _value.isLocked
           : isLocked // ignore: cast_nullable_to_non_nullable
               as bool,
-      canvasScale: null == canvasScale
-          ? _value.canvasScale
-          : canvasScale // ignore: cast_nullable_to_non_nullable
-              as double,
     ));
   }
 }
@@ -277,8 +260,7 @@ class _$DraggableWidgetDataImpl implements _DraggableWidgetData {
       required this.transform,
       required this.layerIndex,
       this.isSelected = false,
-      this.isLocked = false,
-      this.canvasScale = 1});
+      this.isLocked = false});
 
   /// A callback function that is called when the widget is selected.
   ///
@@ -339,16 +321,9 @@ class _$DraggableWidgetDataImpl implements _DraggableWidgetData {
   @JsonKey()
   final bool isLocked;
 
-  /// The scale factor of the canvas.
-  ///
-  /// The [canvasScale] property represents the scale factor of the canvas.
-  @override
-  @JsonKey()
-  final double canvasScale;
-
   @override
   String toString() {
-    return 'DraggableWidgetData(onSelect: $onSelect, updateTransform: $updateTransform, startTransform: $startTransform, endTransform: $endTransform, getTranslationXSnapValues: $getTranslationXSnapValues, getTranslationYSnapValues: $getTranslationYSnapValues, transform: $transform, layerIndex: $layerIndex, isSelected: $isSelected, isLocked: $isLocked, canvasScale: $canvasScale)';
+    return 'DraggableWidgetData(onSelect: $onSelect, updateTransform: $updateTransform, startTransform: $startTransform, endTransform: $endTransform, getTranslationXSnapValues: $getTranslationXSnapValues, getTranslationYSnapValues: $getTranslationYSnapValues, transform: $transform, layerIndex: $layerIndex, isSelected: $isSelected, isLocked: $isLocked)';
   }
 
   @override
@@ -377,9 +352,7 @@ class _$DraggableWidgetDataImpl implements _DraggableWidgetData {
             (identical(other.isSelected, isSelected) ||
                 other.isSelected == isSelected) &&
             (identical(other.isLocked, isLocked) ||
-                other.isLocked == isLocked) &&
-            (identical(other.canvasScale, canvasScale) ||
-                other.canvasScale == canvasScale));
+                other.isLocked == isLocked));
   }
 
   @override
@@ -394,8 +367,7 @@ class _$DraggableWidgetDataImpl implements _DraggableWidgetData {
       transform,
       layerIndex,
       isSelected,
-      isLocked,
-      canvasScale);
+      isLocked);
 
   @JsonKey(ignore: true)
   @override
@@ -416,8 +388,7 @@ abstract class _DraggableWidgetData implements DraggableWidgetData {
       required final Matrix4 transform,
       required final int layerIndex,
       final bool isSelected,
-      final bool isLocked,
-      final double canvasScale}) = _$DraggableWidgetDataImpl;
+      final bool isLocked}) = _$DraggableWidgetDataImpl;
 
   @override
 
@@ -476,12 +447,6 @@ abstract class _DraggableWidgetData implements DraggableWidgetData {
   ///
   /// The [isLocked] property indicates whether the draggable widget is locked or not.
   bool get isLocked;
-  @override
-
-  /// The scale factor of the canvas.
-  ///
-  /// The [canvasScale] property represents the scale factor of the canvas.
-  double get canvasScale;
   @override
   @JsonKey(ignore: true)
   _$$DraggableWidgetDataImplCopyWith<_$DraggableWidgetDataImpl> get copyWith =>

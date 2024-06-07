@@ -53,10 +53,5 @@ class DraggableWidgetData with _$DraggableWidgetData {
     ///
     /// The [isLocked] property indicates whether the draggable widget is locked or not.
     @Default(false) final bool isLocked,
-
-    /// The scale factor of the canvas.
-    ///
-    /// The [canvasScale] property represents the scale factor of the canvas.
-    @Default(1) final double canvasScale,
   }) = _DraggableWidgetData;
 }

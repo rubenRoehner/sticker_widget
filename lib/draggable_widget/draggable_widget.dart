@@ -44,7 +44,6 @@ class DraggableWidget extends StatelessWidget {
       minScale: config.minScale,
       maxScale: config.maxScale,
       initialMatrix: data.transform,
-      canvasScale: data.canvasScale,
       onScaleStart: data.startTransform,
       onScaleEnd: data.endTransform,
       onTap: data.onSelect,

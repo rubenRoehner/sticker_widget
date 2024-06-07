@@ -13,6 +13,7 @@ import 'package:sticker_widget/draggable_widget/draggable_icon_widget.dart';
 import 'package:sticker_widget/draggable_widget/draggable_image_widget.dart';
 import 'package:sticker_widget/draggable_widget/draggable_text_widget.dart';
 import 'package:sticker_widget/sticker_widget.dart';
+import 'package:vector_math/vector_math_64.dart';
 
 /// A Dart class StickerWidgetController used for managing a list of draggable widgets and their properties.
 class StickerWidgetController {
@@ -280,6 +281,44 @@ class StickerWidgetController {
     _widgetsStreamController.add(getCurrentWidgets);
   }
 
+  void updateScale(Key key, double scale) {
+    if (_widgets.containsKey(key)) {
+      DraggableWidget widget = _widgets[key]!;
+
+      final Matrix4 updatedMatrix = Matrix4.compose(
+        widget.data.transform.getTranslation(),
+        Quaternion.fromRotation(widget.data.transform.getRotation()),
+        Vector3.all(scale),
+      );
+
+      if (widget.data.transform != updatedMatrix) {
+        updateDraggableWidget(_widgets[key]!,
+            _widgets[key]!.data.copyWith(transform: updatedMatrix));
+        _widgetsStreamController.add(getCurrentWidgets);
+        repaint();
+      }
+    }
+  }
+
+  void updateRotation(Key key, double rotation) {
+    if (_widgets.containsKey(key)) {
+      DraggableWidget widget = _widgets[key]!;
+
+      final Matrix4 updatedMatrix = Matrix4.compose(
+        widget.data.transform.getTranslation(),
+        Quaternion.fromRotation(Matrix3.rotationZ(rotation)),
+        Vector3.all(widget.data.transform.getMaxScaleOnAxis()),
+      );
+
+      if (widget.data.transform != updatedMatrix) {
+        updateDraggableWidget(_widgets[key]!,
+            _widgets[key]!.data.copyWith(transform: updatedMatrix));
+        _widgetsStreamController.add(getCurrentWidgets);
+        repaint();
+      }
+    }
+  }
+
   /// Method to update the transform matrix of a widget.
   void _setShowTextField(Key key, bool showTextField) {
     if (_widgets.containsKey(key) && _widgets[key] is DraggableTextWidget) {
@@ -296,9 +335,7 @@ class StickerWidgetController {
         DraggableTextWidget textFieldWidget = widget as DraggableTextWidget;
         _widgets[textFieldWidget.key!] = DraggableTextWidget(
           key: textFieldWidget.key,
-          data: data.copyWith(
-              canvasScale:
-                  canvasTransformationController.value.getMaxScaleOnAxis()),
+          data: data,
           config: config,
           text: textFieldWidget.text,
           textStyle: textFieldWidget.textStyle,
@@ -311,9 +348,7 @@ class StickerWidgetController {
         DraggableImageWidget imageWidget = widget as DraggableImageWidget;
         _widgets[imageWidget.key!] = DraggableImageWidget(
           key: imageWidget.key,
-          data: data.copyWith(
-              canvasScale:
-                  canvasTransformationController.value.getMaxScaleOnAxis()),
+          data: data,
           config: config,
           path: imageWidget.path,
           imageSize: imageWidget.imageSize,
@@ -323,9 +358,7 @@ class StickerWidgetController {
         DraggableIconWidget iconWidget = widget as DraggableIconWidget;
         _widgets[iconWidget.key!] = DraggableIconWidget(
           key: iconWidget.key,
-          data: data.copyWith(
-              canvasScale:
-                  canvasTransformationController.value.getMaxScaleOnAxis()),
+          data: data.copyWith(),
           config: config,
           icon: iconWidget.icon,
           color: iconWidget.color,
@@ -335,9 +368,7 @@ class StickerWidgetController {
         _widgets[widget.key!] = DraggableWidget(
           type: widget.type,
           key: widget.key,
-          data: data.copyWith(
-              canvasScale:
-                  canvasTransformationController.value.getMaxScaleOnAxis()),
+          data: data,
           config: config,
           child: widget.child,
         );
@@ -386,7 +417,6 @@ class StickerWidgetController {
       layerIndex: _widgets.length,
       startTransform: () => _isTransformingStreamController.add(true),
       endTransform: () => _isTransformingStreamController.add(false),
-      canvasScale: canvasTransformationController.value.getMaxScaleOnAxis(),
       getTranslationXSnapValues: () => getTranslationXSnapValues(key),
       getTranslationYSnapValues: () => getTranslationYSnapValues(key),
     );
