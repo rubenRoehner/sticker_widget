@@ -285,9 +285,15 @@ class StickerWidgetController {
     if (_widgets.containsKey(key)) {
       DraggableWidget widget = _widgets[key]!;
 
+      final double rotation = atan2(
+            widget.data.transform[1],
+            widget.data.transform[0],
+          ) *
+          radians2Degrees;
+
       final Matrix4 updatedMatrix = Matrix4.compose(
         widget.data.transform.getTranslation(),
-        Quaternion.fromRotation(widget.data.transform.getRotation()),
+        Quaternion.fromRotation(Matrix3.rotationZ(rotation)),
         Vector3.all(scale),
       );
 
