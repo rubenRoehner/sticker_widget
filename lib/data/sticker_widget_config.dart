@@ -84,7 +84,8 @@ class StickerWidgetConfig with _$StickerWidgetConfig {
     /// The [defaultIconSize] property represents the size of the icon.
     /// It defaults to 24.
     @Default(24) final double defaultIconSize,
-    @Default(false) final bool enableHapticFeedbackOnRotation,
+    @Default(false) final bool enableHapticFeedbackOnRotationSnap,
     @Default(1.0) final double rotationSpeed,
+    @Default(false) final bool enableHapticFeedbackOnTranslationSnap,
   }) = _StickerWidgetConfig;
 }

@@ -227,6 +227,11 @@ class StickerGestureDetectorState extends State<StickerGestureDetector> {
       }
     }
 
+    if (widget.stickerWidgetConfig.enableHapticFeedbackOnTranslationSnap &&
+        (dx != translation.x || dy != translation.y)) {
+      HapticFeedback.lightImpact();
+    }
+
     return Vector3(dx, dy, 0);
   }
 
@@ -285,7 +290,7 @@ class StickerGestureDetectorState extends State<StickerGestureDetector> {
               widget.stickerWidgetConfig.rotationToSnapThreshold) {
         toBeRotated = snapPosition - rotation;
 
-        if (widget.stickerWidgetConfig.enableHapticFeedbackOnRotation) {
+        if (widget.stickerWidgetConfig.enableHapticFeedbackOnRotationSnap) {
           HapticFeedback.mediumImpact();
         }
 

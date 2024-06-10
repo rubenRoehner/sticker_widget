@@ -92,8 +92,11 @@ mixin _$StickerWidgetConfig {
   /// The [defaultIconSize] property represents the size of the icon.
   /// It defaults to 24.
   double get defaultIconSize => throw _privateConstructorUsedError;
-  bool get enableHapticFeedbackOnRotation => throw _privateConstructorUsedError;
+  bool get enableHapticFeedbackOnRotationSnap =>
+      throw _privateConstructorUsedError;
   double get rotationSpeed => throw _privateConstructorUsedError;
+  bool get enableHapticFeedbackOnTranslationSnap =>
+      throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $StickerWidgetConfigCopyWith<StickerWidgetConfig> get copyWith =>
@@ -122,8 +125,9 @@ abstract class $StickerWidgetConfigCopyWith<$Res> {
       double translationSnapThreshold,
       Color selectedOverlayColor,
       double defaultIconSize,
-      bool enableHapticFeedbackOnRotation,
-      double rotationSpeed});
+      bool enableHapticFeedbackOnRotationSnap,
+      double rotationSpeed,
+      bool enableHapticFeedbackOnTranslationSnap});
 }
 
 /// @nodoc
@@ -154,8 +158,9 @@ class _$StickerWidgetConfigCopyWithImpl<$Res, $Val extends StickerWidgetConfig>
     Object? translationSnapThreshold = null,
     Object? selectedOverlayColor = null,
     Object? defaultIconSize = null,
-    Object? enableHapticFeedbackOnRotation = null,
+    Object? enableHapticFeedbackOnRotationSnap = null,
     Object? rotationSpeed = null,
+    Object? enableHapticFeedbackOnTranslationSnap = null,
   }) {
     return _then(_value.copyWith(
       canvasSize: null == canvasSize
@@ -218,14 +223,20 @@ class _$StickerWidgetConfigCopyWithImpl<$Res, $Val extends StickerWidgetConfig>
           ? _value.defaultIconSize
           : defaultIconSize // ignore: cast_nullable_to_non_nullable
               as double,
-      enableHapticFeedbackOnRotation: null == enableHapticFeedbackOnRotation
-          ? _value.enableHapticFeedbackOnRotation
-          : enableHapticFeedbackOnRotation // ignore: cast_nullable_to_non_nullable
+      enableHapticFeedbackOnRotationSnap: null ==
+              enableHapticFeedbackOnRotationSnap
+          ? _value.enableHapticFeedbackOnRotationSnap
+          : enableHapticFeedbackOnRotationSnap // ignore: cast_nullable_to_non_nullable
               as bool,
       rotationSpeed: null == rotationSpeed
           ? _value.rotationSpeed
           : rotationSpeed // ignore: cast_nullable_to_non_nullable
               as double,
+      enableHapticFeedbackOnTranslationSnap: null ==
+              enableHapticFeedbackOnTranslationSnap
+          ? _value.enableHapticFeedbackOnTranslationSnap
+          : enableHapticFeedbackOnTranslationSnap // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
@@ -254,8 +265,9 @@ abstract class _$$StickerWidgetConfigImplCopyWith<$Res>
       double translationSnapThreshold,
       Color selectedOverlayColor,
       double defaultIconSize,
-      bool enableHapticFeedbackOnRotation,
-      double rotationSpeed});
+      bool enableHapticFeedbackOnRotationSnap,
+      double rotationSpeed,
+      bool enableHapticFeedbackOnTranslationSnap});
 }
 
 /// @nodoc
@@ -284,8 +296,9 @@ class __$$StickerWidgetConfigImplCopyWithImpl<$Res>
     Object? translationSnapThreshold = null,
     Object? selectedOverlayColor = null,
     Object? defaultIconSize = null,
-    Object? enableHapticFeedbackOnRotation = null,
+    Object? enableHapticFeedbackOnRotationSnap = null,
     Object? rotationSpeed = null,
+    Object? enableHapticFeedbackOnTranslationSnap = null,
   }) {
     return _then(_$StickerWidgetConfigImpl(
       canvasSize: null == canvasSize
@@ -348,14 +361,20 @@ class __$$StickerWidgetConfigImplCopyWithImpl<$Res>
           ? _value.defaultIconSize
           : defaultIconSize // ignore: cast_nullable_to_non_nullable
               as double,
-      enableHapticFeedbackOnRotation: null == enableHapticFeedbackOnRotation
-          ? _value.enableHapticFeedbackOnRotation
-          : enableHapticFeedbackOnRotation // ignore: cast_nullable_to_non_nullable
+      enableHapticFeedbackOnRotationSnap: null ==
+              enableHapticFeedbackOnRotationSnap
+          ? _value.enableHapticFeedbackOnRotationSnap
+          : enableHapticFeedbackOnRotationSnap // ignore: cast_nullable_to_non_nullable
               as bool,
       rotationSpeed: null == rotationSpeed
           ? _value.rotationSpeed
           : rotationSpeed // ignore: cast_nullable_to_non_nullable
               as double,
+      enableHapticFeedbackOnTranslationSnap: null ==
+              enableHapticFeedbackOnTranslationSnap
+          ? _value.enableHapticFeedbackOnTranslationSnap
+          : enableHapticFeedbackOnTranslationSnap // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -379,8 +398,9 @@ class _$StickerWidgetConfigImpl implements _StickerWidgetConfig {
       this.translationSnapThreshold = 0.8,
       this.selectedOverlayColor = const Color(0x00000000),
       this.defaultIconSize = 24,
-      this.enableHapticFeedbackOnRotation = false,
-      this.rotationSpeed = 1.0})
+      this.enableHapticFeedbackOnRotationSnap = false,
+      this.rotationSpeed = 1.0,
+      this.enableHapticFeedbackOnTranslationSnap = false})
       : _rotationSnapValues = rotationSnapValues,
         _translationXSnapValues = translationXSnapValues,
         _translationYSnapValues = translationYSnapValues;
@@ -523,14 +543,17 @@ class _$StickerWidgetConfigImpl implements _StickerWidgetConfig {
   final double defaultIconSize;
   @override
   @JsonKey()
-  final bool enableHapticFeedbackOnRotation;
+  final bool enableHapticFeedbackOnRotationSnap;
   @override
   @JsonKey()
   final double rotationSpeed;
+  @override
+  @JsonKey()
+  final bool enableHapticFeedbackOnTranslationSnap;
 
   @override
   String toString() {
-    return 'StickerWidgetConfig(canvasSize: $canvasSize, layerSize: $layerSize, shouldMove: $shouldMove, shouldRotate: $shouldRotate, shouldScale: $shouldScale, minScale: $minScale, maxScale: $maxScale, rotationSnapValues: $rotationSnapValues, translationXSnapValues: $translationXSnapValues, translationYSnapValues: $translationYSnapValues, rotationFromSnapThreshold: $rotationFromSnapThreshold, rotationToSnapThreshold: $rotationToSnapThreshold, translationSnapThreshold: $translationSnapThreshold, selectedOverlayColor: $selectedOverlayColor, defaultIconSize: $defaultIconSize, enableHapticFeedbackOnRotation: $enableHapticFeedbackOnRotation, rotationSpeed: $rotationSpeed)';
+    return 'StickerWidgetConfig(canvasSize: $canvasSize, layerSize: $layerSize, shouldMove: $shouldMove, shouldRotate: $shouldRotate, shouldScale: $shouldScale, minScale: $minScale, maxScale: $maxScale, rotationSnapValues: $rotationSnapValues, translationXSnapValues: $translationXSnapValues, translationYSnapValues: $translationYSnapValues, rotationFromSnapThreshold: $rotationFromSnapThreshold, rotationToSnapThreshold: $rotationToSnapThreshold, translationSnapThreshold: $translationSnapThreshold, selectedOverlayColor: $selectedOverlayColor, defaultIconSize: $defaultIconSize, enableHapticFeedbackOnRotationSnap: $enableHapticFeedbackOnRotationSnap, rotationSpeed: $rotationSpeed, enableHapticFeedbackOnTranslationSnap: $enableHapticFeedbackOnTranslationSnap)';
   }
 
   @override
@@ -561,22 +584,24 @@ class _$StickerWidgetConfigImpl implements _StickerWidgetConfig {
             (identical(other.rotationFromSnapThreshold,
                     rotationFromSnapThreshold) ||
                 other.rotationFromSnapThreshold == rotationFromSnapThreshold) &&
-            (identical(
-                    other.rotationToSnapThreshold, rotationToSnapThreshold) ||
+            (identical(other.rotationToSnapThreshold, rotationToSnapThreshold) ||
                 other.rotationToSnapThreshold == rotationToSnapThreshold) &&
-            (identical(
-                    other.translationSnapThreshold, translationSnapThreshold) ||
+            (identical(other.translationSnapThreshold, translationSnapThreshold) ||
                 other.translationSnapThreshold == translationSnapThreshold) &&
             (identical(other.selectedOverlayColor, selectedOverlayColor) ||
                 other.selectedOverlayColor == selectedOverlayColor) &&
             (identical(other.defaultIconSize, defaultIconSize) ||
                 other.defaultIconSize == defaultIconSize) &&
-            (identical(other.enableHapticFeedbackOnRotation,
-                    enableHapticFeedbackOnRotation) ||
-                other.enableHapticFeedbackOnRotation ==
-                    enableHapticFeedbackOnRotation) &&
+            (identical(other.enableHapticFeedbackOnRotationSnap,
+                    enableHapticFeedbackOnRotationSnap) ||
+                other.enableHapticFeedbackOnRotationSnap ==
+                    enableHapticFeedbackOnRotationSnap) &&
             (identical(other.rotationSpeed, rotationSpeed) ||
-                other.rotationSpeed == rotationSpeed));
+                other.rotationSpeed == rotationSpeed) &&
+            (identical(other.enableHapticFeedbackOnTranslationSnap,
+                    enableHapticFeedbackOnTranslationSnap) ||
+                other.enableHapticFeedbackOnTranslationSnap ==
+                    enableHapticFeedbackOnTranslationSnap));
   }
 
   @override
@@ -597,8 +622,9 @@ class _$StickerWidgetConfigImpl implements _StickerWidgetConfig {
       translationSnapThreshold,
       selectedOverlayColor,
       defaultIconSize,
-      enableHapticFeedbackOnRotation,
-      rotationSpeed);
+      enableHapticFeedbackOnRotationSnap,
+      rotationSpeed,
+      enableHapticFeedbackOnTranslationSnap);
 
   @JsonKey(ignore: true)
   @override
@@ -610,23 +636,25 @@ class _$StickerWidgetConfigImpl implements _StickerWidgetConfig {
 
 abstract class _StickerWidgetConfig implements StickerWidgetConfig {
   const factory _StickerWidgetConfig(
-      {final Size canvasSize,
-      final Size layerSize,
-      final bool shouldMove,
-      final bool shouldRotate,
-      final bool shouldScale,
-      final double minScale,
-      final double maxScale,
-      final List<double> rotationSnapValues,
-      final List<double> translationXSnapValues,
-      final List<double> translationYSnapValues,
-      final double rotationFromSnapThreshold,
-      final double rotationToSnapThreshold,
-      final double translationSnapThreshold,
-      final Color selectedOverlayColor,
-      final double defaultIconSize,
-      final bool enableHapticFeedbackOnRotation,
-      final double rotationSpeed}) = _$StickerWidgetConfigImpl;
+          {final Size canvasSize,
+          final Size layerSize,
+          final bool shouldMove,
+          final bool shouldRotate,
+          final bool shouldScale,
+          final double minScale,
+          final double maxScale,
+          final List<double> rotationSnapValues,
+          final List<double> translationXSnapValues,
+          final List<double> translationYSnapValues,
+          final double rotationFromSnapThreshold,
+          final double rotationToSnapThreshold,
+          final double translationSnapThreshold,
+          final Color selectedOverlayColor,
+          final double defaultIconSize,
+          final bool enableHapticFeedbackOnRotationSnap,
+          final double rotationSpeed,
+          final bool enableHapticFeedbackOnTranslationSnap}) =
+      _$StickerWidgetConfigImpl;
 
   @override
 
@@ -721,9 +749,11 @@ abstract class _StickerWidgetConfig implements StickerWidgetConfig {
   /// It defaults to 24.
   double get defaultIconSize;
   @override
-  bool get enableHapticFeedbackOnRotation;
+  bool get enableHapticFeedbackOnRotationSnap;
   @override
   double get rotationSpeed;
+  @override
+  bool get enableHapticFeedbackOnTranslationSnap;
   @override
   @JsonKey(ignore: true)
   _$$StickerWidgetConfigImplCopyWith<_$StickerWidgetConfigImpl> get copyWith =>
