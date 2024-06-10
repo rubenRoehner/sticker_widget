@@ -1,8 +1,10 @@
 import 'dart:async';
 import 'dart:math';
 import 'dart:typed_data';
+import 'dart:ui' as ui;
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:sticker_widget/data/sticker_widget_config.dart';
 import 'package:sticker_widget/data/draggable_widget_data.dart';
@@ -393,8 +395,19 @@ class StickerWidgetController {
     // Clear all borders before capturing the image.
     clearAllBorders();
     try {
-      return await StickerWidget.screenshotController
-          .capture(delay: const Duration(milliseconds: 10));
+      Uint8List? pngBytes;
+      double pixelRatio = 2;
+      await Future.delayed(const Duration(milliseconds: 700))
+          .then((value) async {
+        // Capture the image of the widget.
+        RenderRepaintBoundary boundary = StickerWidget.globalKey.currentContext
+            ?.findRenderObject() as RenderRepaintBoundary;
+        ui.Image image = await boundary.toImage(pixelRatio: pixelRatio);
+        ByteData? byteData =
+            await image.toByteData(format: ui.ImageByteFormat.png);
+        pngBytes = byteData?.buffer.asUint8List();
+      });
+      return pngBytes;
     } catch (e) {
       rethrow;
     }
