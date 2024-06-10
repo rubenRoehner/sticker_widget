@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'dart:math';
-import 'dart:ui' as ui;
+import 'dart:typed_data';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:rxdart/rxdart.dart';
@@ -389,12 +389,12 @@ class StickerWidgetController {
   }
 
   /// Method to save the widget layout as a Uint8List image.
-  Future<ui.Image?> saveAsUiImage() async {
+  Future<Uint8List?> saveAsUint8List() async {
     // Clear all borders before capturing the image.
     clearAllBorders();
     try {
       return await StickerWidget.screenshotController
-          .captureAsUiImage(delay: const Duration(milliseconds: 10));
+          .capture(delay: const Duration(milliseconds: 10));
     } catch (e) {
       rethrow;
     }
