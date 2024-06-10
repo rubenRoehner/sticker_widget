@@ -1,6 +1,7 @@
 library sticker_widget;
 
 import 'package:flutter/cupertino.dart';
+import 'package:screenshot/screenshot.dart';
 import 'package:sticker_widget/sticker_widget_controller.dart';
 
 /// A Flutter widget class StickerWidget, which is used to display draggable stickers.
@@ -8,7 +9,7 @@ import 'package:sticker_widget/sticker_widget_controller.dart';
 class StickerWidget extends StatelessWidget {
   /// A global key used to access this widget's state from outside.
   ///
-  static GlobalKey globalKey = GlobalKey();
+  static ScreenshotController screenshotController = ScreenshotController();
 
   /// The controller responsible for managing stickers and their behavior.
   ///
@@ -62,8 +63,8 @@ class StickerWidget extends StatelessWidget {
             child: SizedBox(
               height: controller.config.canvasSize.height,
               width: controller.config.canvasSize.width,
-              child: RepaintBoundary(
-                key: globalKey,
+              child: Screenshot(
+                controller: screenshotController,
                 child: ClipRect(
                   child: Stack(
                     children: [
