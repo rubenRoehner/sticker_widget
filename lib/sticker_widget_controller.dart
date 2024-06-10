@@ -286,10 +286,9 @@ class StickerWidgetController {
       DraggableWidget widget = _widgets[key]!;
 
       final double rotation = atan2(
-            widget.data.transform[1],
-            widget.data.transform[0],
-          ) *
-          radians2Degrees;
+        widget.data.transform[1],
+        widget.data.transform[0],
+      );
 
       final Matrix4 updatedMatrix = Matrix4.compose(
         widget.data.transform.getTranslation(),
