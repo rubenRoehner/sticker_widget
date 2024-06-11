@@ -18,6 +18,8 @@ class DraggableWidget extends StatelessWidget {
   /// The [type] parameter is the type of the draggable widget.
   final DraggableWidgetType type;
 
+  final bool canScale;
+
   /// Creates a draggable widget.
   ///
   /// The [child] parameter is the widget to be displayed.
@@ -30,6 +32,7 @@ class DraggableWidget extends StatelessWidget {
     required this.data,
     required this.config,
     required this.type,
+    this.canScale = true,
   });
   final GlobalKey childrenKey = GlobalKey();
 
@@ -40,7 +43,11 @@ class DraggableWidget extends StatelessWidget {
       isSelected: data.isSelected,
       shouldTranslate: data.isLocked ? false : config.shouldMove,
       shouldRotate: data.isLocked ? false : config.shouldRotate,
-      shouldScale: data.isLocked ? false : config.shouldScale,
+      shouldScale: canScale
+          ? data.isLocked
+              ? false
+              : config.shouldScale
+          : false,
       minScale: config.minScale,
       maxScale: config.maxScale,
       initialMatrix: data.transform,

@@ -53,5 +53,6 @@ class DraggableTextWidget extends DraggableWidget {
               ),
             ),
           ),
+          canScale: false,
         );
 }
