@@ -44,8 +44,11 @@ class DraggableTextWidget extends DraggableWidget {
                     setShowTextField(true);
                   }
                 : null,
-            child: SizedBox(
-              width: width,
+            child: ConstrainedBox(
+              constraints: BoxConstraints(
+                minWidth: width,
+                maxWidth: width,
+              ),
               child: Text(
                 upperCase ? text.toUpperCase() : text,
                 style: textStyle,
