@@ -104,7 +104,8 @@ class StickerWidgetController {
   DraggableTextWidget addTextWidget(
       {TextStyle textStyle = const TextStyle(),
       TextAlign textAlign = TextAlign.center,
-      bool upperCase = false}) {
+      bool upperCase = false,
+      required double width}) {
     // Generate a unique key for the widget.
     Key key = _getNewKey();
     DraggableWidgetData data = _getNewDraggableWidgetData(key);
@@ -114,6 +115,7 @@ class StickerWidgetController {
       key: key,
       config: config,
       data: data,
+      width: width,
       text: '',
       textAlign: textAlign,
       textStyle: textStyle,
@@ -347,6 +349,7 @@ class StickerWidgetController {
           textAlign: textFieldWidget.textAlign,
           upperCase: textFieldWidget.upperCase,
           setShowTextField: textFieldWidget.setShowTextField,
+          width: textFieldWidget.width,
         );
         break;
       case DraggableWidgetType.image:
