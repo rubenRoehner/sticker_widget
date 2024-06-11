@@ -396,17 +396,13 @@ class StickerWidgetController {
     clearAllBorders();
     try {
       Uint8List? pngBytes;
-      double pixelRatio = 2;
-      await Future.delayed(const Duration(milliseconds: 700))
-          .then((value) async {
-        // Capture the image of the widget.
-        RenderRepaintBoundary boundary = StickerWidget.globalKey.currentContext
-            ?.findRenderObject() as RenderRepaintBoundary;
-        ui.Image image = await boundary.toImage(pixelRatio: pixelRatio);
-        ByteData? byteData =
-            await image.toByteData(format: ui.ImageByteFormat.png);
-        pngBytes = byteData?.buffer.asUint8List();
-      });
+      double pixelRatio = 1;
+      RenderRepaintBoundary boundary = StickerWidget.globalKey.currentContext
+          ?.findRenderObject() as RenderRepaintBoundary;
+      ui.Image image = await boundary.toImage(pixelRatio: pixelRatio);
+      ByteData? byteData =
+          await image.toByteData(format: ui.ImageByteFormat.png);
+      pngBytes = byteData?.buffer.asUint8List();
       return pngBytes;
     } catch (e) {
       rethrow;
