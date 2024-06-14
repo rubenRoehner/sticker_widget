@@ -66,17 +66,18 @@ class DraggableWidget extends StatelessWidget {
         child: Transform(
           transform: data.transform,
           alignment: Alignment.center,
-          child: FittedBox(
-            fit: BoxFit.scaleDown,
-            child: Container(
-              key: childrenKey,
-              foregroundDecoration: BoxDecoration(
-                color: data.isSelected
-                    ? config.selectedOverlayColor
-                    : const Color(0x00000000),
+          child: Wrap(
+            children: [
+              Container(
+                key: childrenKey,
+                foregroundDecoration: BoxDecoration(
+                  color: data.isSelected
+                      ? config.selectedOverlayColor
+                      : const Color(0x00000000),
+                ),
+                child: child,
               ),
-              child: child,
-            ),
+            ],
           ),
         ),
       ),

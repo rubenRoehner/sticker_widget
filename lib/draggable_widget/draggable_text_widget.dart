@@ -45,10 +45,7 @@ class DraggableTextWidget extends DraggableWidget {
                   }
                 : null,
             child: ConstrainedBox(
-              constraints: BoxConstraints(
-                minWidth: width,
-                maxWidth: width,
-              ),
+              constraints: BoxConstraints.tightFor(width: width),
               child: Text(
                 upperCase ? text.toUpperCase() : text,
                 style: textStyle,
